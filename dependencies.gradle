@@ -1,0 +1,61 @@
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+ext {
+    //版本控制
+    versionCode = 1
+    versionName = "0.0.0"
+    greenDaoVersion = 1
+
+    //Android
+    androidBuildToolVersion = "27.0.3"
+    androidMinSdkVersion = 21
+    androidTargetSdkVersion = 26
+    androidCompileSdkVersion = 26
+    minSdkVersion = 19
+    targetSdkVersion = 26
+
+    //官方支持
+    supportLibraryVersion = '27.1.1'
+    constraintLayout = '1.0.2'
+    //测试
+    junit = '4.12'
+    testRunner = '1.0.2'
+    espresso = '3.0.2'
+    mockito = '2.8.9'
+    robolectric = '3.8'
+    //BufferKnife
+    bufferKnife = '8.6.0'
+    //RxJava2
+    rxjava2 = '2.2.3'
+    rxAndroid = '2.1.0'
+    rxBinding3 = '3.0.0-alpha1'
+    rxlifecycle3 = '3.0.0'
+    //retrofit
+    retrofit = '2.5.0'
+    retrofitAdapter = '1.0.0'
+    retrofitGsonConvert = '2.3.0'
+    //64k
+    multiDex = '1.0.1'
+
+    AppLibary = [
+            junit           : "junit:junit:$junit",
+            testRunner      : "com.android.support.test:runner:$testRunner",
+            espresso        : "com.android.support.test.espresso:espresso-core:$espresso",
+            appCompatV7     : "com.android.support:appcompat-v7:${supportLibraryVersion}",
+            multiDex        : "com.android.support:multidex:${multiDex}",
+            design          : "com.android.support:design:${supportLibraryVersion}",
+            constraintLayout: "com.android.support.constraint:constraint-layout:${constraintLayout}",
+            recyclerview    : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
+            cardView        : "com.android.support:cardview-v7:${supportLibraryVersion}",
+            rxjava2         : "io.reactivex.rxjava2:rxjava:${rxjava2}",
+            rxAndroid       : "io.reactivex.rxjava2:rxandroid:${rxAndroid}",
+            retrofit        : "com.squareup.retrofit2:retrofit:${retrofit}",
+            rxbinding3      : "com.jakewharton.rxbinding3:rxbinding:$rxBinding3",
+            rxlifecycle3    : "com.trello.rxlifecycle3:rxlifecycle:$rxlifecycle3",
+
+    ]
+}

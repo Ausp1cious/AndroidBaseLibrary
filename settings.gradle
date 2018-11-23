@@ -1,1 +1,1 @@
-include ':app', ':Ausp1ciouslib'
+include ':app', ':Ausp1ciousLib'

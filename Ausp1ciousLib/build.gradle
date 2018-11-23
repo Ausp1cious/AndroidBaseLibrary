@@ -1,0 +1,35 @@
+apply plugin: 'com.android.library'
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
+    defaultConfig {
+        minSdkVersion globalConfiguration["minSdkVersion"]
+        targetSdkVersion globalConfiguration["targetSdkVersion"]
+        versionCode globalConfiguration["versionCode"]
+        versionName globalConfiguration["versionName"]
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {}
+    }
+}
+dependencies {
+    def LibraryDependencies = rootProject.ext.AppLibary
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation LibraryDependencies.junit
+    androidTestImplementation LibraryDependencies.testRunner
+    androidTestImplementation LibraryDependencies.espresso
+    implementation LibraryDependencies.appCompatV7
+    implementation LibraryDependencies.multiDex
+    implementation LibraryDependencies.design
+    implementation LibraryDependencies.constraintLayout
+    implementation LibraryDependencies.recyclerview
+    implementation LibraryDependencies.cardView
+    implementation LibraryDependencies.rxjava2
+    implementation LibraryDependencies.rxAndroid
+    implementation LibraryDependencies.retrofit
+    implementation LibraryDependencies.rxbinding3
+    implementation LibraryDependencies.rxlifecycle3
+}
