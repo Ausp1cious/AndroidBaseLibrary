@@ -21,15 +21,19 @@ dependencies {
     testImplementation LibraryDependencies.junit
     androidTestImplementation LibraryDependencies.testRunner
     androidTestImplementation LibraryDependencies.espresso
-    implementation LibraryDependencies.appCompatV7
-    implementation LibraryDependencies.multiDex
-    implementation LibraryDependencies.design
-    implementation LibraryDependencies.constraintLayout
-    implementation LibraryDependencies.recyclerview
-    implementation LibraryDependencies.cardView
-    implementation LibraryDependencies.rxjava2
-    implementation LibraryDependencies.rxAndroid
-    implementation LibraryDependencies.retrofit
-    implementation LibraryDependencies.rxbinding3
-    implementation LibraryDependencies.rxlifecycle3
+    api LibraryDependencies.appCompatV7
+    api LibraryDependencies.multiDex
+    api LibraryDependencies.design
+    api LibraryDependencies.constraintLayout
+    api LibraryDependencies.recyclerview
+    api LibraryDependencies.cardView
+    api LibraryDependencies.rxjava2
+    api LibraryDependencies.rxAndroid
+    api LibraryDependencies.retrofit
+    api LibraryDependencies.rxbinding3
+    api LibraryDependencies.rxlifecycle3
+    api LibraryDependencies.jacksonCore
+    api LibraryDependencies.jacksonAnnotations
+    api LibraryDependencies.jacksonDatabind
+    api LibraryDependencies.logger
 }

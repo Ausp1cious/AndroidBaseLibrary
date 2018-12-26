@@ -6,7 +6,7 @@
 - Fresco(功能多样，牺牲大小)
 - Jackson
 - GreenDao
--
+- Logger
 
 复杂版
 - Dagger2
@@ -28,4 +28,32 @@
 12. 对Fragment生命周期处理封装
     - 切换时候的生命周期
     - ViewPager的关系
+
+
+# 工具类
+## AppUtils
+
+## TimeUtils
+
+## ConvertUtils
+
+## DeviceUtils
+
+## EncryptUtils
+
+## FileUtils
+
+## KeyboardUtils
+
+## NetWorkUtils
+
+## PathUtils
+
+## PhoneUtils
+
+## ThreadUtils
+
+
+
+
 

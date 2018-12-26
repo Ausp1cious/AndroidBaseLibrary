@@ -40,22 +40,29 @@ ext {
     retrofitGsonConvert = '2.3.0'
     //64k
     multiDex = '1.0.1'
+    //Jackson
+    jackson = '2.9.7'
+    //Logger
+    logger = '2.2.0'
 
     AppLibary = [
-            junit           : "junit:junit:$junit",
-            testRunner      : "com.android.support.test:runner:$testRunner",
-            espresso        : "com.android.support.test.espresso:espresso-core:$espresso",
-            appCompatV7     : "com.android.support:appcompat-v7:${supportLibraryVersion}",
-            multiDex        : "com.android.support:multidex:${multiDex}",
-            design          : "com.android.support:design:${supportLibraryVersion}",
-            constraintLayout: "com.android.support.constraint:constraint-layout:${constraintLayout}",
-            recyclerview    : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
-            cardView        : "com.android.support:cardview-v7:${supportLibraryVersion}",
-            rxjava2         : "io.reactivex.rxjava2:rxjava:${rxjava2}",
-            rxAndroid       : "io.reactivex.rxjava2:rxandroid:${rxAndroid}",
-            retrofit        : "com.squareup.retrofit2:retrofit:${retrofit}",
-            rxbinding3      : "com.jakewharton.rxbinding3:rxbinding:$rxBinding3",
-            rxlifecycle3    : "com.trello.rxlifecycle3:rxlifecycle:$rxlifecycle3",
-
+            junit             : "junit:junit:$junit",
+            testRunner        : "com.android.support.test:runner:$testRunner",
+            espresso          : "com.android.support.test.espresso:espresso-core:$espresso",
+            appCompatV7       : "com.android.support:appcompat-v7:${supportLibraryVersion}",
+            multiDex          : "com.android.support:multidex:${multiDex}",
+            design            : "com.android.support:design:${supportLibraryVersion}",
+            constraintLayout  : "com.android.support.constraint:constraint-layout:${constraintLayout}",
+            recyclerview      : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
+            cardView          : "com.android.support:cardview-v7:${supportLibraryVersion}",
+            rxjava2           : "io.reactivex.rxjava2:rxjava:${rxjava2}",
+            rxAndroid         : "io.reactivex.rxjava2:rxandroid:${rxAndroid}",
+            retrofit          : "com.squareup.retrofit2:retrofit:${retrofit}",
+            rxbinding3        : "com.jakewharton.rxbinding3:rxbinding:$rxBinding3",
+            rxlifecycle3      : "com.trello.rxlifecycle3:rxlifecycle:$rxlifecycle3",
+            jacksonCore       : "com.fasterxml.jackson.core:jackson-core:$jackson",
+            jacksonAnnotations: "com.fasterxml.jackson.core:jackson-annotations:$jackson",
+            jacksonDatabind   : "com.fasterxml.jackson.core:jackson-databind:$jackson",
+            logger            : "com.orhanobut:logger:$logger",
     ]
 }
