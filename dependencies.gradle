@@ -46,9 +46,6 @@ ext {
     logger = '2.2.0'
 
     AppLibary = [
-            junit             : "junit:junit:$junit",
-            testRunner        : "com.android.support.test:runner:$testRunner",
-            espresso          : "com.android.support.test.espresso:espresso-core:$espresso",
             appCompatV7       : "com.android.support:appcompat-v7:${supportLibraryVersion}",
             multiDex          : "com.android.support:multidex:${multiDex}",
             design            : "com.android.support:design:${supportLibraryVersion}",
@@ -64,5 +61,11 @@ ext {
             jacksonAnnotations: "com.fasterxml.jackson.core:jackson-annotations:$jackson",
             jacksonDatabind   : "com.fasterxml.jackson.core:jackson-databind:$jackson",
             logger            : "com.orhanobut:logger:$logger",
+    ]
+
+    AppTestLibary = [
+            junit     : "junit:junit:$junit",
+            testRunner: "com.android.support.test:runner:$testRunner",
+            espresso  : "com.android.support.test.espresso:espresso-core:$espresso",
     ]
 }

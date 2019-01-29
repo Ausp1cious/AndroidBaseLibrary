@@ -8,11 +8,6 @@
 - GreenDao
 - Logger
 
-复杂版
-- Dagger2
-- 单元测试
-- UI测试
-
 # Lib提供的功能
 1. 沉浸式
 2. 左滑返回
@@ -52,6 +47,15 @@
 ## PhoneUtils
 
 ## ThreadUtils
+
+# TODO
+复杂版
+- Dagger2
+- 单元测试
+- UI测试
+升级版
+- 组件化
+- 支持热更新
 
 
 

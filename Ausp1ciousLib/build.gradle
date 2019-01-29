@@ -17,10 +17,11 @@ android {
 }
 dependencies {
     def LibraryDependencies = rootProject.ext.AppLibary
+    def LibraryTestDependencies = rootProject.ext.AppTestLibary
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testImplementation LibraryDependencies.junit
-    androidTestImplementation LibraryDependencies.testRunner
-    androidTestImplementation LibraryDependencies.espresso
+    testImplementation LibraryTestDependencies.junit
+    androidTestImplementation LibraryTestDependencies.testRunner
+    androidTestImplementation LibraryTestDependencies.espresso
     api LibraryDependencies.appCompatV7
     api LibraryDependencies.multiDex
     api LibraryDependencies.design
