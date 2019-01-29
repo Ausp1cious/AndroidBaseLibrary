@@ -11,20 +11,26 @@ ext {
     greenDaoVersion = 1
 
     //Android
-    androidBuildToolVersion = "27.0.3"
+    androidBuildToolVersion = "28.0.0"
     androidMinSdkVersion = 21
-    androidTargetSdkVersion = 26
-    androidCompileSdkVersion = 26
-    minSdkVersion = 19
-    targetSdkVersion = 26
+    androidTargetSdkVersion = 28
+    androidCompileSdkVersion = 28
+    minSdkVersion = 21
+    targetSdkVersion = 28
 
     //官方支持
     supportLibraryVersion = '27.1.1'
-    constraintLayout = '1.0.2'
+//    constraintLayout = '1.0.2'
+    //Androidx
+    appcompat = "1.0.0"
+    material = '1.0.0'
+    constraintLayout = '1.1.3'
+    recyclerview = '1.0.0'
+    cardview = '1.0.0'
     //测试
     junit = '4.12'
-    testRunner = '1.0.2'
-    espresso = '3.0.2'
+    testRunner = '1.1.0-alpha4'
+    espresso = '3.1.0-alpha4'
     mockito = '2.8.9'
     robolectric = '3.8'
     //BufferKnife
@@ -39,19 +45,27 @@ ext {
     retrofitAdapter = '1.0.0'
     retrofitGsonConvert = '2.3.0'
     //64k
-    multiDex = '1.0.1'
+    multiDex = '2.0.0'
     //Jackson
     jackson = '2.9.7'
     //Logger
     logger = '2.2.0'
 
     AppLibary = [
-            appCompatV7       : "com.android.support:appcompat-v7:${supportLibraryVersion}",
-            multiDex          : "com.android.support:multidex:${multiDex}",
-            design            : "com.android.support:design:${supportLibraryVersion}",
-            constraintLayout  : "com.android.support.constraint:constraint-layout:${constraintLayout}",
-            recyclerview      : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
-            cardView          : "com.android.support:cardview-v7:${supportLibraryVersion}",
+            multiDex          : "androidx.multidex:multidex:${multiDex}",
+//support -> androidx//////////////////////////////////////////////////////////////////////////////////////////////////start
+//            appCompatV7       : "com.android.support:appcompat-v7:${supportLibraryVersion}",
+//            design            : "com.android.support:design:${supportLibraryVersion}",
+//            constraintLayout  : "com.android.support.constraint:constraint-layout:${constraintLayout}",
+//            recyclerview      : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
+//            cardView          : "com.android.support:cardview-v7:${supportLibraryVersion}",
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            appCompatV7       : "androidx.appcompat:appcompat:${appcompat}",
+            design            : "com.google.android.material:material:${material}",
+            constraintLayout  : "androidx.constraintlayout:constraintlayout:${constraintLayout}",
+            recyclerview      : "androidx.recyclerview:recyclerview:${recyclerview}",
+            cardView          : "androidx.cardview:cardview:${cardview}",
+//support -> androidx//////////////////////////////////////////////////////////////////////////////////////////////////end
             rxjava2           : "io.reactivex.rxjava2:rxjava:${rxjava2}",
             rxAndroid         : "io.reactivex.rxjava2:rxandroid:${rxAndroid}",
             retrofit          : "com.squareup.retrofit2:retrofit:${retrofit}",
@@ -65,7 +79,7 @@ ext {
 
     AppTestLibary = [
             junit     : "junit:junit:$junit",
-            testRunner: "com.android.support.test:runner:$testRunner",
-            espresso  : "com.android.support.test.espresso:espresso-core:$espresso",
+            testRunner: "androidx.test:runner:$testRunner",
+            espresso  : "androidx.test.espresso:espresso-core:$espresso",
     ]
 }
