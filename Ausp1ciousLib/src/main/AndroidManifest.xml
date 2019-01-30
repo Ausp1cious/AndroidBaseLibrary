@@ -1,2 +1,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="wang.auspicous.ausp1ciouslib"/>
+          xmlns:tools="http://schemas.android.com/tools"
+          package="wang.auspicous.ausp1ciouslib"
+    >
+    <application
+        android:resizeableActivity="true"
+        tools:targetApi="n">
+        <!--沉浸式状态栏添加/////////////////////////////////////////////////////////////////Start-->
+        <!--适配华为（huawei）刘海屏-->
+        <meta-data
+            android:name="android.notch_support"
+            android:value="true"/>
+        <!--适配小米（xiaomi）刘海屏-->
+        <meta-data
+            android:name="notch.config"
+            android:value="portrait|landscape" />
+        <!--沉浸式状态栏添加/////////////////////////////////////////////////////////////////End-->
+    </application>
+</manifest>

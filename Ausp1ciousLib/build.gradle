@@ -38,4 +38,5 @@ dependencies {
     api LibraryDependencies.jacksonDatabind
     api LibraryDependencies.logger
     api LibraryDependencies.immersionBar
+    api LibraryDependencies.swipeback
 }
