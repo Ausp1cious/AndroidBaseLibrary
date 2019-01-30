@@ -1,5 +1,7 @@
 package wang.auspicous.ausp1cious;
+
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {

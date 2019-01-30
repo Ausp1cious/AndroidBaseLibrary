@@ -50,6 +50,9 @@ ext {
     jackson = '2.9.7'
     //Logger
     logger = '2.2.0'
+    //ImmersionBar
+    immersionBar = '2.3.3-beta15'
+
 
     AppLibary = [
             multiDex          : "androidx.multidex:multidex:${multiDex}",
@@ -75,6 +78,7 @@ ext {
             jacksonAnnotations: "com.fasterxml.jackson.core:jackson-annotations:$jackson",
             jacksonDatabind   : "com.fasterxml.jackson.core:jackson-databind:$jackson",
             logger            : "com.orhanobut:logger:$logger",
+            immersionBar      : "com.gyf.immersionbar:immersionbar:$immersionBar",
     ]
 
     AppTestLibary = [

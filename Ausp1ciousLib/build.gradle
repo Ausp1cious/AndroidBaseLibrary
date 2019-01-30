@@ -37,4 +37,5 @@ dependencies {
     api LibraryDependencies.jacksonAnnotations
     api LibraryDependencies.jacksonDatabind
     api LibraryDependencies.logger
+    api LibraryDependencies.immersionBar
 }
