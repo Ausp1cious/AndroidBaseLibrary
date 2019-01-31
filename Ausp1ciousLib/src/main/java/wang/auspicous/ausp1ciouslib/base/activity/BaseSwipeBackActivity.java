@@ -2,6 +2,7 @@ package wang.auspicous.ausp1ciouslib.base.activity;
 
 import android.Manifest;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.gyf.barlibrary.ImmersionBar;
@@ -82,12 +83,12 @@ public abstract class BaseSwipeBackActivity extends BasePermissionActivity imple
 
   /**
    * 是否允许滑动退出
-   *
+   * 默认配置不支持4.4滑动退出
    * @return true-允许 false-不允许
    */
   protected boolean canSwipeBack() {
     // TODO: 2019/1/30 全局滑动退出配置
-    return true;
+    return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
   }
 
   /**
