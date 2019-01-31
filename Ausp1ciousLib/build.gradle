@@ -39,4 +39,5 @@ dependencies {
     api LibraryDependencies.logger
     api LibraryDependencies.immersionBar
     api LibraryDependencies.swipeback
+    api LibraryDependencies.easyPermission
 }

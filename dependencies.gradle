@@ -54,6 +54,9 @@ ext {
     immersionBar = '2.3.3-beta15'
     //SwipeBack
     swipeBack = '1.1.0'
+    //EasyPermission
+    easyPermission = '3.0.0'
+
 
     AppLibary = [
             multiDex          : "androidx.multidex:multidex:${multiDex}",
@@ -81,6 +84,7 @@ ext {
             logger            : "com.orhanobut:logger:$logger",
             immersionBar      : "com.gyf.immersionbar:immersionbar:$immersionBar",
             swipeback         : "me.imid.swipebacklayout.lib:library:$swipeBack",
+            easyPermission    : "pub.devrel:easypermissions:$easyPermission",
     ]
     AppTestLibary = [
             junit     : "junit:junit:$junit",

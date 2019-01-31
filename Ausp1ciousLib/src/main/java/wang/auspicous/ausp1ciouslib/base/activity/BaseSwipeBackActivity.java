@@ -1,5 +1,6 @@
 package wang.auspicous.ausp1ciouslib.base.activity;
 
+import android.Manifest;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
@@ -13,13 +14,19 @@ import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.imid.swipebacklayout.lib.Utils;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityBase;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
+import wang.auspicous.ausp1ciouslib.Constants;
 import wang.auspicous.ausp1ciouslib.R;
+import wang.auspicous.ausp1ciouslib.utils.DeviceUtils;
 
 /**
  * Created by Ausp1cious on 2019/1/30.
  */
-public abstract class BaseSwipeBackActivity extends AppCompatActivity implements
+public abstract class BaseSwipeBackActivity extends BasePermissionActivity implements
         SwipeBackActivityBase {
+  //滑动退出震动时间
+  private static final int VIBRATE_DURATION = 20;
   private SwipeBackActivityHelper mHelper;
 
   @Override
@@ -97,12 +104,12 @@ public abstract class BaseSwipeBackActivity extends AppCompatActivity implements
 
       @Override
       public void onEdgeTouch(int edgeFlag) {
-        // TODO: 2019/1/30 滑动退出震动配置
+        askPermissionForVibrate();
       }
 
       @Override
       public void onScrollOverThreshold() {
-
+        askPermissionForVibrate();
       }
     });
   }
@@ -112,6 +119,26 @@ public abstract class BaseSwipeBackActivity extends AppCompatActivity implements
    */
   private void initImmersionBar() {
     ImmersionBar.with(this).init();
+  }
+
+
+  private void vibrateWhenSwipeBack() {
+    // TODO: 2019/1/31 震动全局配置开关
+    DeviceUtils.vibrate(BaseSwipeBackActivity.this, VIBRATE_DURATION);
+  }
+
+  /**
+   * 震动的权限请求（其实可以不用申请震动权限的）
+   */
+  @AfterPermissionGranted(Constants.Permission.PERMISSION_VIBRATE)
+  private void askPermissionForVibrate() {
+    String[] perms = {Manifest.permission.VIBRATE};
+    if (EasyPermissions.hasPermissions(this, perms)) {
+      vibrateWhenSwipeBack();
+    } else {
+      EasyPermissions.requestPermissions(this, getString(R.string.permission_vibrate),
+              Constants.Permission.PERMISSION_VIBRATE, perms);
+    }
   }
 
 
