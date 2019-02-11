@@ -88,4 +88,8 @@ public interface Constants {
     int PERMISSION_ACCESS_FINE_LOCATION = 100108001;
     int PERMISSION_ACCESS_COARSE_LOCATION = 100108001;
   }
+
+  interface SharedPreference{
+    String NAME_OF_SHARED_PREFERENCE = "Auspicious";
+  }
 }
