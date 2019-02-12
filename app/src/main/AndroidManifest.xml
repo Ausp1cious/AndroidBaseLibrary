@@ -10,7 +10,7 @@
         android:name=".AppApplication"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/BaseAppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".testui.TestActivity">
         </activity>

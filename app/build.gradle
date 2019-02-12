@@ -26,7 +26,4 @@ android {
 
 dependencies {
     implementation project(':Ausp1ciousLib')
-    def AppDependencies = rootProject.ext.App
-    implementation AppDependencies.bufferKnife
-    annotationProcessor  AppDependencies.bufferKnifeCompiler
 }
