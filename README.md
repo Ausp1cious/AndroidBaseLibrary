@@ -13,6 +13,8 @@ Android 基础库
 
 封装在BaseSwipeBackActivity中。默认是开启滑动退出。如果不需要，覆写`canSwipeBack()`方法，返回false。
 
+全局开关控制：`SpUtils`->`setCanSwipeBack`
+
 ## 权限申请管理
 
 基于easyPermission库
