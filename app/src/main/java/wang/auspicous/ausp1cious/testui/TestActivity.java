@@ -22,7 +22,6 @@ public class TestActivity extends BaseSwipeBackActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_test);
-    ButterKnife.bind(this);
     ImmersionBar.with(this).statusBarView(idStatusBar).init();
   }
 

@@ -18,6 +18,7 @@ import pub.devrel.easypermissions.EasyPermissions;
 import wang.auspicous.ausp1ciouslib.Constants;
 import wang.auspicous.ausp1ciouslib.R;
 import wang.auspicous.ausp1ciouslib.utils.deviceutils.VibrateUtils;
+import wang.auspicous.ausp1ciouslib.utils.sharedpreferences.SpUtils;
 
 /**
  * Created by Ausp1cious on 2019/1/30.
@@ -85,8 +86,7 @@ public abstract class BaseSwipeBackActivity extends BasePermissionActivity imple
    * @return true-允许 false-不允许
    */
   protected boolean canSwipeBack() {
-    // TODO: 2019/1/30 全局滑动退出配置
-    return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
+    return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && SpUtils.getCanSwipeBack(null);
   }
 
   /**
