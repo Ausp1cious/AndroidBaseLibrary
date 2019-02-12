@@ -122,8 +122,9 @@ public abstract class BaseSwipeBackActivity extends BasePermissionActivity imple
 
 
   private void vibrateWhenSwipeBack() {
-    // TODO: 2019/1/31 震动全局配置开关
-    VibrateUtils.vibrate(BaseSwipeBackActivity.this, VIBRATE_DURATION);
+    if (SpUtils.getCanSwipeBackWithVibrate(null)) {
+      VibrateUtils.vibrate(BaseSwipeBackActivity.this, VIBRATE_DURATION);
+    }
   }
 
   /**
