@@ -100,79 +100,78 @@ public class SpHelper {
     return t;
   }
 
-    /**
-     * 获取对象作为Observable
-     */
-    public static <T > Observable < T > getObjAsObservable(String id, String key, Class < T > clazz)
-    {
-      return getObjAsObservable(getIdentity(id, key), clazz, null);
-    }
-
-    public static <T > Observable < T > getObjAsObservable(String key, Class < T > clazz) {
-      return getObjAsObservable(key, clazz, null);
-    }
-
-    public static <T > Observable < T > getObjAsObservable(String id, String key, Class < T > clazz,
-            T defaultValue) {
-      return getObjAsObservable(getIdentity(id, key), clazz, defaultValue);
-    }
-
-    public static <T > Observable < T > getObjAsObservable(String key, Class < T > clazz, T
-            defaultValue) {
-      final T t = getObj(key, clazz, defaultValue);
-      return Observable.create(new ObservableOnSubscribe<T>() {
-        @Override
-        public void subscribe(ObservableEmitter<T> emitter) throws Exception {
-          emitter.onNext(t);
-          emitter.onComplete();
-        }
-      });
-    }
-
-
-    /**
-     * 获取SharedPreference保存的List
-     */
-    public static <T > List < T > getList(String id, String key, Class < T > clazz) {
-      return getList(getIdentity(id, key), clazz);
-    }
-
-    public static <T > List < T > getList(String key, Class < T > clazz) {
-      String jsonListStr = getSharedPreferences().getString(key, null);
-      return JsonUtils.getInstance().parseList(jsonListStr, clazz);
-    }
-
-    public static <T > Observable < List < T >> getListAsObservable(String id, String key,
-            Class < T > clazz) {
-      return getListAsObservable(getIdentity(id, key), clazz);
-    }
-
-    public static <T > Observable < List < T >> getListAsObservable(String key, Class < T > clazz) {
-      final List<T> list = getList(key, clazz);
-      return Observable.create(new ObservableOnSubscribe<List<T>>() {
-        @Override
-        public void subscribe(ObservableEmitter<List<T>> emitter) throws Exception {
-          emitter.onNext(list);
-          emitter.onComplete();
-        }
-      });
-    }
-
-    /**
-     * 移除SharedPreference中的字段
-     */
-    public static boolean remove (String id, String key){
-      return remove(getIdentity(id, key));
-    }
-
-    public static boolean remove (String key){
-      return getSharedPreferences().edit().remove(key).commit();
-    }
-
-    /**
-     * 清除SharedPreference
-     */
-    public static boolean clear () {
-      return getSharedPreferences().edit().clear().commit();
-    }
+  /**
+   * 获取对象作为Observable
+   */
+  public static <T> Observable<T> getObjAsObservable(String id, String key, Class<T> clazz) {
+    return getObjAsObservable(getIdentity(id, key), clazz, null);
   }
+
+  public static <T> Observable<T> getObjAsObservable(String key, Class<T> clazz) {
+    return getObjAsObservable(key, clazz, null);
+  }
+
+  public static <T> Observable<T> getObjAsObservable(String id, String key, Class<T> clazz,
+          T defaultValue) {
+    return getObjAsObservable(getIdentity(id, key), clazz, defaultValue);
+  }
+
+  public static <T> Observable<T> getObjAsObservable(String key, Class<T> clazz, T
+          defaultValue) {
+    final T t = getObj(key, clazz, defaultValue);
+    return Observable.create(new ObservableOnSubscribe<T>() {
+      @Override
+      public void subscribe(ObservableEmitter<T> emitter) throws Exception {
+        emitter.onNext(t);
+        emitter.onComplete();
+      }
+    });
+  }
+
+
+  /**
+   * 获取SharedPreference保存的List
+   */
+  public static <T> List<T> getList(String id, String key, Class<T> clazz) {
+    return getList(getIdentity(id, key), clazz);
+  }
+
+  public static <T> List<T> getList(String key, Class<T> clazz) {
+    String jsonListStr = getSharedPreferences().getString(key, null);
+    return JsonUtils.getInstance().parseList(jsonListStr, clazz);
+  }
+
+  public static <T> Observable<List<T>> getListAsObservable(String id, String key,
+          Class<T> clazz) {
+    return getListAsObservable(getIdentity(id, key), clazz);
+  }
+
+  public static <T> Observable<List<T>> getListAsObservable(String key, Class<T> clazz) {
+    final List<T> list = getList(key, clazz);
+    return Observable.create(new ObservableOnSubscribe<List<T>>() {
+      @Override
+      public void subscribe(ObservableEmitter<List<T>> emitter) throws Exception {
+        emitter.onNext(list);
+        emitter.onComplete();
+      }
+    });
+  }
+
+  /**
+   * 移除SharedPreference中的字段
+   */
+  public static boolean remove(String id, String key) {
+    return remove(getIdentity(id, key));
+  }
+
+  public static boolean remove(String key) {
+    return getSharedPreferences().edit().remove(key).commit();
+  }
+
+  /**
+   * 清除SharedPreference
+   */
+  public static boolean clear() {
+    return getSharedPreferences().edit().clear().commit();
+  }
+}
