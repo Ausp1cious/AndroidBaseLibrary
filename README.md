@@ -15,6 +15,8 @@ Android 基础库
 
 全局开关控制：`SpUtils`->`setCanSwipeBack`
 
+滑动退出震动提示开关控制：`SpUtils`->`setSwipeBackWithVibrate`
+
 ## 权限申请管理
 
 基于easyPermission库
