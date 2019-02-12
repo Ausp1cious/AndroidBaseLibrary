@@ -40,4 +40,6 @@ dependencies {
     api LibraryDependencies.immersionBar
     api LibraryDependencies.swipeback
     api LibraryDependencies.easyPermission
+    api LibraryDependencies.bufferKnife
+    annotationProcessor  LibraryDependencies.bufferKnifeCompiler
 }

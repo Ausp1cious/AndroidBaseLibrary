@@ -23,6 +23,20 @@ Android 基础库
 
 封装在BasePermissionActivity中。使用方式参照easePermission。在`Constants`定了权限的状态码。
 
+## 沉浸式状态栏
+
+基于ImmersionBar库
+
+封装在BaseUIActivity中
+
+设置沉浸式状态栏：覆写方法`useImmersionBar`:返回`true`表示使用沉浸式状态栏; 返回`false`表示不使用沉浸式状态栏（默认不使用）
+
+设置状态栏的颜色:覆写方法`setStatusBarColor`:返回`@ColorInt`类型的颜色。默认状态栏的颜色是白色
+
+状态栏字体设置（深色/浅色):覆写方法`isStatusBarDarkFont`,返回true表示深色；返回false表示浅色。通过修改`SpUtils`->`setIsStatusBarDarkFont`来改变状态栏的颜色（按照常理来说，一般只会改变一次这个全局变量,且在加载第一个页面之前使用）
+
+软键盘弹起后，状态栏的相关设置
+
 # 使用3方包
 - rxjava2
 - rxAndroid
@@ -30,3 +44,6 @@ Android 基础库
 - immersionBar
 - swipeback
 - easyPermission
+
+# TODO
+- 语言切换功能
