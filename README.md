@@ -11,7 +11,7 @@ Android 基础库
 
 基于swipeback库。
 
-封装在BaseSwipeBackActivity中。默认是开启滑动退出。如果不需要，复写`canSwipeBack()`方法，返回false。
+封装在BaseSwipeBackActivity中。默认是开启滑动退出。如果不需要，覆写`canSwipeBack()`方法，返回false。
 
 ## 权限申请管理
 
