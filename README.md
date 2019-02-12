@@ -35,7 +35,7 @@ Android 基础库
 
 状态栏字体设置（深色/浅色):覆写方法`isStatusBarDarkFont`,返回true表示深色；返回false表示浅色。通过修改`SpUtils`->`setIsStatusBarDarkFont`来改变状态栏的颜色（按照常理来说，一般只会改变一次这个全局变量,且在加载第一个页面之前使用）
 
-软键盘弹起后，状态栏的相关设置
+[todo]软键盘弹起后，状态栏的相关设置
 
 # 使用3方包
 - rxjava2
