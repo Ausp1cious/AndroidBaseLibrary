@@ -1,4 +1,4 @@
-package wang.auspicous.ausp1ciouslib.utils;
+package wang.auspicous.ausp1ciouslib.utils.sharedpreferences;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
