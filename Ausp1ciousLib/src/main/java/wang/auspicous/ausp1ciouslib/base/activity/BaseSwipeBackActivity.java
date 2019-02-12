@@ -9,8 +9,6 @@ import com.gyf.barlibrary.ImmersionBar;
 import com.gyf.barlibrary.OSUtils;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.imid.swipebacklayout.lib.Utils;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityBase;
@@ -19,7 +17,7 @@ import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 import wang.auspicous.ausp1ciouslib.Constants;
 import wang.auspicous.ausp1ciouslib.R;
-import wang.auspicous.ausp1ciouslib.utils.DeviceUtils;
+import wang.auspicous.ausp1ciouslib.utils.deviceutils.VibrateUtils;
 
 /**
  * Created by Ausp1cious on 2019/1/30.
@@ -125,7 +123,7 @@ public abstract class BaseSwipeBackActivity extends BasePermissionActivity imple
 
   private void vibrateWhenSwipeBack() {
     // TODO: 2019/1/31 震动全局配置开关
-    DeviceUtils.vibrate(BaseSwipeBackActivity.this, VIBRATE_DURATION);
+    VibrateUtils.vibrate(BaseSwipeBackActivity.this, VIBRATE_DURATION);
   }
 
   /**
