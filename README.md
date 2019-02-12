@@ -35,6 +35,23 @@ Android 基础库
 
 状态栏字体设置（深色/浅色):覆写方法`isStatusBarDarkFont`,返回true表示深色；返回false表示浅色。通过修改`SpUtils`->`setIsStatusBarDarkFont`来改变状态栏的颜色（按照常理来说，一般只会改变一次这个全局变量,且在加载第一个页面之前使用）
 
+## 基本布局管理
+
+根布局是由`RelativeLayout`,子布局是一个`LinearLayout`。然后动态添加(TitleBar和要挂载的rootView)布局到`LinearLayout`。LoadingView加载到`RelativeLayout`中。
+
+### TitleBar设置
+封装在BaseUIActivity中
+
+有两种方式：
+1. XML的方式添加TitleBar:覆写`setHeaderLayoutView`方法，返回一个需要加载的XML
+2. View 的方式添加TitleBar：覆写`setHeaderView`方法，返回一个View
+
+第1种方式的优先级高于第2种
+
+获取设置的TitleBar:`setHeaderView`
+
+如果需要通用的TitleBar 需要在BaseUIActivity的基础上再次封装特定的TitleBar
+
 [todo]软键盘弹起后，状态栏的相关设置
 
 # 使用3方包
