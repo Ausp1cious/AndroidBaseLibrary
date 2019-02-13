@@ -14,10 +14,16 @@
         android:layout_width="match_parent"
         android:visibility="gone"
         android:layout_height="0dp"/>
-    <TextView
-        android:id="@+id/tv_test"
+    <Button
+        android:id="@+id/btn_show"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="1234567890"
+        android:text="显示"
+        />
+    <Button
+        android:id="@+id/btn_hide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="隐藏"
         />
 </LinearLayout>

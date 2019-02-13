@@ -13,8 +13,6 @@ import wang.auspicous.ausp1ciouslib.base.activity.BaseSwipeBackActivity;
 
 public class TestActivity extends BaseSwipeBackActivity {
 
-  @BindView(R.id.tv_test)
-  TextView tvTest;
   @BindView(R.id.id_status_bar)
   View idStatusBar;
 

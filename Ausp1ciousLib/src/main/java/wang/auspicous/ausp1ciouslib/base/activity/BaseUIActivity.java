@@ -1,20 +1,24 @@
 package wang.auspicous.ausp1ciouslib.base.activity;
 
 import android.app.Dialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.gyf.barlibrary.ImmersionBar;
+import com.orhanobut.logger.Logger;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import wang.auspicous.ausp1ciouslib.R;
+import wang.auspicous.ausp1ciouslib.component.loading.BaseLoadingView;
+import wang.auspicous.ausp1ciouslib.component.loading.ILoading;
 import wang.auspicous.ausp1ciouslib.utils.sharedpreferences.SpUtils;
 
 /**
@@ -23,9 +27,11 @@ import wang.auspicous.ausp1ciouslib.utils.sharedpreferences.SpUtils;
  * 处理沉浸式
  * 处理TitleBar
  * 处理根布局
+ * 处理Loading布局
+ * 处理LoadingDialog
+ * 处理ButterKnife 页面初始化
  */
 public abstract class BaseUIActivity extends BaseSwipeBackActivity {
-  private Unbinder mBind;
   protected ImmersionBar mImmersionBar;
   //基础根布局
   private RelativeLayout mRootView;
@@ -36,32 +42,37 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
   private View mContainerRootView; //实际加载的根布局
   private View mLoadingView;//LoadingView
   private Dialog mLoadingDialog;//LoadingDialog
+  private ILoading mILoading;
 
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_base_common_layout);
-    mBind = ButterKnife.bind(this);
     initValue();//初始化状态值
     initView();
     setImmersionBar();
     initInflateView();
+    this.bindButterKnife();//加载布局之后使用，否者将不会找到控件
     initWidget();//初始化控件
     initListener();//初始化监听
+
+    setILoading(new BaseLoadingView());
   }
 
   @Override
   protected void onDestroy() {
     super.onDestroy();
-    mBind.unbind();
+    this.unBindButterKnife();
   }
 
   /**
    * 添加根布局的基本方式
+   *
    * @return 根布局LayoutID
    */
   protected abstract int setContainerView();
+
   /**
    * 初始化状态值
    */
@@ -82,6 +93,7 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
   //处理根布局（Start）
   //
 //////////////////////////////////////////////////////////////////////////////
+
   /**
    * 初始化根布局
    */
@@ -120,6 +132,7 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
   //处理沉浸式（Start）
   //
 //////////////////////////////////////////////////////////////////////////////
+
   /**
    * 设置沉浸式状态栏
    */
@@ -175,6 +188,7 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
   //TitleBar（Start）
   //
 //////////////////////////////////////////////////////////////////////////////
+
   /**
    * 添加TitleBar
    */
@@ -191,6 +205,7 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
 
   /**
    * XML的方式添加TitleBar
+   *
    * @return TitleBar布局xml
    */
   protected int setHeaderLayoutView() {
@@ -199,6 +214,7 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
 
   /**
    * View 的方式添加TitleBar
+   *
    * @return View
    */
   protected View setHeaderView() {
@@ -207,6 +223,7 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
 
   /**
    * 获取设置的HeaderView
+   *
    * @return 设置的HeaderView
    */
   @Nullable
@@ -225,6 +242,7 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
   //根布局（Start）
   //
 //////////////////////////////////////////////////////////////////////////////
+
   /**
    * 添加ContainerRootView
    */
@@ -241,6 +259,7 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
 
   /**
    * View 的方式添加TitleBar
+   *
    * @return View
    */
   protected View setContainerRootView() {
@@ -249,6 +268,7 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
 
   /**
    * 获取设置的ContainerRootView
+   *
    * @return 设置的ContainerRootView
    */
   @Nullable
@@ -262,4 +282,86 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
 //////////////////////////////////////////////////////////////////////////////
 
 
+  //////////////////////////////////////////////////////////////////////////////
+  //
+  //Loading布局（Start）
+  //
+//////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * 设置Loading的具体实现类
+   * @param loading loading具体实现类
+   */
+  protected void setILoading(ILoading loading) {
+    this.mILoading = loading;
+    if (mILoading.getLoadingView(this) != null) {
+      setLoadingView();
+    } else if (mILoading.getLoadingDialog() != null) {
+      setLoadingDialog();
+    }
+  }
+
+  /**
+   * 设置LoadingView
+   */
+  private void setLoadingView() {
+    Logger.t("BaseUIActivity").i(mRootView.getChildCount()+"");
+    mLoadingView = mILoading.getLoadingView(this);
+    RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT);
+    lp.addRule(RelativeLayout.CENTER_IN_PARENT);
+    mRootView.addView(mLoadingView,lp);
+//    Logger.t("BaseUIActivity").i(mRootView.getChildAt(1).getX()+"");
+//    TextView child = new TextView(this);
+//    child.setText("123123123123213");
+//    child.setBackgroundColor(Color.GREEN);
+//    mRootView.addView(child,-2,-2);
+
+  }
+
+  /**
+   * 设置LoadingDialog
+   */
+  private void setLoadingDialog() {
+    mLoadingDialog =  mILoading.getLoadingDialog();
+  }
+
+  /**
+   * 显示LoadingView
+   */
+  protected void showLoadingView() {
+    mILoading.showLoading();
+  }
+
+  /**
+   * 隐藏LoadingView
+   */
+  protected void hideLoadingView() {
+    mILoading.hideLoading();
+  }
+//////////////////////////////////////////////////////////////////////////////
+  //
+  //Loading布局（End）
+  //
+//////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////
+  //
+  //ButterKnife 页面初始化（Start）
+  //
+//////////////////////////////////////////////////////////////////////////////
+  protected void bindButterKnife() {
+
+  }
+
+  protected void unBindButterKnife() {
+
+  }
+//////////////////////////////////////////////////////////////////////////////
+  //
+  //ButterKnife 页面初始化（End）
+  //
+//////////////////////////////////////////////////////////////////////////////
 }

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
 
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
@@ -40,6 +41,4 @@ dependencies {
     api LibraryDependencies.immersionBar
     api LibraryDependencies.swipeback
     api LibraryDependencies.easyPermission
-    api LibraryDependencies.bufferKnife
-    annotationProcessor  LibraryDependencies.bufferKnifeCompiler
 }

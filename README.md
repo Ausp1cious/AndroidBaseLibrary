@@ -61,6 +61,15 @@ Android 基础库
 
 使用`getContainerRootView`方法获取根布局
 
+### Loading
+
+### 关于ButterKnife
+将它的绑定和解绑放在具体的业务逻辑BaseActivity中了。
+
+具体使用方法：
+    - 绑定：覆写方法`bindButterKnife`
+    - 解绑：覆写方法`unBindButterKnife`
+
 
 [todo]软键盘弹起后，状态栏的相关设置
 

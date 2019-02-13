@@ -93,4 +93,8 @@ ext {
             testRunner: "androidx.test:runner:$testRunner",
             espresso  : "androidx.test.espresso:espresso-core:$espresso",
     ]
+    App =[
+            bufferKnife        : "com.jakewharton:butterknife:$bufferKnife",
+            bufferKnifeCompiler: "com.jakewharton:butterknife-compiler:$bufferKnife",
+    ]
 }
