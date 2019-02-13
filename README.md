@@ -62,8 +62,17 @@ Android 基础库
 使用`getContainerRootView`方法获取根布局
 
 ### Loading
+封装在BaseUIActivity中
+
+使用接口`ILoading`来实现具体的显示隐藏功能，指定LoadingView或者LoadingDialog。在实现的时候需要实现接口`ILoading`，并且返回具体的LoadingView或者LoadingDialog。
+
+显示Loading的方法：`showLoadingView`
+
+隐藏Loading的方法：`hideLoadingView`
 
 ### 关于ButterKnife
+封装在BaseUIActivity中
+
 将它的绑定和解绑放在具体的业务逻辑BaseActivity中了。
 
 具体使用方法：

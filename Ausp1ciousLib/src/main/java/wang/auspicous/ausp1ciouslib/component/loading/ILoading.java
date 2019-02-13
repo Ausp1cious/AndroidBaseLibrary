@@ -19,7 +19,7 @@ public interface ILoading {
    * 获取LoadingDialog
    * @return LoadingDialog
    */
-  Dialog getLoadingDialog();
+  Dialog getLoadingDialog(Context context);
 
   /**
    * 显示Loading

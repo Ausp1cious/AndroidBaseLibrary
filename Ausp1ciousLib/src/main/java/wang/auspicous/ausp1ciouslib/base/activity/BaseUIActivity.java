@@ -40,7 +40,6 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
   //加载布局
   private View mHeaderView;//TitleBar
   private View mContainerRootView; //实际加载的根布局
-  private View mLoadingView;//LoadingView
   private Dialog mLoadingDialog;//LoadingDialog
   private ILoading mILoading;
 
@@ -296,7 +295,7 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
     this.mILoading = loading;
     if (mILoading.getLoadingView(this) != null) {
       setLoadingView();
-    } else if (mILoading.getLoadingDialog() != null) {
+    } else if (mILoading.getLoadingDialog(this) != null) {
       setLoadingDialog();
     }
   }
@@ -305,26 +304,20 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
    * 设置LoadingView
    */
   private void setLoadingView() {
-    Logger.t("BaseUIActivity").i(mRootView.getChildCount()+"");
-    mLoadingView = mILoading.getLoadingView(this);
+    //LoadingView
+    View loadingView = mILoading.getLoadingView(this);
     RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
             ViewGroup.LayoutParams.WRAP_CONTENT,
             ViewGroup.LayoutParams.WRAP_CONTENT);
     lp.addRule(RelativeLayout.CENTER_IN_PARENT);
-    mRootView.addView(mLoadingView,lp);
-//    Logger.t("BaseUIActivity").i(mRootView.getChildAt(1).getX()+"");
-//    TextView child = new TextView(this);
-//    child.setText("123123123123213");
-//    child.setBackgroundColor(Color.GREEN);
-//    mRootView.addView(child,-2,-2);
-
+    mRootView.addView(loadingView,lp);
   }
 
   /**
    * 设置LoadingDialog
    */
   private void setLoadingDialog() {
-    mLoadingDialog =  mILoading.getLoadingDialog();
+    mLoadingDialog =  mILoading.getLoadingDialog(this);
   }
 
   /**
@@ -352,10 +345,17 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
   //ButterKnife 页面初始化（Start）
   //
 //////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * ButterKnife绑定
+   */
   protected void bindButterKnife() {
 
   }
 
+  /**
+   * ButterKnife解绑
+   */
   protected void unBindButterKnife() {
 
   }

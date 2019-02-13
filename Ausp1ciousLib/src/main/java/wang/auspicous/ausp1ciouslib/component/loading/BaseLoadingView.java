@@ -1,5 +1,6 @@
 package wang.auspicous.ausp1ciouslib.component.loading;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,24 +16,30 @@ public class BaseLoadingView implements ILoading {
 
   private View mView;
   private RelativeLayout mLoadingView;
-  @Override
-  public View getLoadingView(Context context) {
-    return inflateView(context);
-  }
+  private AlertDialog mAlertDialog;
 
   @Override
-  public Dialog getLoadingDialog() {
+  public View getLoadingView(Context context) {
     return null;
   }
 
   @Override
+  public Dialog getLoadingDialog(Context context) {
+    mAlertDialog =
+            new AlertDialog.Builder(context).setTitle("这是个Loading").setMessage("Loading").create();
+    return mAlertDialog;
+  }
+
+  @Override
   public void showLoading() {
-    mLoadingView.setVisibility(View.VISIBLE);
+//    mLoadingView.setVisibility(View.VISIBLE);
+    mAlertDialog.show();
   }
 
   @Override
   public void hideLoading() {
-    mLoadingView.setVisibility(View.GONE);
+//    mLoadingView.setVisibility(View.GONE);
+    mAlertDialog.cancel();
   }
 
   private View inflateView(Context context) {
