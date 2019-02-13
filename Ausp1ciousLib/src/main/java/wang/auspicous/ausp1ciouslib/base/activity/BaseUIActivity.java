@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -23,6 +22,7 @@ import wang.auspicous.ausp1ciouslib.utils.sharedpreferences.SpUtils;
  * 处理根布局
  * 处理沉浸式
  * 处理TitleBar
+ * 处理根布局
  */
 public abstract class BaseUIActivity extends BaseSwipeBackActivity {
   private Unbinder mBind;
@@ -33,6 +33,7 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
   private LinearLayout mContainerView;
   //加载布局
   private View mHeaderView;//TitleBar
+  private View mContainerRootView; //实际加载的根布局
   private View mLoadingView;//LoadingView
   private Dialog mLoadingDialog;//LoadingDialog
 
@@ -56,12 +57,31 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
     mBind.unbind();
   }
 
+  /**
+   * 添加根布局的基本方式
+   * @return 根布局LayoutID
+   */
+  protected abstract int setContainerView();
+  /**
+   * 初始化状态值
+   */
+  protected abstract void initValue();
+
+  /**
+   * 初始化控件
+   */
+  protected abstract void initWidget();
+
+  /**
+   * 初始化监听
+   */
+  protected abstract void initListener();
+
 //////////////////////////////////////////////////////////////////////////////
   //
   //处理根布局（Start）
   //
 //////////////////////////////////////////////////////////////////////////////
-
   /**
    * 初始化根布局
    */
@@ -77,6 +97,7 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
    */
   private void initInflateView() {
     addHeadView();
+    addContainerRootView();
   }
 
   /**
@@ -87,8 +108,7 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
   private View inflate(int resLayoutID) {
     return LayoutInflater.from(this).inflate(resLayoutID, null);
   }
-
-  //////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
   //
   //处理根布局（End）
   //
@@ -100,7 +120,6 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
   //处理沉浸式（Start）
   //
 //////////////////////////////////////////////////////////////////////////////
-
   /**
    * 设置沉浸式状态栏
    */
@@ -156,7 +175,6 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
   //TitleBar（Start）
   //
 //////////////////////////////////////////////////////////////////////////////
-
   /**
    * 添加TitleBar
    */
@@ -195,28 +213,53 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
   protected View getHeaderView() {
     return mHeaderView;
   }
-
-
-
 //////////////////////////////////////////////////////////////////////////////
   //
   //TitleBar（End）
   //
 //////////////////////////////////////////////////////////////////////////////
 
+
+//////////////////////////////////////////////////////////////////////////////
+  //
+  //根布局（Start）
+  //
+//////////////////////////////////////////////////////////////////////////////
   /**
-   * 初始化状态值
+   * 添加ContainerRootView
    */
-  protected abstract void initValue();
+  private void addContainerRootView() {
+    if (setContainerView() != 0) {
+      mContainerRootView = inflate(setContainerView());
+    } else {
+      mContainerRootView = setContainerRootView();
+    }
+    if (mContainerRootView != null) {
+      mContainerView.addView(mContainerRootView, -1, -2);
+    }
+  }
 
   /**
-   * 初始化控件
+   * View 的方式添加TitleBar
+   * @return View
    */
-  protected abstract void initWidget();
+  protected View setContainerRootView() {
+    return null;
+  }
 
   /**
-   * 初始化监听
+   * 获取设置的ContainerRootView
+   * @return 设置的ContainerRootView
    */
-  protected abstract void initListener();
+  @Nullable
+  protected View getContainerRootView() {
+    return mContainerRootView;
+  }
+//////////////////////////////////////////////////////////////////////////////
+  //
+  //根布局（End）
+  //
+//////////////////////////////////////////////////////////////////////////////
+
 
 }

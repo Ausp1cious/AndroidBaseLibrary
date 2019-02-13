@@ -18,6 +18,11 @@ public class MainActivity extends BaseUIActivity {
 //  }
 
   @Override
+  protected int setContainerView() {
+    return R.layout.activity_test;
+  }
+
+  @Override
   protected void initValue() {
 
   }

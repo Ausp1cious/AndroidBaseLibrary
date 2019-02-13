@@ -45,12 +45,22 @@ Android 基础库
 有两种方式：
 1. XML的方式添加TitleBar:覆写`setHeaderLayoutView`方法，返回一个需要加载的XML
 2. View 的方式添加TitleBar：覆写`setHeaderView`方法，返回一个View
-
 第1种方式的优先级高于第2种
 
 获取设置的TitleBar:`setHeaderView`
 
 如果需要通用的TitleBar 需要在BaseUIActivity的基础上再次封装特定的TitleBar
+
+### 根布局的添加
+封装在BaseUIActivity中
+
+有两种方式：
+1. XML的方式添加根布局:覆写`setContainerView`,返回布局Layout
+2. View的方式添加根布局：覆写`setContainerRootView`，返回布局View
+第1种方式的优先级高于第2种
+
+使用`getContainerRootView`方法获取根布局
+
 
 [todo]软键盘弹起后，状态栏的相关设置
 
