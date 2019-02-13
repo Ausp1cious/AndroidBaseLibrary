@@ -28,7 +28,6 @@ import wang.auspicous.ausp1ciouslib.utils.sharedpreferences.SpUtils;
  * 处理TitleBar
  * 处理根布局
  * 处理Loading布局
- * 处理LoadingDialog
  * 处理ButterKnife 页面初始化
  */
 public abstract class BaseUIActivity extends BaseSwipeBackActivity {
