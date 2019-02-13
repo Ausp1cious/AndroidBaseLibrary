@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -39,8 +40,8 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
   //加载布局
   private View mHeaderView;//TitleBar
   private View mContainerRootView; //实际加载的根布局
-  private Dialog mLoadingDialog;//LoadingDialog
   private ILoading mILoading;
+  private InputMethodManager mInputMethodManager;
 
 
   @Override
@@ -62,6 +63,13 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
   protected void onDestroy() {
     super.onDestroy();
     this.unBindButterKnife();
+    mInputMethodManager = null;
+  }
+
+  @Override
+  public void finish() {
+    super.finish();
+    hideSoftKeyBoard();
   }
 
   /**
@@ -316,7 +324,8 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
    * 设置LoadingDialog
    */
   private void setLoadingDialog() {
-    mLoadingDialog =  mILoading.getLoadingDialog(this);
+    //LoadingDialog
+    Dialog loadingDialog = mILoading.getLoadingDialog(this);
   }
 
   /**
@@ -363,4 +372,18 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
   //ButterKnife 页面初始化（End）
   //
 //////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * 退出页面时，收起软键盘
+    */
+private void hideSoftKeyBoard() {
+  View localView = getCurrentFocus();
+  if (this.mInputMethodManager == null) {
+    this.mInputMethodManager = ((InputMethodManager) getSystemService(
+            INPUT_METHOD_SERVICE));
+  }
+  if ((localView != null) && (this.mInputMethodManager != null)) {
+    this.mInputMethodManager.hideSoftInputFromWindow(localView.getWindowToken(), 2);
+  }
+}
 }
