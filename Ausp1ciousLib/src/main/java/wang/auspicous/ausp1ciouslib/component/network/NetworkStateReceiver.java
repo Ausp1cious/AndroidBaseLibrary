@@ -145,19 +145,15 @@ public class NetworkStateReceiver extends BroadcastReceiver {
   private void getTransportAvailable(NetworkCapabilities networkCapabilities) {
     if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
       notifyCellularAvailable();
-      Logger.t("NetworkStatus").i("notifyCellularAvailable");
     }
     if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
       notifyWIFIAvailable();
-      Logger.t("NetworkStatus").i("notifyWIFIAvailable");
     }
     if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH)) {
       notifyBluetoothAvailable();
-      Logger.t("NetworkStatus").i("notifyBluetoothAvailable");
     }
     if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
       notifyEthernetAvailable();
-      Logger.t("NetworkStatus").i("notifyEthernetAvailable");
     }
     if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN)) {
       notifyVPNAvailable();
