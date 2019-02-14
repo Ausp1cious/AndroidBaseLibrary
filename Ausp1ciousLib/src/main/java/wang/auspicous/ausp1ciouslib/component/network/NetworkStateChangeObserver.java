@@ -30,4 +30,43 @@ public interface NetworkStateChangeObserver {
      */
     void on4GDisConnected();
 
+    /**
+     * 网络可用的情况（可能是Wifi,流量，蓝牙等网络可用）
+     */
+    void onNetworkAvailable();
+
+    /**
+     * 网络完全不可用的情况（Wifi,流量，蓝牙等网络都不可用）
+     */
+    void onNetworkNotAvailable();
+
+    /**
+     * 蜂窝网络可用的情况
+     */
+    void onCellularAvailable();
+
+    /**
+     * WIFI网络可用的情况
+     */
+    void onWIFIAvailable();
+
+    /**
+     * 蓝牙网络可用的情况
+     */
+    void onBluetoothAvailable();
+
+    /**
+     * 以太网络可用的情况
+     */
+    void onEthernetAvailable();
+
+    /**
+     * VPN网络可用的情况
+     */
+    void onVPNAvailable();
+
+    /**
+     * 6LoWPAN 网络可用的情况
+     */
+    void onLOWPANAvailable();
 }

@@ -9,7 +9,8 @@ import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.os.Build;
-import android.util.Log;
+
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,14 +20,15 @@ import java.util.List;
  */
 public class NetworkStateReceiver extends BroadcastReceiver {
   private List<NetworkStateChangeObserver> mObservers = new ArrayList<>();
+
   @Override
   public void onReceive(Context context, Intent intent) {
     if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
       monitorNetworkWhenVersionLessThanLOLLIPOP(context);
       //API大于23时使用下面的方式进行网络监听
-    }else if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
+    } else if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
       monitorNetworkWhenVersionLessThanMarshmallow(context);
-    }else {
+    } else {
       monitorNetworkWhenVersionLessThanMarshmallow(context);
       monitorNetworkConnectionType(context);
     }
@@ -35,15 +37,21 @@ public class NetworkStateReceiver extends BroadcastReceiver {
   // TODO: 2019/2/14 多网络连接状态
   @TargetApi(Build.VERSION_CODES.M)
   private void monitorNetworkConnectionType(Context context) {
-    ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-    NetworkCapabilities networkCapabilities = connMgr.getNetworkCapabilities(connMgr.getActiveNetwork());
-    if (networkCapabilities!=null) {
-      boolean isValidated = networkCapabilities.hasCapability(
-              NetworkCapabilities.NET_CAPABILITY_VALIDATED);
-      if (isValidated) {//网络完全可用状态
+    ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(
+            Context.CONNECTIVITY_SERVICE);
+    if(connMgr!=null) {
+      NetworkCapabilities networkCapabilities = connMgr.getNetworkCapabilities(
+              connMgr.getActiveNetwork());
+      if (networkCapabilities != null) {
+        boolean isValidated = networkCapabilities.hasCapability(
+                NetworkCapabilities.NET_CAPABILITY_VALIDATED);
+        if (isValidated) {//网络完全可用状态
 //      networkCapabilities.hasTransport();
-      } else {//网络不可用状态
-        notifyNetworkDisconnected();
+          notifyNetworkAvailable();
+          getTransportAvailable(networkCapabilities);
+        } else {//网络不可用状态
+          notifyNetworkNotAvailable();
+        }
       }
     }
   }
@@ -51,10 +59,10 @@ public class NetworkStateReceiver extends BroadcastReceiver {
   /**
    * 检测网络连接状态
    */
-  // TODO: 2019/2/14 Wifi是否真实连接
   private void monitorNetworkWhenVersionLessThanMarshmallow(Context context) {
     //获得ConnectivityManager对象
-    ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+    ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(
+            Context.CONNECTIVITY_SERVICE);
 
     //获取所有当前已有连接上状态的网络连接的信息
     Network[] networks = connMgr.getAllNetworks();
@@ -86,19 +94,19 @@ public class NetworkStateReceiver extends BroadcastReceiver {
     //因为存在上述情况的组合情况，以组合相加的唯一值作为最终状态的判断
     switch (result) {
       case 0:
-        Log.i("NetworkStatus", "WIFI已断开,移动数据已断开");
+//        Log.i("NetworkStatus", "WIFI已断开,移动数据已断开");
         notifyNetworkDisconnected();
         break;
       case 2:
         notifyMobileDataTrafficConnected();
-        Log.i("NetworkStatus", "WIFI已断开,移动数据已连接");
+//        Log.i("NetworkStatus", "WIFI已断开,移动数据已连接");
         break;
       case 4:
-        Log.i("NetworkStatus", "WIFI已连接,移动数据已断开");
+//        Log.i("NetworkStatus", "WIFI已连接,移动数据已断开");
         notifyWifiConnected();
         break;
       case 5:
-        Log.i("NetworkStatus", "WIFI已连接,移动数据已连接");
+//        Log.i("NetworkStatus", "WIFI已连接,移动数据已连接");
         notifyWifiConnected();
         break;
     }
@@ -106,7 +114,8 @@ public class NetworkStateReceiver extends BroadcastReceiver {
 
   private void monitorNetworkWhenVersionLessThanLOLLIPOP(Context context) {
     //获得ConnectivityManager对象
-    ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+    ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(
+            Context.CONNECTIVITY_SERVICE);
     //获取ConnectivityManager对象对应的NetworkInfo对象
     //获取WIFI连接的信息
     if (connMgr == null) {
@@ -116,23 +125,53 @@ public class NetworkStateReceiver extends BroadcastReceiver {
     //获取移动数据连接的信息
     NetworkInfo dataNetworkInfo = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
     if (wifiNetworkInfo.isConnected() && dataNetworkInfo.isConnected()) {
-      Log.i("NetworkStatus", "WIFI已连接,移动数据已连接");
+//      Log.i("NetworkStatus", "WIFI已连接,移动数据已连接");
       notifyWifiConnected();
     } else if (wifiNetworkInfo.isConnected() && !dataNetworkInfo.isConnected()) {
-      Log.i("NetworkStatus", "WIFI已连接,移动数据已断开");
+//      Log.i("NetworkStatus", "WIFI已连接,移动数据已断开");
       notifyWifiConnected();
     } else if (!wifiNetworkInfo.isConnected() && dataNetworkInfo.isConnected()) {
-      Log.i("NetworkStatus", "WIFI已断开,移动数据已连接");
+//      Log.i("NetworkStatus", "WIFI已断开,移动数据已连接");
       notifyMobileDataTrafficConnected();
     } else {
-      Log.i("NetworkStatus", "WIFI已断开,移动数据已断开");
+//      Log.i("NetworkStatus", "WIFI已断开,移动数据已断开");
       notifyNetworkDisconnected();
     }
   }
 
   /**
+   * 监听网络可用通道变化
+   */
+  private void getTransportAvailable(NetworkCapabilities networkCapabilities) {
+    if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+      notifyCellularAvailable();
+      Logger.t("NetworkStatus").i("notifyCellularAvailable");
+    }
+    if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+      notifyWIFIAvailable();
+      Logger.t("NetworkStatus").i("notifyWIFIAvailable");
+    }
+    if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH)) {
+      notifyBluetoothAvailable();
+      Logger.t("NetworkStatus").i("notifyBluetoothAvailable");
+    }
+    if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
+      notifyEthernetAvailable();
+      Logger.t("NetworkStatus").i("notifyEthernetAvailable");
+    }
+    if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN)) {
+      notifyVPNAvailable();
+    }
+    if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI_AWARE)) {
+      notifyWIFIAvailable();
+    }
+    if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_LOWPAN)) {
+      notifyLOWPANAvailable();
+    }
+  }
+
+  /**
    * 注册Observer
-   * @param observer
    */
   public void registerReceiver(NetworkStateChangeObserver observer) {
     if (observer == null) {
@@ -145,7 +184,6 @@ public class NetworkStateReceiver extends BroadcastReceiver {
 
   /**
    * 移除Observer
-   * @param observer
    */
   public void unregisterObserver(NetworkStateChangeObserver observer) {
     if (observer == null) {
@@ -157,9 +195,8 @@ public class NetworkStateReceiver extends BroadcastReceiver {
   /**
    * 通知Wifi连接
    */
-  private void notifyWifiConnected(){
-    for (NetworkStateChangeObserver observer:mObservers
-    ) {
+  private void notifyWifiConnected() {
+    for (NetworkStateChangeObserver observer : mObservers) {
       observer.onWifiConnected();
     }
   }
@@ -167,9 +204,8 @@ public class NetworkStateReceiver extends BroadcastReceiver {
   /**
    * 移动数据连接
    */
-  private void notifyMobileDataTrafficConnected(){
-    for (NetworkStateChangeObserver observer:mObservers
-    ) {
+  private void notifyMobileDataTrafficConnected() {
+    for (NetworkStateChangeObserver observer : mObservers) {
       observer.onMobileDataTrafficConnected();
     }
   }
@@ -177,10 +213,57 @@ public class NetworkStateReceiver extends BroadcastReceiver {
   /**
    * 失去连接
    */
-  private void notifyNetworkDisconnected(){
-    for (NetworkStateChangeObserver observer:mObservers
-    ) {
+  private void notifyNetworkDisconnected() {
+    for (NetworkStateChangeObserver observer : mObservers) {
       observer.onNetworkDisconnected();
+    }
+  }
+
+  private void notifyNetworkAvailable() {
+    for (NetworkStateChangeObserver observer : mObservers) {
+      observer.onNetworkAvailable();
+    }
+  }
+
+  private void notifyNetworkNotAvailable() {
+    for (NetworkStateChangeObserver observer : mObservers) {
+      observer.onNetworkNotAvailable();
+    }
+  }
+
+  private void notifyCellularAvailable() {
+    for (NetworkStateChangeObserver observer : mObservers) {
+      observer.onCellularAvailable();
+    }
+  }
+
+  private void notifyWIFIAvailable() {
+    for (NetworkStateChangeObserver observer : mObservers) {
+      observer.onWIFIAvailable();
+    }
+  }
+
+  private void notifyBluetoothAvailable() {
+    for (NetworkStateChangeObserver observer : mObservers) {
+      observer.onBluetoothAvailable();
+    }
+  }
+
+  private void notifyEthernetAvailable() {
+    for (NetworkStateChangeObserver observer : mObservers) {
+      observer.onEthernetAvailable();
+    }
+  }
+
+  private void notifyVPNAvailable() {
+    for (NetworkStateChangeObserver observer : mObservers) {
+      observer.onVPNAvailable();
+    }
+  }
+
+  private void notifyLOWPANAvailable() {
+    for (NetworkStateChangeObserver observer : mObservers) {
+      observer.onLOWPANAvailable();
     }
   }
 }
