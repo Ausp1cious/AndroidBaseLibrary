@@ -23,7 +23,7 @@ import wang.auspicous.ausp1ciouslib.utils.sharedpreferences.SpUtils;
 /**
  * Created by Ausp1cious on 2019/1/30.
  */
-public abstract class BaseSwipeBackActivity extends BasePermissionActivity implements
+public abstract class BaseSwipeBackActivity extends BaseNetEvnActivity implements
         SwipeBackActivityBase {
   //滑动退出震动时间
   private static final int VIBRATE_DURATION = 20;

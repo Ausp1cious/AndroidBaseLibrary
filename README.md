@@ -79,6 +79,8 @@ Android 基础库
     - 绑定：覆写方法`bindButterKnife`
     - 解绑：覆写方法`unBindButterKnife`
 
+## 网络环境管理
+
 
 [todo]软键盘弹起后，状态栏的相关设置
 
