@@ -82,6 +82,28 @@ Android 基础库
 ## 网络环境管理
 封装在BaseNetEvnActivity中
 
+某些覆写的方法可能会有重复，某些方法可能是6.0以上版本才支持的。
+- `startIn2G`
+- `startIn3G`
+- `startIn4G`
+- `startInWifi`
+- `startInEthernet`
+- `startInBlueTooth`
+- `startInVPN`
+- `startInUNKNOWN`
+- `onNetworkDisconnected`
+- `onWifiConnected`
+- `onMobileDataTrafficConnected`
+- `on4GConnected`
+- `onNetworkAvailable`
+- `onNetworkNotAvailable`
+- `onCellularAvailable`
+- `onWIFIAvailable`
+- `onBluetoothAvailable`
+- `onEthernetAvailable`
+- `onVPNAvailable`
+- `onLOWPANAvailable`
+
 # 关于打包
 基本的配置在app的`build.gradle`中。 混淆的时候，需要将`Ausp1ciousLib`中的混淆文件复制到app中
 
