@@ -104,7 +104,7 @@ Android 基础库
 - `onVPNAvailable`
 - `onLOWPANAvailable`
 
-## RxBus
+## EvenBus
 
 # Utils
 ## VibrateUtils

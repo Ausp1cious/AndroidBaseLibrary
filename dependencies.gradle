@@ -56,6 +56,8 @@ ext {
     swipeBack = '1.1.0'
     //EasyPermission
     easyPermission = '3.0.0'
+    //EvenBus
+    evenBus = '3.1.1'
 
 
     AppLibary = [
@@ -85,8 +87,9 @@ ext {
             immersionBar      : "com.gyf.immersionbar:immersionbar:$immersionBar",
             swipeback         : "me.imid.swipebacklayout.lib:library:$swipeBack",
             easyPermission    : "pub.devrel:easypermissions:$easyPermission",
-            bufferKnife        : "com.jakewharton:butterknife:$bufferKnife",
-            bufferKnifeCompiler: "com.jakewharton:butterknife-compiler:$bufferKnife",
+            evenBus           : "org.greenrobot:eventbus:$evenBus",
+
+
     ]
     AppTestLibary = [
             junit     : "junit:junit:$junit",

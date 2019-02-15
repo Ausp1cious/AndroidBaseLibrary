@@ -89,7 +89,18 @@ public interface Constants {
     int PERMISSION_ACCESS_COARSE_LOCATION = 100108001;
   }
 
+  /**
+   * SharedPreference 相关名字
+   */
   interface SharedPreference{
     String NAME_OF_SHARED_PREFERENCE = "Auspicious";
+  }
+
+  /**
+   * EventBus状态码
+   * xx 模块 xxx 功能  xxxx 事件
+   */
+  interface EventCode{
+
   }
 }
