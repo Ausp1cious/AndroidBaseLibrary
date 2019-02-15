@@ -79,7 +79,6 @@ public abstract class BaseNetEvnActivity extends BasePermissionActivity implemen
   /**
    * 获取当前的网络状态信息
    */
-
   private void getCurrentNetworkInfo() {
     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
       NetworkUtils.NetworkAvailable networkAvailable = NetworkUtils.isNetworkAvailable();

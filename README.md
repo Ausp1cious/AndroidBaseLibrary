@@ -105,6 +105,17 @@ Android 基础库
 - `onLOWPANAvailable`
 
 ## EvenBus
+封装在BaseEventActivity中
+
+总开关`enableEventBus` 覆写方法返回true-允许使用（默认）EventBus false-不允许
+
+发送事件：`EventBusMessageCenter.post`
+
+发送stickEvent：`EventBusStickMessageCenter.post`
+
+接收事件:覆写`onGetMessageEvent`后处理逻辑
+
+接收stickEvent:覆写`onGetStickMessageEvent`后处理逻辑
 
 # Utils
 ## VibrateUtils
