@@ -111,7 +111,7 @@ public final class NetworkUtils {
   }
 
   /**
-   * 在移动网络状态下，返回网络
+   * 在移动网络状态下，返回网络类型
    */
   @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
   private static NetworkType getMobileNetworkType(NetworkInfo info) {

@@ -107,7 +107,19 @@ Android 基础库
 ## RxBus
 
 # Utils
-
+## VibrateUtils
+- `vibrate` 开始震动
+- `cancelVibrate` 取消震动
+## NetworkUtils
+- `getCurrentNetworkType`返回当前网络环境
+- `getMobileNetworkType`在移动网络状态下，返回网络类型
+- `getIPAddress`获取IP地址
+- `getBroadcastIpAddress`获取广播地址
+- `getDomainAddress`获取域名地址
+- `getIpAddressByWifi`通过Wifi获取ip
+- `getGatewayByWifi`通过Wifi获取网关
+- `getNetMaskByWifi`通过Wifi获取掩码
+- `getServerAddressByWifi`通过Wifi获取服务地址
 
 # 关于打包
 基本的配置在app的`build.gradle`中。 混淆的时候，需要将`Ausp1ciousLib`中的混淆文件复制到app中
