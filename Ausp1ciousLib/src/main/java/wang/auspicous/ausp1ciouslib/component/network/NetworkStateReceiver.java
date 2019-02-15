@@ -10,10 +10,10 @@ import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.os.Build;
 
-import com.orhanobut.logger.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import wang.auspicous.ausp1ciouslib.utils.deviceutils.NetworkUtils;
 
 /**
  * Created by Ausp1cious on 2019/2/13.
@@ -34,7 +34,6 @@ public class NetworkStateReceiver extends BroadcastReceiver {
     }
   }
 
-  // TODO: 2019/2/14 多网络连接状态
   @TargetApi(Build.VERSION_CODES.M)
   private void monitorNetworkConnectionType(Context context) {
     ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(
@@ -46,7 +45,6 @@ public class NetworkStateReceiver extends BroadcastReceiver {
         boolean isValidated = networkCapabilities.hasCapability(
                 NetworkCapabilities.NET_CAPABILITY_VALIDATED);
         if (isValidated) {//网络完全可用状态
-//      networkCapabilities.hasTransport();
           notifyNetworkAvailable();
           getTransportAvailable(networkCapabilities);
         } else {//网络不可用状态
@@ -99,6 +97,11 @@ public class NetworkStateReceiver extends BroadcastReceiver {
         break;
       case 2:
         notifyMobileDataTrafficConnected();
+        switch (NetworkUtils.getCurrentNetworkType()) {
+          case NETWORK_4G:
+            notify4GConnected();
+            break;
+        }
 //        Log.i("NetworkStatus", "WIFI已断开,移动数据已连接");
         break;
       case 4:
@@ -203,6 +206,12 @@ public class NetworkStateReceiver extends BroadcastReceiver {
   private void notifyMobileDataTrafficConnected() {
     for (NetworkStateChangeObserver observer : mObservers) {
       observer.onMobileDataTrafficConnected();
+    }
+  }
+
+  private void notify4GConnected() {
+    for (NetworkStateChangeObserver observer : mObservers) {
+      observer.on4GConnected();
     }
   }
 

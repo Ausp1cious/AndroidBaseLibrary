@@ -25,10 +25,6 @@ public interface NetworkStateChangeObserver {
      */
     void on4GConnected();
 
-    /**
-     * 当4G断开时
-     */
-    void on4GDisConnected();
 
     /**
      * 网络可用的情况（可能是Wifi,流量，蓝牙等网络可用）
