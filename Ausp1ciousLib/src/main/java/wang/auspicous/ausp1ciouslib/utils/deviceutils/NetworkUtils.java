@@ -1,15 +1,26 @@
 package wang.auspicous.ausp1ciouslib.utils.deviceutils;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
+import android.text.format.Formatter;
+import android.util.Log;
 
+import java.net.InetAddress;
+import java.net.InterfaceAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.LinkedList;
 import java.util.List;
 
 import androidx.annotation.RequiresApi;
@@ -40,17 +51,6 @@ public final class NetworkUtils {
     NETWORK_NOT_AVAILABLE,
     UNKNOWN,
   }
-
-  public enum TransportAvailable {
-    TRANSPORT_CELLULAR,
-    TRANSPORT_WIFI,
-    TRANSPORT_BLUETOOTH,
-    TRANSPORT_ETHERNET,
-    TRANSPORT_VPN,
-    TRANSPORT_WIFI_AWARE,
-    TRANSPORT_LOWPAN
-  }
-
 
   @RequiresApi(api = Build.VERSION_CODES.M)
   public static NetworkAvailable isNetworkAvailable() {
@@ -151,5 +151,133 @@ public final class NetworkUtils {
       }
     }
     return NetworkType.NETWORK_UNKNOWN;
+  }
+
+  /**
+   * 获取IP地址
+   * @param useIPv4 是否使用ipv4
+   * @return ip地址
+   */
+  @RequiresPermission(Manifest.permission.INTERNET)
+  public static String getIPAddress(final boolean useIPv4) {
+    try {
+      Enumeration<NetworkInterface> nis = NetworkInterface.getNetworkInterfaces();
+      LinkedList<InetAddress> adds = new LinkedList<>();
+      while (nis.hasMoreElements()) {
+        NetworkInterface ni = nis.nextElement();
+        // To prevent phone of xiaomi return "10.0.2.15"
+        if (!ni.isUp() || ni.isLoopback()) continue;
+        Enumeration<InetAddress> addresses = ni.getInetAddresses();
+        while (addresses.hasMoreElements()) {
+          adds.addFirst(addresses.nextElement());
+        }
+      }
+      for (InetAddress add : adds) {
+        if (!add.isLoopbackAddress()) {
+          String hostAddress = add.getHostAddress();
+          boolean isIPv4 = hostAddress.indexOf(':') < 0;
+          if (useIPv4) {
+            if (isIPv4) return hostAddress;
+          } else {
+            if (!isIPv4) {
+              int index = hostAddress.indexOf('%');
+              return index < 0
+                      ? hostAddress.toUpperCase()
+                      : hostAddress.substring(0, index).toUpperCase();
+            }
+          }
+        }
+      }
+    } catch (SocketException e) {
+      e.printStackTrace();
+    }
+    return "";
+  }
+
+  /**
+   * 获取广播地址
+   * @return 广播地址
+   */
+  public static String getBroadcastIpAddress() {
+    try {
+      Enumeration<NetworkInterface> nis = NetworkInterface.getNetworkInterfaces();
+      LinkedList<InetAddress> adds = new LinkedList<>();
+      while (nis.hasMoreElements()) {
+        NetworkInterface ni = nis.nextElement();
+        if (!ni.isUp() || ni.isLoopback()) continue;
+        List<InterfaceAddress> ias = ni.getInterfaceAddresses();
+        for (int i = 0, size = ias.size(); i < size; i++) {
+          InterfaceAddress ia = ias.get(i);
+          InetAddress broadcast = ia.getBroadcast();
+          if (broadcast != null) {
+            return broadcast.getHostAddress();
+          }
+        }
+      }
+    } catch (SocketException e) {
+      e.printStackTrace();
+    }
+    return "";
+  }
+
+  /**
+   * 获取域名地址
+   * @param domain 域名
+   * @return 域名地址
+   */
+  @RequiresPermission(Manifest.permission.INTERNET)
+  public static String getDomainAddress(final String domain) {
+    InetAddress inetAddress;
+    try {
+      inetAddress = InetAddress.getByName(domain);
+      return inetAddress.getHostAddress();
+    } catch (UnknownHostException e) {
+      e.printStackTrace();
+      return "";
+    }
+  }
+
+  /**
+   * 通过Wifi获取ip
+   */
+  @RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
+  public static String getIpAddressByWifi() {
+    @SuppressLint("WifiManagerLeak")
+    WifiManager wm = (WifiManager) BaseApp.getInstance().getContext().getSystemService(Context.WIFI_SERVICE);
+    if (wm == null) return "";
+    return Formatter.formatIpAddress(wm.getDhcpInfo().ipAddress);
+  }
+
+  /**
+   * 通过Wifi获取网关
+   */
+  @RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
+  public static String getGatewayByWifi() {
+    @SuppressLint("WifiManagerLeak")
+    WifiManager wm = (WifiManager) BaseApp.getInstance().getContext().getSystemService(Context.WIFI_SERVICE);
+    if (wm == null) return "";
+    return Formatter.formatIpAddress(wm.getDhcpInfo().gateway);
+  }
+
+  /**
+   *  通过Wifi获取掩码
+   */
+  @RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
+  public static String getNetMaskByWifi() {
+    @SuppressLint("WifiManagerLeak")
+    WifiManager wm = (WifiManager) BaseApp.getInstance().getContext().getSystemService(Context.WIFI_SERVICE);
+    if (wm == null) return "";
+    return Formatter.formatIpAddress(wm.getDhcpInfo().netmask);
+  }
+
+  /**
+   * 通过Wifi获取服务地址
+   */
+  @RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
+  public static String getServerAddressByWifi() {
+    @SuppressLint("WifiManagerLeak")
+    WifiManager wm = (WifiManager) BaseApp.getInstance().getContext().getSystemService(Context.WIFI_SERVICE);
+    if (wm == null) return "";
+    return Formatter.formatIpAddress(wm.getDhcpInfo().serverAddress);
   }
 }
