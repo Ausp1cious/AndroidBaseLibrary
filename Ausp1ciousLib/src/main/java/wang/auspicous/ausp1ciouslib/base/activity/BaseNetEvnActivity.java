@@ -3,11 +3,8 @@ package wang.auspicous.ausp1ciouslib.base.activity;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.IntentFilter;
-import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
-
-import java.util.List;
 
 import androidx.annotation.Nullable;
 import pub.devrel.easypermissions.EasyPermissions;
