@@ -1,14 +1,20 @@
 package wang.auspicous.ausp1cious;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+
+import com.orhanobut.logger.Logger;
+
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.Observable;
+import io.reactivex.observers.DisposableObserver;
 import wang.auspicous.ausp1cious.testui.TestActivity;
+import wang.auspicous.ausp1ciouslib.base.BaseApp;
 import wang.auspicous.ausp1ciouslib.base.activity.BaseUIActivity;
 import wang.auspicous.ausp1ciouslib.component.eventbus.EventBusMessageCenter;
 import wang.auspicous.ausp1ciouslib.component.eventbus.EventBusStickMessageCenter;
@@ -58,9 +64,13 @@ public class MainActivity extends BaseUIActivity {
 
   @Override
   protected void initListener() {
-    btnShow.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, TestActivity.class)));
+    btnShow.setOnClickListener(v -> {
+//      startActivity(new Intent(MainActivity.this, TestActivity.class));
+      Logger.t("ActivityLifecycle").i("发送事件");
+      EventBusStickMessageCenter.post(123);
+    });
     btnHide.setOnClickListener(v -> {
-      EventBusStickMessageCenter.post(0);
+      finish();
     });
   }
 

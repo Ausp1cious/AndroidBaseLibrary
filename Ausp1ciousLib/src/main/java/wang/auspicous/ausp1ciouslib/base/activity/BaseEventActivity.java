@@ -1,9 +1,13 @@
 package wang.auspicous.ausp1ciouslib.base.activity;
 
+import com.orhanobut.logger.Logger;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import wang.auspicous.ausp1ciouslib.base.BaseApp;
+import wang.auspicous.ausp1ciouslib.component.app.IAppMonitor;
 import wang.auspicous.ausp1ciouslib.component.eventbus.EventBusMessageCenter;
 import wang.auspicous.ausp1ciouslib.component.eventbus.EventBusStickMessageCenter;
 
@@ -27,7 +31,6 @@ public abstract class BaseEventActivity extends BaseNetEvnActivity {
   @Override
   protected void onDestroy() {
     super.onDestroy();
-    // TODO: 2019/2/15 判断最后一个Activity 并且删除stickEvent
   }
 
   /**

@@ -117,6 +117,13 @@ Android 基础库
 
 接收stickEvent:覆写`onGetStickMessageEvent`后处理逻辑
 
+# App状态监控
+实现接口:IAppMonitor ->AppMonitorImpl
+
+- `onLastActivityFinish` 最后一个ActivityFinish的时候的回调
+- `onUIRunInBackground` 程序界面运行在后台的时候的回调
+- `onActivityBackInForeBackground` 程序重后台回到前台时的回调
+
 # Utils
 ## VibrateUtils
 - `vibrate` 开始震动
