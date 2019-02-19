@@ -22,12 +22,12 @@ public class AppMonitorImpl implements IAppMonitor {
 
   @Override
   public void onUIRunInBackground() {
-      Logger.t("App状态监控").i("运行在Background");
+//      Logger.t("App状态监控").i("运行在Background");
   }
 
   @Override
   public void onActivityBackInForeBackground() {
     // TODO: 2019/2/18 UI重新运行到前台时
-    Logger.t("App状态监控").i("重新运行到前台");
+//    Logger.t("App状态监控").i("重新运行到前台");
   }
 }

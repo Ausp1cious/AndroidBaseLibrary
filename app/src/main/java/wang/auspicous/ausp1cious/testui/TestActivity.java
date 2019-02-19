@@ -6,11 +6,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.gyf.barlibrary.ImmersionBar;
+import com.orhanobut.logger.Logger;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import wang.auspicous.ausp1cious.R;
 import wang.auspicous.ausp1ciouslib.base.activity.BaseSwipeBackActivity;
+import wang.auspicous.ausp1ciouslib.component.activitylifecyle.ActivityStacks;
 import wang.auspicous.ausp1ciouslib.component.eventbus.EventBusMessageCenter;
 import wang.auspicous.ausp1ciouslib.component.eventbus.EventBusStickMessageCenter;
 
@@ -24,12 +26,11 @@ public class TestActivity extends BaseSwipeBackActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_test);
     ImmersionBar.with(this).statusBarView(idStatusBar).init();
-    EventBusMessageCenter.post(1);
+    Logger.t("Stacks").i(ActivityStacks.getInstance().getActivityStacksSize()+"");
   }
 
   @Override
   public void onGetStickMessageEvent(EventBusStickMessageCenter stickEvent) {
     super.onGetStickMessageEvent(stickEvent);
-    Log.i(TAG, "onGetStickMessageEvent: ");
   }
 }

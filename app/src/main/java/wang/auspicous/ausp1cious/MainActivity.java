@@ -16,6 +16,7 @@ import io.reactivex.observers.DisposableObserver;
 import wang.auspicous.ausp1cious.testui.TestActivity;
 import wang.auspicous.ausp1ciouslib.base.BaseApp;
 import wang.auspicous.ausp1ciouslib.base.activity.BaseUIActivity;
+import wang.auspicous.ausp1ciouslib.component.activitylifecyle.ActivityStacks;
 import wang.auspicous.ausp1ciouslib.component.eventbus.EventBusMessageCenter;
 import wang.auspicous.ausp1ciouslib.component.eventbus.EventBusStickMessageCenter;
 
@@ -57,6 +58,12 @@ public class MainActivity extends BaseUIActivity {
   }
 
   @Override
+  protected void onResume() {
+    super.onResume();
+    Logger.t("Stacks").i(ActivityStacks.getInstance().getActivityStacksSize()+"");
+  }
+
+  @Override
   protected void initWidget() {
 //    btnShow = findViewById(R.id.btn_show);
 //    btnHide = findViewById(R.id.btn_hide);
@@ -65,9 +72,7 @@ public class MainActivity extends BaseUIActivity {
   @Override
   protected void initListener() {
     btnShow.setOnClickListener(v -> {
-//      startActivity(new Intent(MainActivity.this, TestActivity.class));
-      Logger.t("ActivityLifecycle").i("发送事件");
-      EventBusStickMessageCenter.post(123);
+      startActivity(new Intent(MainActivity.this, TestActivity.class));
     });
     btnHide.setOnClickListener(v -> {
       finish();
@@ -82,6 +87,5 @@ public class MainActivity extends BaseUIActivity {
   @Override
   public void onGetMessageEvent(EventBusMessageCenter event) {
     super.onGetMessageEvent(event);
-    Log.i(TAG, "onGetMessageEvent: ");
   }
 }

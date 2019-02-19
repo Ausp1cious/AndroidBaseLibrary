@@ -32,6 +32,7 @@ public class ActivityLifecycleImpl implements Application.ActivityLifecycleCallb
   @Override
   public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
     addActivityToLast(activity);
+    ActivityStacks.getInstance().push(activity);
 //    Logger.t("ActivityLifecycle").i("onCreate");
   }
 
@@ -90,6 +91,7 @@ public class ActivityLifecycleImpl implements Application.ActivityLifecycleCallb
   @Override
   public void onActivityDestroyed(Activity activity) {
     mActivities.remove(activity);
+    ActivityStacks.getInstance().pop(activity);
     if (mActivities.size() == 0) {
       if (mActivityLifecycleObservable != null) {
         mActivityLifecycleObservable.onActivityAllDestroyed();
