@@ -167,7 +167,6 @@ public class ActivityStacks {
     if (!mActivityStacks.isEmpty()) {
       if (isStacksTop(ac)) {
         mActivityStacks.removeFirst();
-        Logger.t("Stacks").i("Top");
       }
     }
   }

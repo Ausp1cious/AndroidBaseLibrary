@@ -26,7 +26,6 @@ public class TestActivity extends BaseSwipeBackActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_test);
     ImmersionBar.with(this).statusBarView(idStatusBar).init();
-    Logger.t("Stacks").i(ActivityStacks.getInstance().getActivityStacksSize()+"");
   }
 
   @Override

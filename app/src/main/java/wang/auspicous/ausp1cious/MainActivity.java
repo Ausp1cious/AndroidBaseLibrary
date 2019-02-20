@@ -60,7 +60,6 @@ public class MainActivity extends BaseUIActivity {
   @Override
   protected void onResume() {
     super.onResume();
-    Logger.t("Stacks").i(ActivityStacks.getInstance().getActivityStacksSize()+"");
   }
 
   @Override
