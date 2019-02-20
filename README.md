@@ -117,6 +117,17 @@ Android 基础库
 
 接收stickEvent:覆写`onGetStickMessageEvent`后处理逻辑
 
+## 栈管理工具
+封装在ActivityStacks中，与`AppMonitorImpl`相结合，封装Activity的入栈和出栈。
+
+关于Activity管理的相关方法：
+- `isStacksTop` 判断Activity是否在栈顶
+- `moveActivityTopStacksTop`将制定Activity移动至栈顶，在它之上的Activity全部移除
+- `findActivity`查找任务栈的Activity
+- `removeAllKeepOnlyOne` 只保留一个Activity
+- `exitApp` 删除全部的Activity
+
+
 # App状态监控
 实现接口:IAppMonitor ->AppMonitorImpl
 

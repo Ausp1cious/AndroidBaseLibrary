@@ -108,16 +108,6 @@ public class ActivityStacks {
   }
 
   /**
-   * finish掉靠近栈顶的指定activity
-   */
-  public void removeStackTopActivity() {
-    if (!mActivityStacks.isEmpty()) {
-      finish(mActivityStacks.remove(0).get());
-    }
-  }
-
-
-  /**
    * finish掉除ac以外的所有activity，并且只保留一个ac
    */
   public void removeAllKeepOnlyOne(Activity ac) {
