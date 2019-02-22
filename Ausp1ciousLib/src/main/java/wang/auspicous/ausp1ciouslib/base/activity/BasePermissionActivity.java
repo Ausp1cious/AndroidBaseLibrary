@@ -1,15 +1,16 @@
 package wang.auspicous.ausp1ciouslib.base.activity;
 
+import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
+
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import pub.devrel.easypermissions.EasyPermissions;
 
 /**
  * Created by Ausp1cious on 2019/1/30.
  */
-public abstract class BasePermissionActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
+public abstract class BasePermissionActivity extends RxAppCompatActivity implements EasyPermissions.PermissionCallbacks {
   @Override
   public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
           @NonNull int[] grantResults) {

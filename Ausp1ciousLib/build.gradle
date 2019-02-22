@@ -38,6 +38,8 @@ dependencies {
     api LibraryDependencies.retrofit
     api LibraryDependencies.rxbinding3
     api LibraryDependencies.rxlifecycle3
+    api LibraryDependencies.rxbindingAndroid3
+    api LibraryDependencies.rxbindingComponents3
     api LibraryDependencies.jacksonCore
     api LibraryDependencies.jacksonAnnotations
     api LibraryDependencies.jacksonDatabind
