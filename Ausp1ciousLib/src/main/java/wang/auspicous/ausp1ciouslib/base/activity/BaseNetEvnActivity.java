@@ -30,13 +30,23 @@ public abstract class BaseNetEvnActivity extends BasePermissionActivity implemen
   @Override
   protected void onStart() {
     super.onStart();
-    initNetworkReceiver();
+    if (openNetworkMonitor()) {
+      initNetworkReceiver();
+    }
   }
 
   @Override
   protected void onStop() {
     super.onStop();
     unregisterNetworkReceiver();
+  }
+
+  /**
+   * 是否开启网络监听
+   * @return true-开启（默认） false-关闭
+   */
+  protected boolean openNetworkMonitor() {
+    return true;
   }
 
   /**
