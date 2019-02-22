@@ -82,6 +82,9 @@ Android 基础库
 ## 网络环境管理
 封装在BaseNetEvnActivity中
 
+开关：
+`openNetworkMonitor` true 开启网络监听 false 关闭网络监听。 在Activity中默认开始，在Fragment中默认关闭
+
 某些覆写的方法可能会有重复，某些方法可能是6.0以上版本才支持的。
 - `startIn2G`
 - `startIn3G`
