@@ -1,10 +1,13 @@
 package wang.auspicous.ausp1ciouslib.base.activity;
 
+import android.os.Bundle;
+
 import com.trello.rxlifecycle3.LifecycleTransformer;
 import com.trello.rxlifecycle3.android.ActivityEvent;
 
 import java.lang.reflect.ParameterizedType;
 
+import androidx.annotation.Nullable;
 import wang.auspicous.ausp1ciouslib.base.presenter.BasePresenterImpl;
 import wang.auspicous.ausp1ciouslib.component.contract.BaseContract;
 
@@ -16,6 +19,12 @@ public abstract class BaseMVPActivity<V extends BaseContract.View,
         P extends BasePresenterImpl> extends
         BaseUIActivity {
     private P mPresenter;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        attachPresenter();
+    }
 
     @Override
     protected void onDestroy() {
@@ -31,6 +40,10 @@ public abstract class BaseMVPActivity<V extends BaseContract.View,
         return bindUntilEvent(activityEvent);
     }
 
+    /**
+     * 获取Presenter
+     * @return
+     */
     public P getPresenter() {
         if (mPresenter != null) {
             attachPresenter();
@@ -38,6 +51,10 @@ public abstract class BaseMVPActivity<V extends BaseContract.View,
         return mPresenter;
     }
 
+    /**
+     * 反射的方式创建Presenter
+     * @return
+     */
     protected P createPresenter() {
         try {
             Class<P> entityClass =
@@ -49,6 +66,9 @@ public abstract class BaseMVPActivity<V extends BaseContract.View,
         return null;
     }
 
+    /**
+     * 将Presenter与Activity绑定
+     */
     private void attachPresenter() {
         mPresenter = createPresenter();
         if (null != mPresenter) {
@@ -56,6 +76,9 @@ public abstract class BaseMVPActivity<V extends BaseContract.View,
         }
     }
 
+    /**
+     * 将Presenter与Activity取消绑定
+     */
     private void detachPresenter() {
         if (null != mPresenter) {
             mPresenter.detach();
