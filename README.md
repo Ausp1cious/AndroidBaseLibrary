@@ -131,7 +131,11 @@ Android 基础库
 - `exitApp` 删除全部的Activity
 
 ## MVP模式
+MVPActivity,BasePresenterImpl以及BaseContract的组合来实现MVP模式
 
+BaseContact 用于Activity和Presenter的接口逻辑控制
+BaseActivity 用于界面的具体实现类
+BasePresenterImpl  Presenter的具体实现类
 
 # App状态监控
 实现接口:IAppMonitor ->AppMonitorImpl
