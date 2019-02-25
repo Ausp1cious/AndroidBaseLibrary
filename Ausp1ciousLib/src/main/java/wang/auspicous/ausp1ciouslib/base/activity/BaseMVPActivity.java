@@ -27,6 +27,12 @@ public abstract class BaseMVPActivity<V extends BaseContract.View,
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        initData();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         detachPresenter();
@@ -84,4 +90,9 @@ public abstract class BaseMVPActivity<V extends BaseContract.View,
             mPresenter.detach();
         }
     }
+
+    /**
+     * 初始化数据请求，在onStart中
+     */
+    protected abstract void initData();
 }
