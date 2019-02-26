@@ -26,4 +26,8 @@
         android:layout_height="wrap_content"
         android:text="隐藏"
         />
+    <FrameLayout
+        android:id="@+id/fl_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>
