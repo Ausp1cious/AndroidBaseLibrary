@@ -186,10 +186,10 @@ public abstract class BaseUIFragment extends BaseEventFragment {
     /**
      * 是否使用沉浸式状态栏
      *
-     * @return false-不使用（默认） true-使用
+     * @return false-不使用 true-使用（默认）
      */
     protected boolean useImmersionBar() {
-        return false;
+        return true;
     }
 
     /**

@@ -10,6 +10,7 @@ import java.util.LinkedList;
 
 /**
  * Created by Ausp1cious on 2019/2/18.
+ * TODO 使用栈的数据结构来优化
  */
 public class ActivityStacks {
   private ActivityStacks() {
