@@ -4,14 +4,16 @@
           package="wang.auspicous.ausp1cious">
 
     <application
+        android:name=".AppApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".AppApplication"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/BaseAppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".testui.FGActivity">
+        </activity>
         <activity android:name=".testui.TestActivity">
         </activity>
         <activity android:name=".MainActivity">

@@ -20,38 +20,38 @@ import wang.auspicous.ausp1ciouslib.component.eventbus.EventBusMessageCenter;
 import wang.auspicous.ausp1ciouslib.component.eventbus.EventBusStickMessageCenter;
 
 public class TestActivity extends BaseUIActivity {
-  private static final String TAG = "MainActivity";
-  @BindView(R.id.id_status_bar)
-  View idStatusBar;
+    private static final String TAG = "MainActivity";
+    @BindView(R.id.id_status_bar)
+    View idStatusBar;
 
-  @BindView(R.id.fl_frame)
-  FrameLayout flLayout;
-  private TestFragment mNewInstance;
+    @BindView(R.id.fl_frame)
+    FrameLayout flLayout;
 
-  @Override
-  protected int setContainerView() {
-    return R.layout.activity_test;
-  }
+    @Override
+    protected int setContainerView() {
+        return R.layout.activity_test;
+    }
 
-  @Override
-  protected void initValue() {
-    mNewInstance = TestFragment.getNewInstance();
-    getSupportFragmentManager().beginTransaction().replace(R.id.fl_frame, mNewInstance).commit();
-  }
+    @Override
+    protected void initValue() {
+        TestFragment newInstance = TestFragment.getNewInstance();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fl_frame,
+                newInstance).commit();
+    }
 
-  @Override
-  protected void initWidget() {
+    @Override
+    protected void initWidget() {
 
-  }
+    }
 
-  @Override
-  protected void initListener() {
+    @Override
+    protected void initListener() {
 
-  }
+    }
 
 
-  @Override
-  public void onGetStickMessageEvent(EventBusStickMessageCenter stickEvent) {
-    super.onGetStickMessageEvent(stickEvent);
-  }
+    @Override
+    public void onGetStickMessageEvent(EventBusStickMessageCenter stickEvent) {
+        super.onGetStickMessageEvent(stickEvent);
+    }
 }

@@ -8,11 +8,13 @@ import com.orhanobut.logger.Logger;
 
 import java.util.concurrent.TimeUnit;
 
+import androidx.core.content.ContextCompat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.Observable;
 import io.reactivex.observers.DisposableObserver;
+import wang.auspicous.ausp1cious.testui.FGActivity;
 import wang.auspicous.ausp1cious.testui.TestActivity;
 import wang.auspicous.ausp1ciouslib.base.BaseApp;
 import wang.auspicous.ausp1ciouslib.base.activity.BaseUIActivity;
@@ -74,9 +76,10 @@ public class MainActivity extends BaseUIActivity {
       startActivity(new Intent(MainActivity.this, TestActivity.class));
     });
     btnHide.setOnClickListener(v -> {
-      finish();
+      startActivity(new Intent(MainActivity.this, FGActivity.class));
     });
   }
+
 
   @Override
   protected int setHeaderLayoutView() {
