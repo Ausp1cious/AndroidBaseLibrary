@@ -29,6 +29,7 @@ public abstract class BaseUIFragment extends BaseEventFragment {
     //加载布局
     private View mHeaderView;//TitleBar
     private View mContainerRootView; //实际加载的根布局
+    // TODO: 2019/2/28 绑定ButterKnife
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
