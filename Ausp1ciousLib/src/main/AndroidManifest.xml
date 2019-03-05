@@ -23,6 +23,19 @@
         <meta-data
             android:name="notch.config"
             android:value="portrait|landscape" />
-        <!--沉浸式状态栏添加/////////////////////////////////////////////////////////////////End-->
+        <!--沉浸式状态栏添加/////////////////////////////////////////////////////////////////Start-->
+
+        <!--FileProvider添加/////////////////////////////////////////////////////////////////Start-->
+        <provider
+            android:name=".base.provider.FileProvider"
+            android:authorities="wang.auspicous.ausp1ciouslib.base.provider.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <!--元数据-->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/lib_base_file_paths" />
+        </provider>
+        <!--FileProvider添加/////////////////////////////////////////////////////////////////Start-->
     </application>
 </manifest>
