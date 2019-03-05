@@ -1,9 +1,10 @@
-package wang.auspicous.ausp1ciouslib.base.activity;
+package wang.auspicous.ausp1ciouslib.base.fragment;
 
 import android.os.Bundle;
 
 import com.trello.rxlifecycle3.LifecycleTransformer;
 import com.trello.rxlifecycle3.android.ActivityEvent;
+import com.trello.rxlifecycle3.android.FragmentEvent;
 
 import java.lang.reflect.ParameterizedType;
 
@@ -12,37 +13,36 @@ import wang.auspicous.ausp1ciouslib.base.presenter.BasePresenterImpl;
 import wang.auspicous.ausp1ciouslib.component.contract.BaseContract;
 
 /**
- * Created by Ausp1cious on 2019/2/21.
- * MVP Activity 基类
+ * Created by Ausp1cious on 2019/3/5.
  */
-public abstract class BaseMVPActivity<V extends BaseContract.View,
-        P extends BasePresenterImpl> extends BaseUIActivity {
+public abstract class BaseMVPFragment<V extends BaseContract.View,
+        P extends BasePresenterImpl> extends BaseUIFragment {
     private P mPresenter;
-
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         attachPresenter();
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        initData();
+    public void onDestroyView() {
+        super.onDestroyView();
+        detachPresenter();
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        detachPresenter();
+    void onFragmentFirstVisible() {
+        if (whetherLazyLoad()) {
+            initData();
+        }
     }
 
     public LifecycleTransformer bindApiLifecycle() {
         return bindToLifecycle();
     }
 
-    public LifecycleTransformer bindApiLifcycle(ActivityEvent activityEvent) {
-        return bindUntilEvent(activityEvent);
+    public LifecycleTransformer bindApiLifcycle(FragmentEvent fragmentEvent) {
+        return bindUntilEvent(fragmentEvent);
     }
 
     /**

@@ -215,4 +215,11 @@ public abstract class BaseLazyLoadFragment extends BaseEventFragment {
      */
     abstract void onFragmentPause();
 
+    /**
+     * Fragment是否懒加载
+     * @return true-使用懒加载 false-不使用懒加载（默认）
+     */
+    protected boolean whetherLazyLoad() {
+        return false;
+    }
 }

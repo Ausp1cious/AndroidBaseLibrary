@@ -149,6 +149,7 @@ BaseLazyLoadFragment 中
 - `onFragmentFirstVisible` 当Fragment第一次可见的时候
 - `onFragmentResume` 当Fragment 可见的时候
 - `onFragmentPause` 当Fragment 不可见的时候
+- `whetherLazyLoad` 是否是用懒加载。 如果使用懒加载，控件的初始化，数据请求都会放于Fragment第一次可见的时候
 
 # Utils
 ## VibrateUtils

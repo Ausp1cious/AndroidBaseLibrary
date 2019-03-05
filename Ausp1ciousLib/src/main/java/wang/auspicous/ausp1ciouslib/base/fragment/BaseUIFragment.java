@@ -18,7 +18,7 @@ import wang.auspicous.ausp1ciouslib.utils.sharedpreferences.SpUtils;
 /**
  * Created by Ausp1cious on 2019/2/25.
  */
-public abstract class BaseUIFragment extends BaseEventFragment {
+public abstract class BaseUIFragment extends BaseLazyLoadFragment {
     protected ImmersionBar mImmersionBar;
     private View mFragmentView;
     //基础根布局
@@ -45,10 +45,11 @@ public abstract class BaseUIFragment extends BaseEventFragment {
             initView(inflater, container);
             setImmersionBar();
             initInflateView(inflater);
-
-            initWidget();//初始化控件
-            initListener();//初始化监听
+            if (!whetherLazyLoad()) {
+                initWidget();//初始化控件
+                initListener();//初始化监听
 //            setILoading(new BaseLoadingView());
+            }
         }
         ViewGroup mViewGroup = (ViewGroup) mFragmentView.getParent();
         if (null != mViewGroup) {
@@ -221,6 +222,25 @@ public abstract class BaseUIFragment extends BaseEventFragment {
     //
 //////////////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////////////
+    //
+    //Fragment懒加载（Start）
+    //
+//////////////////////////////////////////////////////////////////////////////
+
+    @Override
+    void onFragmentFirstVisible() {
+        if (whetherLazyLoad()) {
+            initWidget();//初始化控件
+            initListener();//初始化监听
+        }
+    }
+
+//////////////////////////////////////////////////////////////////////////////
+    //
+    //Fragment懒加载（Start）
+    //
+//////////////////////////////////////////////////////////////////////////////
 
     /**
      * 添加根布局的基本方式
@@ -243,5 +263,6 @@ public abstract class BaseUIFragment extends BaseEventFragment {
      * 初始化监听
      */
     protected abstract void initListener();
+
 
 }
