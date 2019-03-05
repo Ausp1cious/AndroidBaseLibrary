@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -13,6 +14,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import wang.auspicous.ausp1ciouslib.R;
+import wang.auspicous.ausp1ciouslib.utils.SoftKeyBoardUtils;
 import wang.auspicous.ausp1ciouslib.utils.sharedpreferences.SpUtils;
 
 /**
@@ -30,6 +32,8 @@ public abstract class BaseUIFragment extends BaseLazyLoadFragment {
     private View mHeaderView;//TitleBar
     private View mContainerRootView; //实际加载的根布局
     // TODO: 2019/2/28 绑定ButterKnife
+
+    private InputMethodManager mInputMethodManager;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,6 +60,16 @@ public abstract class BaseUIFragment extends BaseLazyLoadFragment {
             mViewGroup.removeView(mFragmentView);
         }
         return mFragmentView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (getActivity()!=null) {
+            //页面销毁的时候关闭软键盘
+            SoftKeyBoardUtils.hideSoftKeyBoard(getActivity(), mInputMethodManager);
+        }
+        mInputMethodManager = null;
     }
 
     /**

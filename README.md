@@ -165,6 +165,8 @@ BaseLazyLoadFragment 中
 - `getGatewayByWifi`通过Wifi获取网关
 - `getNetMaskByWifi`通过Wifi获取掩码
 - `getServerAddressByWifi`通过Wifi获取服务地址
+## SoftKeyBoardUtils
+- `hideSoftKeyBoard` 关闭软键盘
 
 # 关于打包
 基本的配置在app的`build.gradle`中。 混淆的时候，需要将`Ausp1ciousLib`中的混淆文件复制到app中
