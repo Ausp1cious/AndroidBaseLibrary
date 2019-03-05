@@ -144,6 +144,12 @@ BasePresenterImpl  Presenter的具体实现类
 - `onUIRunInBackground` 程序界面运行在后台的时候的回调
 - `onActivityBackInForeBackground` 程序重后台回到前台时的回调
 
+# Fragment懒加载
+BaseLazyLoadFragment 中
+- `onFragmentFirstVisible` 当Fragment第一次可见的时候
+- `onFragmentResume` 当Fragment 可见的时候
+- `onFragmentPause` 当Fragment 不可见的时候
+
 # Utils
 ## VibrateUtils
 - `vibrate` 开始震动
