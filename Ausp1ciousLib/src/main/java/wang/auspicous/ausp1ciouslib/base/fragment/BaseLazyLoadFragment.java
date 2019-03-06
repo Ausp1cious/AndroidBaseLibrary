@@ -208,12 +208,12 @@ public abstract class BaseLazyLoadFragment extends BaseEventFragment {
     /**
      * Fragment 对用户可见
      */
-    abstract void onFragmentResume();
+    protected abstract void onFragmentResume();
 
     /**
      * Fragment对用户不可见
      */
-    abstract void onFragmentPause();
+    protected abstract void onFragmentPause();
 
     /**
      * Fragment是否懒加载
