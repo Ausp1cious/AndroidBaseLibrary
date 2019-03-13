@@ -18,7 +18,7 @@ public interface BaseContract {
          */
         LifecycleTransformer bindApiLifecycle();
 
-        LifecycleTransformer bindApiLifcycle(ActivityEvent activityEvent);
+        LifecycleTransformer bindApiLifecycle(ActivityEvent activityEvent);
     }
 
     /**

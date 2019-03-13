@@ -263,7 +263,7 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
             mContainerRootView = setContainerRootView();
         }
         if (mContainerRootView != null) {
-            mContainerView.addView(mContainerRootView, -1, -2);
+            mContainerView.addView(mContainerRootView, -1, -1);
         }
     }
 

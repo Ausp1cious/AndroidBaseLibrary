@@ -66,5 +66,5 @@ dependencies {
     def AppDependencies = rootProject.ext.App
     implementation project(':Ausp1ciousLib')
     implementation AppDependencies.bufferKnife
-    annotationProcessor  AppDependencies.bufferKnifeCompiler
+    annotationProcessor AppDependencies.bufferKnifeCompiler
 }

@@ -17,7 +17,7 @@ import wang.auspicous.ausp1ciouslib.component.contract.BaseContract;
  */
 public abstract class BaseMVPActivity<V extends BaseContract.View,
         P extends BasePresenterImpl> extends BaseUIActivity {
-    private P mPresenter;
+    protected P mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,52 +41,28 @@ public abstract class BaseMVPActivity<V extends BaseContract.View,
         return bindToLifecycle();
     }
 
-    public LifecycleTransformer bindApiLifcycle(ActivityEvent activityEvent) {
+    public LifecycleTransformer bindApiLifecycle(ActivityEvent activityEvent) {
         return bindUntilEvent(activityEvent);
     }
 
     /**
-     * 获取Presenter
+     * 设置Presenter
      */
-    public P getPresenter() {
-        if (mPresenter != null) {
-            attachPresenter();
-        }
-        return mPresenter;
-    }
+    protected abstract void setPresenter(P presenter);
 
     /**
-     * 反射的方式创建Presenter
+     * 获取页面中的Presenter
      */
-    protected P createPresenter() {
-        try {
-            Class<P> entityClass =
-                    (Class<P>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1];
-            return entityClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+    protected abstract P getPresenter();
 
     /**
-     * 将Presenter与Activity绑定
+     * Presenter绑定View
      */
-    private void attachPresenter() {
-        mPresenter = createPresenter();
-        if (null != mPresenter) {
-            mPresenter.onAttach((V) this);
-        }
-    }
-
+    protected abstract void attachPresenter();
     /**
-     * 将Presenter与Activity取消绑定
+     * Presenter取消绑定View
      */
-    private void detachPresenter() {
-        if (null != mPresenter) {
-            mPresenter.detach();
-        }
-    }
+    protected abstract void detachPresenter();
 
     /**
      * 初始化数据请求，在onStart中

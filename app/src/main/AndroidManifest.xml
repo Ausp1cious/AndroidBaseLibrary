@@ -12,16 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/BaseAppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".testui.FGActivity">
-        </activity>
-        <activity android:name=".testui.TestActivity">
-        </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity android:name=".testui.FGActivity">
+        </activity>
+        <activity android:name=".testui.TestActivity">
+        </activity>
+        <activity android:name=".MainActivity">
         </activity>
     </application>
 
