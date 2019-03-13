@@ -59,6 +59,7 @@ public abstract class BaseUIFragment extends BaseLazyLoadFragment {
         if (null != mViewGroup) {
             mViewGroup.removeView(mFragmentView);
         }
+        this.bindButterKnife(mFragmentView);
         return mFragmentView;
     }
 
@@ -70,6 +71,7 @@ public abstract class BaseUIFragment extends BaseLazyLoadFragment {
             SoftKeyBoardUtils.hideSoftKeyBoard(getActivity(), mInputMethodManager);
         }
         mInputMethodManager = null;
+        this.unBindButterKnife();
     }
 
     /**
@@ -233,6 +235,35 @@ public abstract class BaseUIFragment extends BaseLazyLoadFragment {
 //////////////////////////////////////////////////////////////////////////////
     //
     //处理沉浸式（End）
+    //
+//////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////
+    //
+    //绑定ButterKnife（Start）
+    //
+//////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * ButterKnife绑定
+     */
+    protected void bindButterKnife(View view) {
+
+    }
+
+    /**
+     * ButterKnife解绑
+     */
+    protected void unBindButterKnife() {
+
+    }
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+    //
+    //绑定ButterKnife（Start）
     //
 //////////////////////////////////////////////////////////////////////////////
 

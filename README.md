@@ -151,6 +151,12 @@ BaseLazyLoadFragment 中
 - `onFragmentPause` 当Fragment 不可见的时候
 - `whetherLazyLoad` 是否是用懒加载。 如果使用懒加载，控件的初始化，数据请求都会放于Fragment第一次可见的时候
 
+# 配置ButterKnife
+
+在BaseUIActivity中，覆写方法`bindButterKnife`与`unBindButterKnife`
+
+在BaseUIFragment中，覆写方法`bindButterKnife`与`unBindButterKnife`，不同的是Fragment会提供一个View
+
 # Utils
 ## VibrateUtils
 - `vibrate` 开始震动
