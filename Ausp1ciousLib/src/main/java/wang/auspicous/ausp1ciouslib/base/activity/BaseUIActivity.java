@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -48,6 +50,11 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (fullScreenMode()) {
+            requestWindowFeature(Window.FEATURE_NO_TITLE); //去除标题栏
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN); //去除状态栏
+        }
         setContentView(R.layout.activity_base_common_layout);
         initValue();//初始化状态值
         initView();
@@ -151,7 +158,7 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
                 .statusBarDarkFont(isStatusBarDarkFont())
                 .statusBarView(mStatusBar);
         mImmersionBar.init();
-        if (useImmersionBar()) {
+        if (useImmersionBar()||fullScreenMode()) {
             mStatusBar.setVisibility(View.GONE);
         } else {
             mStatusBar.setVisibility(View.VISIBLE);
@@ -377,5 +384,13 @@ public abstract class BaseUIActivity extends BaseSwipeBackActivity {
     //ButterKnife 页面初始化（End）
     //
 //////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * 全屏显示模式
+     * @return true-全屏显示 false-不全屏显示(默认)
+     */
+    protected boolean fullScreenMode() {
+        return false;
+    }
 
 }

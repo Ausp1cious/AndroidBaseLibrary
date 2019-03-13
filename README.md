@@ -35,6 +35,8 @@ Android 基础库
 
 状态栏字体设置（深色/浅色):覆写方法`isStatusBarDarkFont`,返回true表示深色；返回false表示浅色。通过修改`SpUtils`->`setIsStatusBarDarkFont`来改变状态栏的颜色（按照常理来说，一般只会改变一次这个全局变量,且在加载第一个页面之前使用）
 
+是否使用全屏显示：覆写方法`fullScreenMode` true-全屏显示 false-不使用全屏显示（默认非全屏显示）
+
 ## 基本布局管理
 
 根布局是由`RelativeLayout`,子布局是一个`LinearLayout`。然后动态添加(TitleBar和要挂载的rootView)布局到`LinearLayout`。LoadingView加载到`RelativeLayout`中。
@@ -71,7 +73,7 @@ Android 基础库
 隐藏Loading的方法：`hideLoadingView`
 
 ### 关于ButterKnife
-封装在BaseUIActivity中
+封装在BaseUIActivity,BaseUIFragment中
 
 将它的绑定和解绑放在具体的业务逻辑BaseActivity中了。
 
@@ -150,12 +152,6 @@ BaseLazyLoadFragment 中
 - `onFragmentResume` 当Fragment 可见的时候
 - `onFragmentPause` 当Fragment 不可见的时候
 - `whetherLazyLoad` 是否是用懒加载。 如果使用懒加载，控件的初始化，数据请求都会放于Fragment第一次可见的时候
-
-# 配置ButterKnife
-
-在BaseUIActivity中，覆写方法`bindButterKnife`与`unBindButterKnife`
-
-在BaseUIFragment中，覆写方法`bindButterKnife`与`unBindButterKnife`，不同的是Fragment会提供一个View
 
 # Utils
 ## VibrateUtils

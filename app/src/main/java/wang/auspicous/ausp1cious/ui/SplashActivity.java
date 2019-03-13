@@ -44,6 +44,11 @@ public class SplashActivity extends
     }
 
     @Override
+    protected boolean fullScreenMode() {
+        return true;
+    }
+
+    @Override
     public void setTips(String tips) {
         tvSplashTips.setText(tips);
     }
