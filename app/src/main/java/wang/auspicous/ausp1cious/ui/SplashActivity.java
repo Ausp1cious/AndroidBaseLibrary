@@ -1,5 +1,7 @@
 package wang.auspicous.ausp1cious.ui;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -7,6 +9,7 @@ import wang.auspicous.ausp1cious.Presenters.Contracts.SplashContract;
 import wang.auspicous.ausp1cious.Presenters.SplashPresenterImpl;
 import wang.auspicous.ausp1cious.R;
 import wang.auspicous.ausp1cious.base.AppMVPActivity;
+import wang.auspicous.ausp1ciouslib.utils.interpolator.BreathInterpolator;
 
 public class SplashActivity extends
         AppMVPActivity<SplashContract.SplashView, SplashPresenterImpl> implements
@@ -41,6 +44,7 @@ public class SplashActivity extends
     @Override
     protected void initData() {
         getPresenter().getTips();
+
     }
 
     @Override
@@ -51,5 +55,10 @@ public class SplashActivity extends
     @Override
     public void setTips(String tips) {
         tvSplashTips.setText(tips);
+        ObjectAnimator alphaAnimator = ObjectAnimator.ofFloat(tvSplashTips, "alpha", 0f, 1f);
+        alphaAnimator.setDuration(4000);
+        alphaAnimator.setInterpolator(new BreathInterpolator());//使用自定义的插值器
+        alphaAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        alphaAnimator.start();
     }
 }
