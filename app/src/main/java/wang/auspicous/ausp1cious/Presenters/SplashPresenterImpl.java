@@ -12,7 +12,7 @@ public class SplashPresenterImpl extends BasePresenterImpl<SplashContract.Splash
     @Override
     public void getTips() {
         if (getView() != null) {
-            getView().setTips("Test");
+            getView().setTips("静心，深呼吸");
         }
     }
 }

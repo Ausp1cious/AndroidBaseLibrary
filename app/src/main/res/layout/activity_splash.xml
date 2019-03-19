@@ -18,6 +18,8 @@
         android:layout_below="@id/tv_splash_tips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="Ready"
         android:layout_marginTop="24dp"
         />
 </RelativeLayout>

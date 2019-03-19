@@ -11,6 +11,7 @@ public interface SplashContract {
          * 设置Tips
          */
         void setTips(String tips);
+
     }
 
     interface SplashPresenter extends BaseContract.Presenter {

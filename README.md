@@ -132,6 +132,7 @@ Android 基础库
 - `removeAllKeepOnlyOne` 只保留一个Activity
 - `exitApp` 删除全部的Activity
 
+
 ## MVP模式
 MVPActivity,BasePresenterImpl以及BaseContract的组合来实现MVP模式
 
@@ -169,6 +170,8 @@ BaseLazyLoadFragment 中
 - `getServerAddressByWifi`通过Wifi获取服务地址
 ## SoftKeyBoardUtils
 - `hideSoftKeyBoard` 关闭软键盘
+## ActivityJumpUtils 页面跳转工具类
+用于页面的跳转处理
 
 # FileProvider
 FileProvider中

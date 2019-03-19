@@ -5,10 +5,12 @@ import android.animation.ValueAnimator;
 import android.widget.TextView;
 
 import butterknife.BindView;
+import wang.auspicous.ausp1cious.MainActivity;
 import wang.auspicous.ausp1cious.Presenters.Contracts.SplashContract;
 import wang.auspicous.ausp1cious.Presenters.SplashPresenterImpl;
 import wang.auspicous.ausp1cious.R;
 import wang.auspicous.ausp1cious.base.AppMVPActivity;
+import wang.auspicous.ausp1ciouslib.utils.ActivityJumpUtils;
 import wang.auspicous.ausp1ciouslib.utils.interpolator.BreathInterpolator;
 
 public class SplashActivity extends
@@ -37,7 +39,7 @@ public class SplashActivity extends
 
     @Override
     protected void initListener() {
-
+        tvSplashBreath.setOnClickListener(v -> ActivityJumpUtils.jump(this, MainActivity.class));
     }
 
 
@@ -61,4 +63,5 @@ public class SplashActivity extends
         alphaAnimator.setRepeatCount(ValueAnimator.INFINITE);
         alphaAnimator.start();
     }
+
 }
