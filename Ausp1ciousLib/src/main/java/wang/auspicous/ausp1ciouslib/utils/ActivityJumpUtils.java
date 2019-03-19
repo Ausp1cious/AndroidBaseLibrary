@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
  * Activity 跳转工具类
  */
 public class ActivityJumpUtils {
+    // TODO: 2019/3/19   加入跳转动画
     public interface IExtras{
         void with(Intent intent);
     }
