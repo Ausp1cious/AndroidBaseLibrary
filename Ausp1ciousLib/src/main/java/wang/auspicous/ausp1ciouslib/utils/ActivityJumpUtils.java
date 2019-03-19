@@ -12,9 +12,10 @@ import androidx.fragment.app.Fragment;
  */
 public class ActivityJumpUtils {
     // TODO: 2019/3/19   加入跳转动画
-    public interface IExtras{
+    public interface IExtras {
         void with(Intent intent);
     }
+
     public static void jump(Context context, Class<?> targetActivity) {
         jump(context, targetActivity, null);
     }
@@ -27,15 +28,37 @@ public class ActivityJumpUtils {
         context.startActivity(intent);
     }
 
-    public static void jumpForResult(Activity sourceActivity, Class<?> targetActivity, int requestCode) {
+    public static void jumpPendingTransition(Activity context, Class<?> targetActivity,
+            int enterAnim, int exitAnim) {
+        jump(context, targetActivity, null);
+        context.overridePendingTransition(enterAnim, exitAnim);
+    }
+
+    public static void jumpPendingTransition(Activity context, Class<?> targetActivity,
+            IExtras iExtras, int enterAnim, int exitAnim) {
+        jump(context, targetActivity, iExtras);
+        context.overridePendingTransition(enterAnim, exitAnim);
+    }
+
+    public static void jumpForResult(Activity sourceActivity, Class<?> targetActivity,
+            int requestCode) {
         jumpForResult(sourceActivity, targetActivity, requestCode, null);
     }
 
-    public static void jumpForResult(Fragment sourceFragment, Class<?> targetActivity, int requestCode) {
+    public static void jumpForResultPendingTransition(Activity sourceActivity,
+            Class<?> targetActivity, int requestCode, IExtras iExtras, int enterAnim,
+            int exitAnim) {
+        jumpForResult(sourceActivity, targetActivity, requestCode, iExtras);
+        sourceActivity.overridePendingTransition(enterAnim, exitAnim);
+    }
+
+    public static void jumpForResult(Fragment sourceFragment, Class<?> targetActivity,
+            int requestCode) {
         jumpForResult(sourceFragment, targetActivity, requestCode, null);
     }
 
-    public static void jumpForResult(Activity sourceActivity, Class<?> targetActivity, int requestCode, IExtras iExtras) {
+    public static void jumpForResult(Activity sourceActivity, Class<?> targetActivity,
+            int requestCode, IExtras iExtras) {
         Intent intent = new Intent(sourceActivity, targetActivity);
         if (null != iExtras) {
             iExtras.with(intent);
@@ -43,7 +66,8 @@ public class ActivityJumpUtils {
         sourceActivity.startActivityForResult(intent, requestCode);
     }
 
-    public static void jumpForResult(Fragment sourceFragment, Class<?> targetActivity, int requestCode, IExtras iExtras) {
+    public static void jumpForResult(Fragment sourceFragment, Class<?> targetActivity,
+            int requestCode, IExtras iExtras) {
         Intent intent = new Intent(sourceFragment.getActivity(), targetActivity);
         if (null != iExtras) {
             iExtras.with(intent);
@@ -62,4 +86,6 @@ public class ActivityJumpUtils {
         }
         sourceActivity.setResult(resultCode, intent);
     }
+
+
 }
