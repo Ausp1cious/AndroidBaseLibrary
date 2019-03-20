@@ -1,6 +1,6 @@
 TODO
 ============
-1. RecyclerView
+1. RecyclerView (S：3.20 D: 3.24)
 2. 网络层封装
 3. 首页切换Tab
 4. 数据库
