@@ -1,93 +1,84 @@
 package wang.auspicous.ausp1cious;
 
 import android.content.Intent;
-import android.util.Log;
+import android.os.Bundle;
 import android.widget.Button;
 
-import com.orhanobut.logger.Logger;
+import java.util.ArrayList;
 
-import java.util.concurrent.TimeUnit;
-
-import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
-import io.reactivex.Observable;
-import io.reactivex.observers.DisposableObserver;
+import wang.auspicous.ausp1cious.base.AppMVPActivity;
+import wang.auspicous.ausp1cious.base.AppUIActivity;
 import wang.auspicous.ausp1cious.testui.FGActivity;
 import wang.auspicous.ausp1cious.testui.TestActivity;
-import wang.auspicous.ausp1ciouslib.base.BaseApp;
-import wang.auspicous.ausp1ciouslib.base.activity.BaseUIActivity;
-import wang.auspicous.ausp1ciouslib.component.activitylifecyle.ActivityStacks;
 import wang.auspicous.ausp1ciouslib.component.eventbus.EventBusMessageCenter;
-import wang.auspicous.ausp1ciouslib.component.eventbus.EventBusStickMessageCenter;
+import wang.auspicous.ausp1ciouslib.widgets.recyclerview.IConvert;
+import wang.auspicous.ausp1ciouslib.widgets.recyclerview.TestAdapter;
 
-public class MainActivity extends BaseUIActivity {
-  private static final String TAG = "MainActivity";
-  @BindView(R.id.btn_show)
-  Button btnShow;
-  @BindView(R.id.btn_hide)
-  Button btnHide;
-  private Unbinder mBind;
+public class MainActivity extends AppUIActivity {
+    private static final String TAG = "MainActivity";
+    @BindView(R.id.btn_show)
+    Button btnShow;
+    @BindView(R.id.btn_hide)
+    Button btnHide;
+    @BindView(R.id.rv_test)
+    RecyclerView rvTest;
 
 
-//  @Override
-//  protected void onCreate(Bundle savedInstanceState) {
-//    super.onCreate(savedInstanceState);
-//    setContentView(R.layout.activity_main);
-//    btnTurn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, TestActivity
-// .class)));
-//  }
-//
-  @Override
-  protected void bindButterKnife() {
-    mBind = ButterKnife.bind(MainActivity.this);
-  }
+    @Override
+    protected int setContainerView() {
+        return R.layout.activity_test;
+    }
 
-  @Override
-  protected void unBindButterKnife() {
-    mBind.unbind();
-  }
+    @Override
+    protected void initValue() {
+    }
 
-  @Override
-  protected int setContainerView() {
-    return R.layout.activity_test;
-  }
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 
-  @Override
-  protected void initValue() {
-
-  }
-
-  @Override
-  protected void onResume() {
-    super.onResume();
-  }
-
-  @Override
-  protected void initWidget() {
+    @Override
+    protected void initWidget() {
 //    btnShow = findViewById(R.id.btn_show);
 //    btnHide = findViewById(R.id.btn_hide);
-  }
+        rvTest.setLayoutManager(new LinearLayoutManager(this));
 
-  @Override
-  protected void initListener() {
-    btnShow.setOnClickListener(v -> {
-      startActivity(new Intent(MainActivity.this, TestActivity.class));
-    });
-    btnHide.setOnClickListener(v -> {
-      startActivity(new Intent(MainActivity.this, FGActivity.class));
-    });
-  }
+        ArrayList<String> data = new ArrayList<>();
+        data.add("1");
+        data.add("2");
+        data.add("3");
+        TestAdapter<String> adapter = new TestAdapter<>(this, R.layout.item_test, data,
+                (IConvert<String>) (viewHolder, itemData) -> {
+                    viewHolder.setText(R.id.tv_test_recycler, itemData);
+                });
+        rvTest.setAdapter(adapter);
+    }
+
+    @Override
+    protected void initListener() {
+        btnShow.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, TestActivity.class));
+        });
+        btnHide.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, FGActivity.class));
+        });
+    }
 
 
-  @Override
-  protected int setHeaderLayoutView() {
-    return R.layout.layout_title;
-  }
+    @Override
+    protected int setHeaderLayoutView() {
+        return R.layout.layout_title;
+    }
 
-  @Override
-  public void onGetMessageEvent(EventBusMessageCenter event) {
-    super.onGetMessageEvent(event);
-  }
+    @Override
+    public void onGetMessageEvent(EventBusMessageCenter event) {
+        super.onGetMessageEvent(event);
+    }
+
+
 }
