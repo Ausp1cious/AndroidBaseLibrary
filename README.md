@@ -109,6 +109,10 @@ Android 基础库
 - `onVPNAvailable`
 - `onLOWPANAvailable`
 
+## 相关配置
+- 配置屏幕的方向 `screenOrientationType`设置屏幕方向的返回值。详细参考BaseSystemSettingActivity
+
+
 ## EvenBus
 封装在BaseEventActivity中
 

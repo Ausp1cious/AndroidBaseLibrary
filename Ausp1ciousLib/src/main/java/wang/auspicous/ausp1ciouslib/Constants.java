@@ -103,4 +103,40 @@ public interface Constants {
   interface EventCode{
 
   }
+
+  //屏幕方向类型
+  interface ScreenOrientationType{
+    //随系统
+    int ORIENTATION_LANDSCAPE_UNSPECIFIED = -1;
+    //横屏
+    int ORIENTATION_LANDSCAPE = 0;
+    //竖屏
+    int ORIENTATION_PORTRAIT = 1;
+    //用户当前的首选方向
+    int SCREEN_ORIENTATION_USER = 2;
+    //继承Activity堆栈中当前Activity下面的那个Activity的方向
+    int SCREEN_ORIENTATION_BEHIND = 3;
+    //根据传感器控制方向（没有竖向的反转方向）
+    int SCREEN_ORIENTATION_SENSOR = 4;
+    //忽略物理方向传感器（设置后，如果用户横屏拿着手机进行播放，界面也是横屏的，一旦设置了这个属性之后，手机界面会先变换到竖屏，然后才会锁死方向传感器）
+    int SCREEN_ORIENTATION_NOSENSOR = 5;
+    //在横屏方向使用传感器
+    int SCREEN_ORIENTATION_SENSOR_LANDSCAPE = 6;
+    //在竖屏方向使用
+    int SCREEN_ORIENTATION_SENSOR_PPRTRAIT = 7;
+    //反向横屏
+    int SCREEN_ORIENTATION_REVERSE_LANDSCAPE = 8;
+    //反向竖屏
+    int SCREEN_ORIENTATION_REVERSE_PORTRAIT = 9;
+    //根据传感器控制方向（全部方向）
+    int SCREEN_ORIENTATION_FULL_SENSOR = 10;
+    //使用用户指定的横屏
+    int SCREEN_ORIENTATION_USER_LANDSCAPE = 11;
+    //使用用户指定的竖屏
+    int SCREEN_ORIENTATION_USER_PORTRAIT = 12;
+    //根据用户指定设置屏幕
+    int SCREEN_ORIENTATION_FULL_USER = 13;
+    //锁死当前用户屏幕，方向传感器不生效
+    int SCREEN_ORIENTATION_LOCKED = 14;
+  }
 }

@@ -10,7 +10,7 @@ import pub.devrel.easypermissions.EasyPermissions;
 /**
  * Created by Ausp1cious on 2019/1/30.
  */
-public abstract class BasePermissionActivity extends RxAppCompatActivity implements EasyPermissions.PermissionCallbacks {
+public abstract class BasePermissionActivity extends BaseSystemSettingActivity implements EasyPermissions.PermissionCallbacks {
   @Override
   public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
           @NonNull int[] grantResults) {
