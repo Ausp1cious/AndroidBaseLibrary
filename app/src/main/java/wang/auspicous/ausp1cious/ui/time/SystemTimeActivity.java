@@ -8,7 +8,7 @@ import butterknife.BindView;
 import wang.auspicous.ausp1cious.R;
 import wang.auspicous.ausp1cious.base.AppUIActivity;
 import wang.auspicous.ausp1ciouslib.Constants;
-import wang.auspicous.ausp1ciouslib.utils.TimeUtils;
+import wang.auspicous.ausp1ciouslib.utils.timeutils.TimeUtils;
 
 public class SystemTimeActivity extends AppUIActivity {
 

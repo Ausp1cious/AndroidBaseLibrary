@@ -4,7 +4,7 @@ import android.annotation.SuppressLint;
 
 import java.util.Locale;
 
-import wang.auspicous.ausp1ciouslib.utils.TimeUtils;
+import wang.auspicous.ausp1ciouslib.utils.timeutils.TimeUtils;
 
 /**
  * Created by Ausp1cious on 2019/3/27.

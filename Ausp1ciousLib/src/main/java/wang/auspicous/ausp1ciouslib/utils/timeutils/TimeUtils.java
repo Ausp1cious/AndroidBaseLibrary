@@ -1,7 +1,9 @@
-package wang.auspicous.ausp1ciouslib.utils;
+package wang.auspicous.ausp1ciouslib.utils.timeutils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -76,7 +78,7 @@ public class TimeUtils{
     public static String getMonth(Locale locale,long timestamp) {
         Calendar calendar = Calendar.getInstance(locale);
         calendar.setTime(new Date(timestamp));
-        return String.valueOf(calendar.get(Calendar.MONTH));
+        return String.valueOf(calendar.get(Calendar.MONTH)+1);
     }
     public static String getMonth(Locale locale,String time, String pattern) {
         long timestamp = getTimestamp(time, pattern, locale);
@@ -148,6 +150,10 @@ public class TimeUtils{
     public static String getMilliSecond(Locale locale,String time, String pattern) {
         long timestamp = getTimestamp(time, pattern, locale);
         return getMilliSecond(locale, timestamp);
+    }
+
+    public void compareTwoTime(long time, long targetTime) {
+//        Period.between()
     }
 
 
