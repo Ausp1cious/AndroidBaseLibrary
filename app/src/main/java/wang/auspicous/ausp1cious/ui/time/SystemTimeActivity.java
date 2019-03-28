@@ -8,6 +8,7 @@ import butterknife.BindView;
 import wang.auspicous.ausp1cious.R;
 import wang.auspicous.ausp1cious.base.AppUIActivity;
 import wang.auspicous.ausp1ciouslib.Constants;
+import wang.auspicous.ausp1ciouslib.utils.timeutils.DateBean;
 import wang.auspicous.ausp1ciouslib.utils.timeutils.TimeUtils;
 
 public class SystemTimeActivity extends AppUIActivity {
@@ -28,8 +29,7 @@ public class SystemTimeActivity extends AppUIActivity {
 
     @Override
     protected void initWidget() {
-        tvSystemTime.setText(TimeUtils.getCurrentTime(TimeUtils.FORMAT_TIME_SECOND_MILLISECOND,
-                Locale.getDefault()));
+        tvSystemTime.setText(DateBean.of(2019,3,28).plusDays(4).toString());
     }
 
     @Override

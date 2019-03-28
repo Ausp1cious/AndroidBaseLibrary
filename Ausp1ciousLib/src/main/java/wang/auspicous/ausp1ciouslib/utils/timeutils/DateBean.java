@@ -1,5 +1,6 @@
 package wang.auspicous.ausp1ciouslib.utils.timeutils;
 
+import androidx.annotation.NonNull;
 import wang.auspicous.ausp1ciouslib.component.BaseBean;
 
 /**
@@ -138,6 +139,14 @@ public final class DateBean extends BaseBean {
     }
 
     /**
+     * 获取日期
+     * @return 日期，格式为：yyyy-MM-dd
+     */
+    public String getDate() {
+        return year + "-" + month + "-" + day;
+    }
+
+    /**
      * 创建日期
      */
     private static DateBean create(int year, int month, int dayOfMonth) {
@@ -245,4 +254,6 @@ public final class DateBean extends BaseBean {
         int year = (int) yearEst;
         return new DateBean(year, month, dom);
     }
+
+
 }
