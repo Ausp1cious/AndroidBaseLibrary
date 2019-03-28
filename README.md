@@ -178,6 +178,12 @@ BaseLazyLoadFragment 中
 用于页面的跳转处理
 ## 时间工具类
 TimeUtils
+输入输出类型是String/long
+- getCurrentTime 获取当前时间
+- getTime 获取时间
+- 获取年月日
+- 一个日期加上或者减去某个天数/周数/月数/年数
+- 两个日期之间的差值
 
 
 # FileProvider
