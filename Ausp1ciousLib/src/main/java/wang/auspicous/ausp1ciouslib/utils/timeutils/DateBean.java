@@ -1,5 +1,8 @@
 package wang.auspicous.ausp1ciouslib.utils.timeutils;
 
+import java.util.Calendar;
+import java.util.Locale;
+
 import wang.auspicous.ausp1ciouslib.component.BaseBean;
 
 /**
@@ -23,6 +26,12 @@ public final class DateBean extends BaseBean {
 
     public static DateBean of(int year, int month, int dayOfMonth) {
         return create(year, month, dayOfMonth);
+    }
+
+    public static DateBean of(Locale locale, long timestamp) {
+        return create(Integer.valueOf(TimeUtils.getYear(locale, timestamp)),
+                Integer.valueOf(TimeUtils.getMonth(locale, timestamp)),
+                Integer.valueOf(TimeUtils.getDay(locale, timestamp)));
     }
 
     /**
@@ -62,6 +71,7 @@ public final class DateBean extends BaseBean {
 
     /**
      * 减少天数
+     *
      * @param daysToSubtract 减少的天数
      * @return 减少后的天数
      */
@@ -79,8 +89,10 @@ public final class DateBean extends BaseBean {
     public DateBean plusWeeks(long weeksToAdd) {
         return plusDays(weeksToAdd * 7);
     }
+
     /**
      * 减少周数
+     *
      * @param weeksToSubtract 减少的周数
      * @return 减少周数后的日期
      */
@@ -91,6 +103,7 @@ public final class DateBean extends BaseBean {
 
     /**
      * 添加月份
+     *
      * @param monthsToAdd 添加的月份
      * @return 添加月份后的日期
      */
@@ -107,6 +120,7 @@ public final class DateBean extends BaseBean {
 
     /**
      * 减少月份
+     *
      * @param monthToSubtract 减少的月份
      * @return 减少后的月份
      */
@@ -117,6 +131,7 @@ public final class DateBean extends BaseBean {
 
     /**
      * 添加年份
+     *
      * @param yearsToAdd 添加的年份
      * @return 添加后的年份
      */
@@ -130,6 +145,7 @@ public final class DateBean extends BaseBean {
 
     /**
      * 减少年份
+     *
      * @param yearsToSubtract 减少的年份
      * @return 减少后的年份
      */
@@ -140,6 +156,7 @@ public final class DateBean extends BaseBean {
 
     /**
      * 两个日期相差的天数
+     *
      * @param end 目标日期
      * @return 当前日期与目标日期相差的天数
      */
@@ -149,14 +166,17 @@ public final class DateBean extends BaseBean {
 
     /**
      * 两个日期相差的天数
+     *
      * @param end 目标日期
      * @return 当前日期与目标日期相差的周数
      */
     public long weeksUntil(DateBean end) {
         return daysUntil(end) / 7;
     }
+
     /**
      * 两个日期相差的月份
+     *
      * @param end 目标日期
      * @return 当前日期与目标日期相差的月份
      */
@@ -165,8 +185,10 @@ public final class DateBean extends BaseBean {
         long packed2 = end.getProlepticMonth() * 32L + Integer.valueOf(end.getDay());
         return (packed2 - packed1) / 32;
     }
+
     /**
      * 两个日期相差的年份
+     *
      * @param end 目标日期
      * @return 当前日期与目标日期相差的年份
      */
@@ -176,6 +198,7 @@ public final class DateBean extends BaseBean {
 
     /**
      * 两个日期之间的间隔
+     *
      * @param end 目标日期
      * @return 间隔的日期
      */
@@ -197,10 +220,23 @@ public final class DateBean extends BaseBean {
 
     /**
      * 获取日期
+     *
      * @return 日期，格式为：yyyy-MM-dd
      */
     public String getDate() {
         return year + "-" + month + "-" + day;
+    }
+
+    /**
+     * 获取日期时间戳
+     *
+     * @param locale 时区
+     * @return 时间戳
+     */
+    public long getDateTimestamp(Locale locale) {
+        Calendar calendar = Calendar.getInstance(locale);
+        calendar.set(year, month, day);
+        return calendar.getTimeInMillis();
     }
 
     /**

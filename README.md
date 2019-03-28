@@ -176,6 +176,9 @@ BaseLazyLoadFragment 中
 - `hideSoftKeyBoard` 关闭软键盘
 ## ActivityJumpUtils 页面跳转工具类
 用于页面的跳转处理
+## 时间工具类
+TimeUtils
+
 
 # FileProvider
 FileProvider中
