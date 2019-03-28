@@ -62,4 +62,33 @@ public class DateBeanTest {
         // TODO: 2019/3/28 testMinusYears
     }
 
+    @Test
+    public void testDaysUntil() {
+        DateBean date2019328 = DateBean.of(2019, 3, 28);
+        DateBean date201941 = DateBean.of(2019, 4, 1);
+        Assert.assertEquals(date201941.daysUntil(date2019328), -4);
+    }
+
+    @Test
+    public void testWeeksUntil() {
+        DateBean date2019328 = DateBean.of(2019, 3, 28);
+        DateBean date201941 = DateBean.of(2019, 4, 3);
+        Assert.assertEquals(date2019328.weeksUntil(date201941), 0);
+    }
+    @Test
+    public void testMonthUntil() {
+        DateBean date2019328 = DateBean.of(2019, 3, 28);
+        DateBean date2019428 = DateBean.of(2019, 4, 27);
+        Assert.assertEquals(date2019328.monthsUntil(date2019428), 0);
+    }
+
+    @Test
+    public void testUntil() {
+        DateBean date2019328 = DateBean.of(2019, 3, 28);
+        DateBean date2019428 = DateBean.of(2019, 4, 27);
+        System.out.print(date2019428.until(date2019428).getDate());
+//        Assert.assertEquals(date2019328.until(date2019428).getDay(), "0-30-0");
+
+    }
+
 }

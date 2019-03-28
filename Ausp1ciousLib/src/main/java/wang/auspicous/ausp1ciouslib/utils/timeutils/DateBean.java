@@ -1,6 +1,5 @@
 package wang.auspicous.ausp1ciouslib.utils.timeutils;
 
-import androidx.annotation.NonNull;
 import wang.auspicous.ausp1ciouslib.component.BaseBean;
 
 /**
@@ -14,6 +13,7 @@ public final class DateBean extends BaseBean {
     private final int year;
     private final short month;
     private final short day;
+
 
     private DateBean(int year, int month, int day) {
         this.year = year;
@@ -139,6 +139,63 @@ public final class DateBean extends BaseBean {
     }
 
     /**
+     * 两个日期相差的天数
+     * @param end 目标日期
+     * @return 当前日期与目标日期相差的天数
+     */
+    public long daysUntil(DateBean end) {
+        return end.toEpochDay() - toEpochDay();
+    }
+
+    /**
+     * 两个日期相差的天数
+     * @param end 目标日期
+     * @return 当前日期与目标日期相差的周数
+     */
+    public long weeksUntil(DateBean end) {
+        return daysUntil(end) / 7;
+    }
+    /**
+     * 两个日期相差的月份
+     * @param end 目标日期
+     * @return 当前日期与目标日期相差的月份
+     */
+    public long monthsUntil(DateBean end) {
+        long packed1 = getProlepticMonth() * 32L + day;
+        long packed2 = end.getProlepticMonth() * 32L + Integer.valueOf(end.getDay());
+        return (packed2 - packed1) / 32;
+    }
+    /**
+     * 两个日期相差的年份
+     * @param end 目标日期
+     * @return 当前日期与目标日期相差的年份
+     */
+    public long yearsUntil(DateBean end) {
+        return monthsUntil(end) / 12;
+    }
+
+    /**
+     * 两个日期之间的间隔
+     * @param end 目标日期
+     * @return 间隔的日期
+     */
+    public DateBean until(DateBean end) {
+        long totalMonths = end.getProlepticMonth() - this.getProlepticMonth();
+        int days = end.day - this.day;
+        if (totalMonths > 0 && days < 0) {
+            totalMonths--;
+            DateBean calcDate = this.plusMonths(totalMonths);
+            days = (int) (end.toEpochDay() - calcDate.toEpochDay());  // safe
+        } else if (totalMonths < 0 && days > 0) {
+            totalMonths++;
+            days -= end.lengthOfMonth();
+        }
+        long years = totalMonths / 12;  // safe
+        int months = (int) (totalMonths % 12);  // safe
+        return DateBean.of((int) years, months, days);
+    }
+
+    /**
      * 获取日期
      * @return 日期，格式为：yyyy-MM-dd
      */
@@ -198,6 +255,23 @@ public final class DateBean extends BaseBean {
         return ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0);
     }
 
+    private long getProlepticMonth() {
+        return (year * 12L + month - 1);
+    }
+
+    private int lengthOfMonth() {
+        switch (month) {
+            case 2:
+                return (isLeapYear(year) ? 29 : 28);
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                return 30;
+            default:
+                return 31;
+        }
+    }
 
     private long toEpochDay() {
         long y = year;
