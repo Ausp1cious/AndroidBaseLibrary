@@ -42,8 +42,11 @@ ext {
     rxlifecycle3 = '3.0.0'
     //retrofit
     retrofit = '2.5.0'
-    retrofitAdapter = '1.0.0'
+    retrofitAdapter = '2.3.0'
     retrofitGsonConvert = '2.3.0'
+    retrofitConvertScalars = '2.3.0'
+    disklrucache = '2.0.2'
+    okhttpLogger = '3.8.1'
     //64k
     multiDex = '2.0.0'
     //Jackson
@@ -70,7 +73,7 @@ ext {
             bufferKnifeCompiler: "com.jakewharton:butterknife-compiler:$bufferKnife",
     ]
     AppLibary = [
-            multiDex            : "androidx.multidex:multidex:${multiDex}",
+            multiDex              : "androidx.multidex:multidex:${multiDex}",
 //support -> androidx//////////////////////////////////////////////////////////////////////////////////////////////////start
 //            appCompatV7       : "com.android.support:appcompat-v7:${supportLibraryVersion}",
 //            design            : "com.android.support:design:${supportLibraryVersion}",
@@ -78,27 +81,34 @@ ext {
 //            recyclerview      : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
 //            cardView          : "com.android.support:cardview-v7:${supportLibraryVersion}",
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            appCompatV7         : "androidx.appcompat:appcompat:${appcompat}",
-            design              : "com.google.android.material:material:${material}",
-            constraintLayout    : "androidx.constraintlayout:constraintlayout:${constraintLayout}",
-            recyclerview        : "androidx.recyclerview:recyclerview:${recyclerview}",
-            cardView            : "androidx.cardview:cardview:${cardview}",
+            appCompatV7           : "androidx.appcompat:appcompat:${appcompat}",
+            design                : "com.google.android.material:material:${material}",
+            constraintLayout      : "androidx.constraintlayout:constraintlayout:${constraintLayout}",
+            recyclerview          : "androidx.recyclerview:recyclerview:${recyclerview}",
+            cardView              : "androidx.cardview:cardview:${cardview}",
 //support -> androidx//////////////////////////////////////////////////////////////////////////////////////////////////end
-            rxjava2             : "io.reactivex.rxjava2:rxjava:${rxjava2}",
-            rxAndroid           : "io.reactivex.rxjava2:rxandroid:${rxAndroid}",
-            retrofit            : "com.squareup.retrofit2:retrofit:${retrofit}",
-            rxbinding3          : "com.jakewharton.rxbinding3:rxbinding:$rxBinding3",
-            rxlifecycle3        : "com.trello.rxlifecycle3:rxlifecycle:$rxlifecycle3",
-            rxbindingAndroid3   : "com.trello.rxlifecycle3:rxlifecycle-android:$rxlifecycle3",
-            rxbindingComponents3: "com.trello.rxlifecycle3:rxlifecycle-components:$rxlifecycle3",
-            jacksonCore         : "com.fasterxml.jackson.core:jackson-core:$jackson",
-            jacksonAnnotations  : "com.fasterxml.jackson.core:jackson-annotations:$jackson",
-            jacksonDatabind     : "com.fasterxml.jackson.core:jackson-databind:$jackson",
-            logger              : "com.orhanobut:logger:$logger",
-            immersionBar        : "com.gyf.immersionbar:immersionbar:$immersionBar",
-            swipeback           : "me.imid.swipebacklayout.lib:library:$swipeBack",
-            easyPermission      : "pub.devrel:easypermissions:$easyPermission",
-            evenBus             : "org.greenrobot:eventbus:$evenBus",
+            rxjava2               : "io.reactivex.rxjava2:rxjava:${rxjava2}",
+            rxAndroid             : "io.reactivex.rxjava2:rxandroid:${rxAndroid}",
+            //Retrofit
+            retrofit              : "com.squareup.retrofit2:retrofit:${retrofit}",
+            gsonConverter         : "com.squareup.retrofit2:converter-gson:${retrofitGsonConvert}",
+            retrofitAdapter       : "com.squareup.retrofit2:adapter-rxjava2:${retrofitAdapter}",
+            retrofitConvertScalars: "com.squareup.retrofit2:converter-scalars:$retrofitConvertScalars",
+            disklrucache          : "com.jakewharton:disklrucache:$disklrucache",
+            okHttpLogger          : "com.squareup.okhttp3:logging-interceptor:$okhttpLogger",
+
+            rxbinding3            : "com.jakewharton.rxbinding3:rxbinding:$rxBinding3",
+            rxlifecycle3          : "com.trello.rxlifecycle3:rxlifecycle:$rxlifecycle3",
+            rxbindingAndroid3     : "com.trello.rxlifecycle3:rxlifecycle-android:$rxlifecycle3",
+            rxbindingComponents3  : "com.trello.rxlifecycle3:rxlifecycle-components:$rxlifecycle3",
+            jacksonCore           : "com.fasterxml.jackson.core:jackson-core:$jackson",
+            jacksonAnnotations    : "com.fasterxml.jackson.core:jackson-annotations:$jackson",
+            jacksonDatabind       : "com.fasterxml.jackson.core:jackson-databind:$jackson",
+            logger                : "com.orhanobut:logger:$logger",
+            immersionBar          : "com.gyf.immersionbar:immersionbar:$immersionBar",
+            swipeback             : "me.imid.swipebacklayout.lib:library:$swipeBack",
+            easyPermission        : "pub.devrel:easypermissions:$easyPermission",
+            evenBus               : "org.greenrobot:eventbus:$evenBus",
 
 
     ]

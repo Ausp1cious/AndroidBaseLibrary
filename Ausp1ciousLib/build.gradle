@@ -37,6 +37,11 @@ dependencies {
     api LibraryDependencies.rxjava2
     api LibraryDependencies.rxAndroid
     api LibraryDependencies.retrofit
+    api LibraryDependencies.gsonConverter
+    api LibraryDependencies.retrofitAdapter
+    api LibraryDependencies.retrofitConvertScalars
+    api LibraryDependencies.disklrucache
+    api LibraryDependencies.okHttpLogger
     api LibraryDependencies.rxbinding3
     api LibraryDependencies.rxlifecycle3
     api LibraryDependencies.rxbindingAndroid3
