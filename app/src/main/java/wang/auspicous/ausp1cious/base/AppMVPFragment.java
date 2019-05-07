@@ -1,13 +1,9 @@
 package wang.auspicous.ausp1cious.base;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import java.lang.reflect.ParameterizedType;
 
-import androidx.annotation.Nullable;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import wang.auspicous.ausp1ciouslib.base.fragment.BaseMVPFragment;

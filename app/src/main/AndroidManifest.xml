@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="wang.auspicous.ausp1cious">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="wang.auspicous.ausp1cious">
 
     <application
         android:name=".AppApplication"
@@ -12,21 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/BaseAppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.time.SystemTimeActivity">
-        </activity>
+        <activity android:name=".testui.WebTest"></activity>
+        <activity android:name=".ui.time.SystemTimeActivity"></activity>
         <activity android:name=".ui.SplashActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".testui.FGActivity">
-        </activity>
-        <activity android:name=".testui.TestActivity">
-        </activity>
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".testui.FGActivity"></activity>
+        <activity android:name=".testui.TestActivity"></activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

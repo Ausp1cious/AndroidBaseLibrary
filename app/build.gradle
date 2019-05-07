@@ -67,5 +67,7 @@ dependencies {
     implementation project(':Ausp1ciousLib')
     implementation AppDependencies.bufferKnife
 
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     annotationProcessor AppDependencies.bufferKnifeCompiler
 }

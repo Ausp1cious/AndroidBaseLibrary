@@ -14,6 +14,7 @@ import wang.auspicous.ausp1cious.base.AppMVPActivity;
 import wang.auspicous.ausp1cious.base.AppUIActivity;
 import wang.auspicous.ausp1cious.testui.FGActivity;
 import wang.auspicous.ausp1cious.testui.TestActivity;
+import wang.auspicous.ausp1cious.testui.WebTest;
 import wang.auspicous.ausp1cious.ui.time.SystemTimeActivity;
 import wang.auspicous.ausp1ciouslib.component.eventbus.EventBusMessageCenter;
 import wang.auspicous.ausp1ciouslib.widgets.recyclerview.IConvert;
@@ -66,7 +67,7 @@ public class MainActivity extends AppUIActivity {
             startActivity(new Intent(MainActivity.this, SystemTimeActivity.class));
         });
         btnHide.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, FGActivity.class));
+            startActivity(new Intent(MainActivity.this, WebTest.class));
         });
     }
 
