@@ -3,6 +3,7 @@ package wang.auspicous.ausp1ciouslib.net;
 
 import wang.auspicous.ausp1ciouslib.net.request.DownloadRequest;
 import wang.auspicous.ausp1ciouslib.net.request.GetRequest;
+import wang.auspicous.ausp1ciouslib.net.request.PostQueryRequest;
 import wang.auspicous.ausp1ciouslib.net.request.PostRequest;
 import wang.auspicous.ausp1ciouslib.net.request.UploadRequest;
 
@@ -17,6 +18,10 @@ public final class HttpUtils {
 
     public static PostRequest post() {
         return new PostRequest();
+    }
+
+    public static PostQueryRequest postQuery() {
+        return new PostQueryRequest();
     }
 
     public static DownloadRequest download() {

@@ -47,6 +47,7 @@ ext {
     retrofitConvertScalars = '2.3.0'
     disklrucache = '2.0.2'
     okhttpLogger = '3.8.1'
+    xlog = '1.6.1'
     //64k
     multiDex = '2.0.0'
     //Jackson
@@ -96,6 +97,8 @@ ext {
             retrofitConvertScalars: "com.squareup.retrofit2:converter-scalars:$retrofitConvertScalars",
             disklrucache          : "com.jakewharton:disklrucache:$disklrucache",
             okHttpLogger          : "com.squareup.okhttp3:logging-interceptor:$okhttpLogger",
+            xlog                  : "com.elvishew:xlog:$xlog",
+
 
             rxbinding3            : "com.jakewharton.rxbinding3:rxbinding:$rxBinding3",
             rxlifecycle3          : "com.trello.rxlifecycle3:rxlifecycle:$rxlifecycle3",

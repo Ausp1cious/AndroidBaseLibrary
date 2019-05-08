@@ -42,6 +42,7 @@ dependencies {
     api LibraryDependencies.retrofitConvertScalars
     api LibraryDependencies.disklrucache
     api LibraryDependencies.okHttpLogger
+    api LibraryDependencies.xlog
     api LibraryDependencies.rxbinding3
     api LibraryDependencies.rxlifecycle3
     api LibraryDependencies.rxbindingAndroid3

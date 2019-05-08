@@ -31,6 +31,10 @@ public interface ApiService {
     @POST()
     Flowable<ResponseBody> post(@Url() String url, @FieldMap Map<String, Object> maps);
 
+
+    @POST()
+    Flowable<ResponseBody> postQuery(@Url() String url, @QueryMap Map<String, Object> maps);
+
     @POST()
     Flowable<ResponseBody> postBody(@Url() String url, @Body RequestBody requestBody);
 
