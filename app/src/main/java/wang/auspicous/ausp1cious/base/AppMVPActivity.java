@@ -56,7 +56,9 @@ public abstract class AppMVPActivity<V extends BaseContract.View,
 
     @Override
     protected void attachPresenter() {
-        mPresenter = createPresenter();
+        if(mPresenter==null) {
+            mPresenter = createPresenter();
+        }
         if (null != mPresenter) {
             mPresenter.onAttach((V) this);
         }

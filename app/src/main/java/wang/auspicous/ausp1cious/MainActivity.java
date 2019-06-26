@@ -75,7 +75,7 @@ public class MainActivity extends AppUIActivity {
         });
         btnHide.setOnClickListener(v -> {
 //            startActivity(new Intent(MainActivity.this, WebTest.class));
-            shutdown();
+//            shutdown();
         });
     }
 
@@ -90,27 +90,27 @@ public class MainActivity extends AppUIActivity {
         super.onGetMessageEvent(event);
     }
 
-    private void shutdown() {
-        HttpUtils.get().setSuffixUrl("live/admin").execute(new SimpleCallBack<String>() {
-            @Override
-            public void onNext(String requestUrl, Map<String, Object> requestParams, String responseResult) {
-                Log.i(TAG, "onNext: "+responseResult);
-            }
-
-            @Override
-            public void onError(String requestUrl, Map<String, Object> requestParams, Throwable throwable) {
-                Log.i(TAG, "onError: url:"+requestUrl+";throwable:"+throwable.getMessage());
-            }
-
-            @Override
-            public void onStart() {
-
-            }
-
-            @Override
-            public void onFinish() {
-                Log.i(TAG, "onFinish: ");
-            }
-        },bindToLifecycle());
-    }
+//    private void shutdown() {
+//        HttpUtils.get().setSuffixUrl("live/admin").execute(new SimpleCallBack<String>() {
+//            @Override
+//            public void onNext(String requestUrl, Map<String, Object> requestParams, String responseResult) {
+//                Log.i(TAG, "onNext: "+responseResult);
+//            }
+//
+//            @Override
+//            public void onError(String requestUrl, Map<String, Object> requestParams, Throwable throwable) {
+//                Log.i(TAG, "onError: url:"+requestUrl+";throwable:"+throwable.getMessage());
+//            }
+//
+//            @Override
+//            public void onStart() {
+//
+//            }
+//
+//            @Override
+//            public void onFinish() {
+//                Log.i(TAG, "onFinish: ");
+//            }
+//        },bindToLifecycle());
+//    }
 }

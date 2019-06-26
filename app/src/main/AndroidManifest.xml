@@ -8,23 +8,27 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/BaseAppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".testui.WebTest"></activity>
-        <activity android:name=".ui.time.SystemTimeActivity"></activity>
-        <activity android:name=".ui.SplashActivity">
+        <activity android:name=".pancam.ShowActivity"></activity>
+        <activity android:name=".pancam.ControlMainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".testui.FGActivity"></activity>
-        <activity android:name=".testui.TestActivity"></activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".testui.WebTest" />
+        <activity android:name=".ui.time.SystemTimeActivity" />
+        <activity android:name=".ui.SplashActivity">
+
+        </activity>
+        <activity android:name=".testui.FGActivity" />
+        <activity android:name=".testui.TestActivity" />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
