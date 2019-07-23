@@ -34,7 +34,7 @@ ext {
     mockito = '2.8.9'
     robolectric = '3.8'
     //BufferKnife
-    bufferKnife = '10.0.0'
+    bufferKnife = '10.1.0'
     //RxJava2
     rxjava2 = '2.2.3'
     rxAndroid = '2.1.0'

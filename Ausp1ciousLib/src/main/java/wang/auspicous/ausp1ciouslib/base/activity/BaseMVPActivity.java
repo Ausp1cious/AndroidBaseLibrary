@@ -8,6 +8,7 @@ import com.trello.rxlifecycle3.android.ActivityEvent;
 import java.lang.reflect.ParameterizedType;
 
 import androidx.annotation.Nullable;
+
 import wang.auspicous.ausp1ciouslib.base.presenter.BasePresenterImpl;
 import wang.auspicous.ausp1ciouslib.component.contract.BaseContract;
 
@@ -18,17 +19,23 @@ import wang.auspicous.ausp1ciouslib.component.contract.BaseContract;
 public abstract class BaseMVPActivity<V extends BaseContract.View,
         P extends BasePresenterImpl> extends BaseUIActivity {
     protected P mPresenter;
+    private boolean isFirstInitData = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         attachPresenter();
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        initData();
+        if (isFirstInitData) {
+            initData();
+            isFirstInitData = false;
+        }
+        freshDataOnStart();
     }
 
     @Override
@@ -59,6 +66,7 @@ public abstract class BaseMVPActivity<V extends BaseContract.View,
      * Presenter绑定View
      */
     protected abstract void attachPresenter();
+
     /**
      * Presenter取消绑定View
      */
@@ -68,4 +76,9 @@ public abstract class BaseMVPActivity<V extends BaseContract.View,
      * 初始化数据请求，在onStart中
      */
     protected abstract void initData();
+
+    /**
+     * 每次在onStart的时候，加载数据
+     */
+    protected abstract void freshDataOnStart();
 }
