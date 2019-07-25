@@ -1,24 +1,20 @@
 package wang.auspicous.ausp1cious.pancam;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.os.BatteryManager;
-import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.orhanobut.logger.Logger;
+
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import wang.auspicous.ausp1cious.Presenters.Contracts.ControlMainContract;
 import wang.auspicous.ausp1cious.Presenters.ControlMainPresenterImpl;
 import wang.auspicous.ausp1cious.R;
 import wang.auspicous.ausp1cious.base.AppMVPActivity;
-import wang.auspicous.ausp1ciouslib.net.httpclient.HttpFactory;
 import wang.auspicous.ausp1ciouslib.utils.ActivityJumpUtils;
+import wang.auspicous.ausp1ciouslib.utils.cryptology.Md5NativeUtils;
 
 public class ControlMainActivity extends AppMVPActivity<ControlMainContract.ControlMainView, ControlMainPresenterImpl> implements ControlMainContract.ControlMainView {
     private static final String TAG = "ControlMainActivity";
@@ -55,7 +51,7 @@ public class ControlMainActivity extends AppMVPActivity<ControlMainContract.Cont
 
     @Override
     protected void initWidget() {
-
+        Logger.i(Md5NativeUtils.encryptMD5("123"));
     }
 
     @Override

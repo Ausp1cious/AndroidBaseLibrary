@@ -80,5 +80,5 @@ public abstract class BaseMVPActivity<V extends BaseContract.View,
     /**
      * 每次在onStart的时候，加载数据
      */
-    protected abstract void freshDataOnStart();
+    protected void freshDataOnStart(){}
 }
