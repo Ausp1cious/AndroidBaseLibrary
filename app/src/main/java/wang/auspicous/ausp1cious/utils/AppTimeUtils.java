@@ -104,6 +104,49 @@ public class AppTimeUtils extends TimeUtils {
         return getMilliSecond(CURRENT_LOCAL, time, pattern);
     }
 
+    /**
+     * 给一个时间添加毫秒
+     */
+    public static String datePlusMilliseconds(String time, long addMilliSeconds) {
+        return datePlusMilliSeconds(CURRENT_LOCAL, time, addMilliSeconds);
+    }
+
+    public static long datePlusMilliseconds(String time, String pattern, long addMilliSeconds) {
+        return datePlusMinutesAsLong(time, pattern, addMilliSeconds);
+    }
+
+    /**
+     * 给一个时间添加秒
+     */
+    public static String datePlusSeconds(String time, long addSeconds) {
+        return datePlusSeconds(CURRENT_LOCAL, time, addSeconds);
+    }
+
+    public static long datePlusSeconds(String time, String pattern, long addSeconds) {
+        return datePlusSeconds(time, pattern, addSeconds);
+    }
+
+    /**
+     * 给一个时间添加分钟
+     */
+    public static String datePlusMinutes(String time, long addMinutes) {
+        return datePlusMinutes(CURRENT_LOCAL, time, addMinutes);
+    }
+
+    public static long datePlusMinutesAsLong(String time, String pattern, long addMinutes) {
+        return datePlusMinutesAsLong(time, pattern, addMinutes);
+    }
+
+    /**
+     * 给一个时间添加小时
+     */
+    public static String datePlusHours(String time, long addhours) {
+        return datePlusHours(CURRENT_LOCAL, time, addhours);
+    }
+
+    public static long dateMinusHoursAsLong(String time, String pattern, long addhours) {
+        return dateMinusHoursAsLong(time, pattern, addhours);
+    }
 
     /**
      * 一个日期添加天数，后返回日期
@@ -150,6 +193,52 @@ public class AppTimeUtils extends TimeUtils {
     }
 
     /**
+     * 给一个时间减少毫秒
+     */
+    public static String dateMinusMilliSeconds(String time, long minusMilliSeconds) {
+        return dateMinusMilliSeconds(CURRENT_LOCAL, time, minusMilliSeconds);
+    }
+
+    public static long dateMinusMilliSecondsAsLong(String time, String pattern,
+                                                   long minusMilliSeconds) {
+        return dateMinusMilliSecondsAsLong(CURRENT_LOCAL, time, minusMilliSeconds);
+    }
+
+    /**
+     * 给一个时间减少秒
+     */
+    public static String dateMinusSeconds(String time, long minusSeconds) {
+        return dateMinusSeconds(CURRENT_LOCAL, time, minusSeconds);
+    }
+
+    public static long dateMinusSecondsAsLong(String time, long minusSeconds) {
+        return dateMinusSecondsAsLong(CURRENT_LOCAL, time, minusSeconds);
+    }
+
+    /**
+     * 给一个时间减少分
+     */
+    public static String dateMinusMinutes(String time, long minusMilliSeconds) {
+        return dateMinusMinutes(CURRENT_LOCAL, time, minusMilliSeconds);
+    }
+
+    public static long dateMinusMinutesAsLong(String time, long minusMilliSeconds) {
+        return dateMinusMinutesAsLong(CURRENT_LOCAL, time, minusMilliSeconds);
+    }
+
+    /**
+     * 给一个时间减少小时
+     */
+    public static String dateMinusHours(String time, long minusMilliSeconds) {
+        return dateMinusHours(CURRENT_LOCAL, time, minusMilliSeconds);
+    }
+
+    public static long dateMinusHoursAsLong(String time, long minusMilliSeconds) {
+        return dateMinusHoursAsLong(CURRENT_LOCAL, time, minusMilliSeconds);
+    }
+
+
+    /**
      * 一个日期减少天数
      */
     public static String dateMinusDays(String time, String pattern, long subtractDays) {
@@ -191,6 +280,56 @@ public class AppTimeUtils extends TimeUtils {
 
     public static long dateMinusYearsAsLong(String time, String pattern, long subtractYears) {
         return dateMinusYearsAsLong(CURRENT_LOCAL, time, pattern, subtractYears);
+    }
+
+    /**
+     * 两个日期相差的毫秒数
+     */
+    public static long getMillisecondsBetweenTwoTime(long timestampOne,
+                                                     long timestampTwo) {
+        return getMillisecondsBetweenTwoTime(CURRENT_LOCAL, timestampOne, timestampTwo);
+    }
+
+    public static long getMillisecondsBetweenTwoTime(String timeOne,
+                                                     String timeTwo) {
+        return getMillisecondsBetweenTwoTime(CURRENT_LOCAL, timeOne, timeTwo);
+    }
+
+    /**
+     * 两个日期相差的秒数
+     */
+    public static long getSecondsBetweenTwoTime(long timestampOne,
+                                                long timestampTwo) {
+        return getSecondsBetweenTwoTime(CURRENT_LOCAL, timestampOne, timestampTwo);
+    }
+
+    public static long getSecondsBetweenTwoTime(String timeOne,
+                                                String timeTwo) {
+        return getSecondsBetweenTwoTime(CURRENT_LOCAL, timeOne, timeTwo);
+    }
+
+    /**
+     * 两个日期相差的分钟数
+     */
+    public static long getMinutesBetweenTwoTime(Locale locale, long timestampOne,
+                                                long timestampTwo) {
+        return getMinutesBetweenTwoTime(CURRENT_LOCAL, timestampOne, timestampTwo);
+    }
+
+    public static long getMinutesBetweenTwoTime(String timeOne,
+                                                String timeTwo) {
+        return getMinutesBetweenTwoTime(CURRENT_LOCAL, timeOne, timeTwo);
+    }
+
+    /**
+     * 两个日期相差的小时数
+     */
+    public static long getHoursBetweenTwoTime( long timestampOne, long timestampTwo) {
+        return getHoursBetweenTwoTime(CURRENT_LOCAL, timestampOne, timestampTwo);
+    }
+    public static long getHoursBetweenTwoTime(String timeOne,
+                                              String timeTwo) {
+        return getHoursBetweenTwoTime(CURRENT_LOCAL, timeOne, timeTwo);
     }
 
     /**
@@ -237,30 +376,5 @@ public class AppTimeUtils extends TimeUtils {
         return getYearsBetweenTwoTime(CURRENT_LOCAL, pattern, timeOne, timeTwo);
     }
 
-    /**
-     * 两个日期相差的时间戳
-     */
-    public static long getTimeBetweenTwoTimeAsTimestamp(long timestampOne,
-            long timestampTwo) {
-        return getTimeBetweenTwoTimeAsTimestamp(CURRENT_LOCAL, timestampOne, timestampTwo);
-    }
-
-    public static long getTimeBetweenTwoTimeAsTimestamp(String pattern, String timeOne,
-            String timeTwo) {
-        return getTimeBetweenTwoTimeAsTimestamp(CURRENT_LOCAL, pattern, timeOne, timeTwo);
-    }
-
-    /**
-     * 两个日期相差的日期
-     */
-    public static String getTimeBetweenTwoTime(String pattern, long timestampOne,
-            long timestampTwo) {
-        return getTimeBetweenTwoTime(CURRENT_LOCAL, pattern, timestampOne, timestampTwo);
-    }
-
-    public static String getTimeBetweenTwoTime(String intoPattern, String timeOne,
-            String timeTwo, String outPattern) {
-        return getTimeBetweenTwoTime(CURRENT_LOCAL, intoPattern, timeOne, timeTwo, outPattern);
-    }
 
 }

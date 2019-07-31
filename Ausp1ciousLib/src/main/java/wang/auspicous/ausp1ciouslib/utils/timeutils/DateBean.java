@@ -1,5 +1,6 @@
 package wang.auspicous.ausp1ciouslib.utils.timeutils;
 
+import java.time.Period;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -114,7 +115,7 @@ public final class DateBean extends BaseBean {
         long monthCount = year * 12L + (month - 1);
         long calcMonths = monthCount + monthsToAdd;  // safe overflow
         int newYear = (int) (calcMonths / 12);
-        int newMonth = (int) ((calcMonths / 12) + 1);
+        int newMonth = (int) floorMod(calcMonths, 12) + 1;
         return resolvePreviousValid(newYear, newMonth, day);
     }
 
@@ -365,5 +366,12 @@ public final class DateBean extends BaseBean {
         return new DateBean(year, month, dom);
     }
 
-
+    private long floorMod(long x, long y) {
+        long r = x / y;
+        // if the signs are different and modulo not zero, round down
+        if ((x ^ y) < 0 && (r * y != x)) {
+            r--;
+        }
+        return x - r * y;
+    }
 }

@@ -46,6 +46,12 @@ public class TimeBean extends BaseBean {
         return new TimeBean(hour, minute, second, millisecond);
     }
 
+    //两个时间的差值
+
+    //给一个时间添加时间
+    //给一个时间减少时间
+
+
     public String getTime() {
         return hour + ":" + minute + ":" + second + "." + nano;
     }
