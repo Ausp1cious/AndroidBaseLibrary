@@ -39,7 +39,10 @@ public class SplashActivity extends
 
     @Override
     protected void initListener() {
-        tvSplashBreath.setOnClickListener(v -> ActivityJumpUtils.jump(this, MainActivity.class));
+        tvSplashBreath.setOnClickListener(v -> {
+            ActivityJumpUtils.jump(this, MainActivity.class);
+            finish();
+        });
     }
 
 

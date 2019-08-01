@@ -18,6 +18,7 @@ public class TimeUtils {
     public static final String FORMAT_TIME_SECOND = "HH:mm:ss";
     public static final String FORMAT_TIME_SECOND_MILLISECOND = "HH:mm:ss.SSS";
     public static final String FORMAT_DATE = "yyyy-MM-dd";
+    public static final String FORMAT_DATE_CHINESE = "yyyy年MM月dd日";
     public static final String FORMAT_DATE_TIME = "yyyy-MM-dd HH:mm";
     public static final String FORMAT_DATE_TIME_SECOND = "yyyy-MM-dd HH:mm:ss";
     public static final String FORMAT_DATE_TIME_SECOND_MILLISECOND = "yyyy-MM-dd HH:mm:ss.SSS";
@@ -572,6 +573,18 @@ public class TimeUtils {
         long timestampOne = getTimestamp(timeOne, pattern, locale);
         long timestampTwo = getTimestamp(timeTwo, pattern, locale);
         return getYearsBetweenTwoTime(locale, timestampOne, timestampTwo);
+    }
+
+    /**
+     * 获取指定的时间的星期
+     */
+    public static String getWeek(String[] weekName,Date data) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(data);
+        int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        if (w < 0)
+            w = 0;
+        return weekName[w];
     }
 
     private static SimpleDateFormat getSimpleDateFormat(String pattern, Locale locale) {

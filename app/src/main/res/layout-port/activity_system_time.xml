@@ -57,8 +57,8 @@
             android:layout_marginTop="32dp"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/icon_lightbulb_off"
             android:visibility="gone"
+            android:src="@drawable/icon_lightbulb_off"
             android:layout_gravity="center_horizontal"
             />
     </LinearLayout>

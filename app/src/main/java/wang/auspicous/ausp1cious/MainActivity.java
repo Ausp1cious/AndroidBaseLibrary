@@ -11,6 +11,7 @@ import java.util.Map;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import wang.auspicous.ausp1cious.base.AppMVPActivity;
@@ -44,6 +45,11 @@ public class MainActivity extends AppUIActivity {
 
     @Override
     protected void initValue() {
+    }
+
+    @Override
+    protected boolean canSwipeBack() {
+        return false;
     }
 
     @Override
@@ -89,28 +95,4 @@ public class MainActivity extends AppUIActivity {
     public void onGetMessageEvent(EventBusMessageCenter event) {
         super.onGetMessageEvent(event);
     }
-
-//    private void shutdown() {
-//        HttpUtils.get().setSuffixUrl("live/admin").execute(new SimpleCallBack<String>() {
-//            @Override
-//            public void onNext(String requestUrl, Map<String, Object> requestParams, String responseResult) {
-//                Log.i(TAG, "onNext: "+responseResult);
-//            }
-//
-//            @Override
-//            public void onError(String requestUrl, Map<String, Object> requestParams, Throwable throwable) {
-//                Log.i(TAG, "onError: url:"+requestUrl+";throwable:"+throwable.getMessage());
-//            }
-//
-//            @Override
-//            public void onStart() {
-//
-//            }
-//
-//            @Override
-//            public void onFinish() {
-//                Log.i(TAG, "onFinish: ");
-//            }
-//        },bindToLifecycle());
-//    }
 }

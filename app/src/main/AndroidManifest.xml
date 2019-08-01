@@ -15,16 +15,16 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".pancam.ShowActivity"></activity>
         <activity android:name=".pancam.ControlMainActivity" >
+
+        </activity>
+        <activity android:name=".testui.WebTest" />
+        <activity android:name=".ui.time.SystemTimeActivity" />
+        <activity android:name=".ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".testui.WebTest" />
-        <activity android:name=".ui.time.SystemTimeActivity" />
-        <activity android:name=".ui.SplashActivity">
-
         </activity>
         <activity android:name=".testui.FGActivity" />
         <activity android:name=".testui.TestActivity" />

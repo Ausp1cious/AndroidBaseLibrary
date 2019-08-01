@@ -1,4 +1,4 @@
-package wang.auspicous.ausp1ciouslib.component;
+package wang.auspicous.ausp1ciouslib.component.bean;
 
 import java.io.Serializable;
 

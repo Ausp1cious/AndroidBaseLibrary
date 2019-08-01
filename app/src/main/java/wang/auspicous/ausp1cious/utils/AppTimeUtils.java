@@ -2,6 +2,7 @@ package wang.auspicous.ausp1cious.utils;
 
 import android.annotation.SuppressLint;
 
+import java.util.Date;
 import java.util.Locale;
 
 import wang.auspicous.ausp1ciouslib.utils.timeutils.TimeUtils;
@@ -12,7 +13,8 @@ import wang.auspicous.ausp1ciouslib.utils.timeutils.TimeUtils;
 public class AppTimeUtils extends TimeUtils {
     @SuppressLint("ConstantLocale")
     private static final Locale CURRENT_LOCAL = Locale.getDefault();
-
+    public static final String[] WEEK_CHINESE = {"星期日","星期一","星期二","星期三","星期四","星期五","星期六"};
+    public static final String[] WEEK_ENGLISH = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
     /**
      * 获取当前的时间
      */
@@ -374,6 +376,20 @@ public class AppTimeUtils extends TimeUtils {
 
     public static long getYearsBetweenTwoTime(String pattern, String timeOne, String timeTwo) {
         return getYearsBetweenTwoTime(CURRENT_LOCAL, pattern, timeOne, timeTwo);
+    }
+
+    /**
+     * 获取当前是星期几
+     */
+    public static String getCurrentWeek() {
+        return getWeek(WEEK_CHINESE, new Date(getCurrentTimeAsLong()));
+    }
+
+    /**
+     * 得到指定时间是星期几
+     */
+    public static String getWeek(String time,String pattern) {
+        return getWeek(WEEK_CHINESE, new Date(getTimestamp(time, pattern)));
     }
 
 

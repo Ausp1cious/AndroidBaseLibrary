@@ -160,7 +160,7 @@
 #
 #############################################################################################
 #BaseBean混淆
--keep class * extends wang.auspicous.ausp1ciouslib.component.BaseBean{*;}
+-keep class * extends wang.auspicous.ausp1ciouslib.component.bean.BaseBean{*;}
 #butterknife
 -keep class butterknife.** { *; }
 -dontwarn butterknife.internal.**

@@ -2,7 +2,7 @@ package wang.auspicous.ausp1ciouslib.component.eventbus;
 
 import org.greenrobot.eventbus.EventBus;
 
-import wang.auspicous.ausp1ciouslib.component.BaseBean;
+import wang.auspicous.ausp1ciouslib.component.bean.BaseBean;
 
 /**
  * Created by Ausp1cious on 2019/1/8.

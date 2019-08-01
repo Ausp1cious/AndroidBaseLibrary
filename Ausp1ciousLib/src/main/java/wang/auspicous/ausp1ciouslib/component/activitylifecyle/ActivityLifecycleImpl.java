@@ -134,7 +134,7 @@ public class ActivityLifecycleImpl implements Application.ActivityLifecycleCallb
           declaredField.set(imm, null);
         }
       } catch (Throwable th) {
-        th.printStackTrace();
+//        th.printStackTrace();
       }
     }
   }
