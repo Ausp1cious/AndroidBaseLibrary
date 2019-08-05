@@ -2,7 +2,10 @@ package wang.auspicous.ausp1ciouslib.utils.storage;
 
 import android.os.Environment;
 
+import androidx.annotation.Nullable;
+
 import java.io.File;
+import java.io.IOException;
 
 
 /**
@@ -13,6 +16,7 @@ public class StorageCardUtils {
     public static final String IMAGE_DIR = "images";//图片存储目录
     public static final String DOWNLOAD_DIR = "downloads";//apk版本更新存放目录
     public static final String HTTP_DIR = "https";//http请求
+    public static final String VIDEO_DIR = "video";//视频存放目录
     public static final String H5_ASSET_PREFIX = "file:///android_asset/";
     public static final String H5_SDCARD_PREFIX = "content://com.android.htmlfileprovider/";
 
@@ -30,6 +34,38 @@ public class StorageCardUtils {
             dir.mkdirs();
         }
         return dir;
+    }
+
+
+    /**
+     * 获取文件地址
+     * @param fileName
+     * @return
+     */
+    @Nullable
+    public static File getFileDir(String fileName) {
+        if (isExistSDCard()) {
+            String filePath = getExternalFilesDir().getAbsolutePath() + "/" + fileName;
+            File file = new File(filePath);
+            if (file != null && !file.exists()) {
+                file.mkdirs();
+            }
+            return file;
+        }
+        return null;
+    }
+
+    public static File createFile(String filePath,String fileName,String fileFormat) {
+        String f = filePath + "/" + fileName + fileFormat;
+        File file = new File(f);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return file;
     }
 
     /**

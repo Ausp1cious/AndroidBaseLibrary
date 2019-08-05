@@ -5,12 +5,15 @@ buildscript {
     repositories {
         google()
         jcenter()
+        //GreenDao
+        mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.2'
         classpath 'com.jakewharton:butterknife-gradle-plugin:10.0.0'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-
+        //GreenDao
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

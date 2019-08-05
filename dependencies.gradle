@@ -62,6 +62,8 @@ ext {
     easyPermission = '3.0.0'
     //EvenBus
     evenBus = '3.1.1'
+    //GreenDao
+    greendao = '3.2.2'
 
 
     AppTestLibary = [
@@ -72,6 +74,7 @@ ext {
     App = [
             bufferKnife        : "com.jakewharton:butterknife:$bufferKnife",
             bufferKnifeCompiler: "com.jakewharton:butterknife-compiler:$bufferKnife",
+            greenDao           : "org.greenrobot:greendao:$greendao",
     ]
     AppLibary = [
             multiDex              : "androidx.multidex:multidex:${multiDex}",
