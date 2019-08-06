@@ -1,13 +1,27 @@
 package wang.auspicous.ausp1cious.ui.time;
 
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.widget.TextView;
+
+import com.trello.rxlifecycle3.android.ActivityEvent;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import wang.auspicous.ausp1cious.Presenters.Contracts.TomatoTimeContract;
 import wang.auspicous.ausp1cious.Presenters.TomatoTimePresenterImpl;
 import wang.auspicous.ausp1cious.R;
 import wang.auspicous.ausp1cious.base.AppMVPActivity;
+import wang.auspicous.ausp1cious.utils.AppTimeUtils;
+import wang.auspicous.ausp1cious.utils.RxTimeUtils;
+import wang.auspicous.ausp1cious.utils.TomatoTimeUtils;
 
 public class TomatoTimeActivity extends AppMVPActivity<TomatoTimeContract.TomatoTimeView,
         TomatoTimePresenterImpl> implements TomatoTimeContract.TomatoTimeView {
 
+
+    @BindView(R.id.tv_tomato_time_show)
+    TextView tvTomatoTimeShow;
 
     @Override
     protected int setContainerView() {
@@ -24,13 +38,18 @@ public class TomatoTimeActivity extends AppMVPActivity<TomatoTimeContract.Tomato
 
     }
 
-    @Override
     protected void initListener() {
 
     }
 
+    @SuppressLint("CheckResult")
     @Override
     protected void initData() {
-
+        RxTimeUtils.showScreenTime(bindUntilEvent(ActivityEvent.DESTROY)).subscribe(
+                aLong -> {
+                    tvTomatoTimeShow.setText(TomatoTimeUtils.getRestTime(1565083920000L));
+                }
+        );
     }
+
 }

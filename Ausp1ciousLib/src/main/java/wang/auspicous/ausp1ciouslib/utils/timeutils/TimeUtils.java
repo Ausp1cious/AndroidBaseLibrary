@@ -1,5 +1,7 @@
 package wang.auspicous.ausp1ciouslib.utils.timeutils;
 
+import com.orhanobut.logger.Logger;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -190,6 +192,10 @@ public class TimeUtils {
         return timestamp + (addMilliSeconds);
     }
 
+    public static long datePlusMillisecondsAsLong(long timestamp, long addMilliSeconds) {
+        return timestamp + addMilliSeconds;
+    }
+
     /**
      * 一个日期添加秒数
      */
@@ -200,6 +206,10 @@ public class TimeUtils {
 
     public static long datePlusSecondsAsLong(Locale locale, String time, long addSeconds) {
         long timestamp = getTimestamp(time, FORMAT_DATE_TIME_SECOND_MILLISECOND, locale);
+        return timestamp + (1000 * addSeconds);
+    }
+
+    public static long datePlusSecondsAsLong(long timestamp, long addSeconds) {
         return timestamp + (1000 * addSeconds);
     }
 
@@ -216,6 +226,10 @@ public class TimeUtils {
         return timestamp + (1000 * 60 * addMinutes);
     }
 
+    public static  long datePlusMinutesAsLong(long timestamp,long addMinutes) {
+        return timestamp + (1000 * 60 * addMinutes);
+    }
+
     /**
      * 一个日期添加小时数
      */
@@ -226,6 +240,10 @@ public class TimeUtils {
 
     public static long datePlusHoursAsLong(Locale locale, String time, long addHours) {
         long timestamp = getTimestamp(time, FORMAT_DATE_TIME_SECOND_MILLISECOND, locale);
+        return timestamp + (1000 * 60 * 60 * addHours);
+    }
+
+    public static long datePlusHorsAsLong(long timestamp, long addHours) {
         return timestamp + (1000 * 60 * 60 * addHours);
     }
 
@@ -317,6 +335,10 @@ public class TimeUtils {
         return timestamp - (minusMilliSeconds);
     }
 
+    public static long dateMinusMilliSecondsAsLong(long timestamp, long milliSeconds) {
+        return timestamp - milliSeconds;
+    }
+
     /**
      * 一个日期减少秒数
      */
@@ -328,6 +350,11 @@ public class TimeUtils {
     public static long dateMinusSecondsAsLong(Locale locale, String time, long minusSeconds) {
         long timestamp = getTimestamp(time, FORMAT_DATE_TIME_SECOND_MILLISECOND, locale);
         return timestamp - (1000 * minusSeconds);
+    }
+
+    public static long dateMinusSecondsAsLong(long timestamp, long minusSeconds) {
+        return timestamp - (1000 * minusSeconds);
+
     }
 
     /**
@@ -353,6 +380,10 @@ public class TimeUtils {
 
     public static long dateMinusHoursAsLong(Locale locale, String time, long minusHours) {
         long timestamp = getTimestamp(time, FORMAT_DATE_TIME_SECOND_MILLISECOND, locale);
+        return timestamp - (1000 * 60 * 60 * minusHours);
+    }
+
+    public static long dateMinusHoursAsLong(long timestamp,long minusHours) {
         return timestamp - (1000 * 60 * 60 * minusHours);
     }
 
@@ -485,6 +516,7 @@ public class TimeUtils {
         int minuteOne = Integer.valueOf(getMinute(locale, timestampOne));
         int minuteTwo = Integer.valueOf(getMinute(locale, timestampTwo));
         long hoursBetweenTwoTime = getHoursBetweenTwoTime(locale, timestampOne, timestampTwo);
+        Logger.i("One:"+minuteOne+";Two:"+minuteTwo);
         return hoursBetweenTwoTime * 60 - (minuteOne - minuteTwo);
     }
 

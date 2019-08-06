@@ -22,6 +22,10 @@ public class AppTimeUtils extends TimeUtils {
         return getCurrentTime(pattern, CURRENT_LOCAL);
     }
 
+    public static String getTime(String pattern, long time) {
+        return getTime(CURRENT_LOCAL, time, pattern);
+    }
+
     /**
      * 获取时间戳
      */
@@ -113,8 +117,8 @@ public class AppTimeUtils extends TimeUtils {
         return datePlusMilliSeconds(CURRENT_LOCAL, time, addMilliSeconds);
     }
 
-    public static long datePlusMilliseconds(String time, String pattern, long addMilliSeconds) {
-        return datePlusMinutesAsLong(time, pattern, addMilliSeconds);
+    public static long datePlusMillisecondsAsLong(String time, long addMilliSeconds) {
+        return datePlusMinutesAsLong(CURRENT_LOCAL,time, addMilliSeconds);
     }
 
     /**
@@ -135,10 +139,12 @@ public class AppTimeUtils extends TimeUtils {
         return datePlusMinutes(CURRENT_LOCAL, time, addMinutes);
     }
 
-    public static long datePlusMinutesAsLong(String time, String pattern, long addMinutes) {
-        return datePlusMinutesAsLong(time, pattern, addMinutes);
+    public static long datePlusMinutesAsLong(String time,long addMinutes) {
+        return datePlusMinutesAsLong(CURRENT_LOCAL,time,addMinutes);
     }
-
+    public static long datePlusMinutesAsLong(long time,long addMinutes) {
+        return TimeUtils.datePlusMinutesAsLong(time,addMinutes);
+    }
     /**
      * 给一个时间添加小时
      */
@@ -313,7 +319,7 @@ public class AppTimeUtils extends TimeUtils {
     /**
      * 两个日期相差的分钟数
      */
-    public static long getMinutesBetweenTwoTime(Locale locale, long timestampOne,
+    public static long getMinutesBetweenTwoTime( long timestampOne,
                                                 long timestampTwo) {
         return getMinutesBetweenTwoTime(CURRENT_LOCAL, timestampOne, timestampTwo);
     }

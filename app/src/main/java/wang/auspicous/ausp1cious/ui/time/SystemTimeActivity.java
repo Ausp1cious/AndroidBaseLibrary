@@ -27,6 +27,7 @@ import io.reactivex.schedulers.Schedulers;
 import wang.auspicous.ausp1cious.R;
 import wang.auspicous.ausp1cious.base.AppUIActivity;
 import wang.auspicous.ausp1cious.utils.AppTimeUtils;
+import wang.auspicous.ausp1cious.utils.RxTimeUtils;
 import wang.auspicous.ausp1ciouslib.Constants;
 import wang.auspicous.ausp1ciouslib.base.broadcast.SystemBroadcastReceiver;
 import wang.auspicous.ausp1ciouslib.component.bean.BatteryBean;
@@ -74,28 +75,47 @@ public class SystemTimeActivity extends AppUIActivity {
     protected void initWidget() {
         screenLightSwitch(screenOn);
         setScreenSwitch();
-        Observable.interval(500, TimeUnit.MILLISECONDS)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(bindToLifecycle())
-                .subscribe(
-                        aLong -> {
-                            tvSystemTimeDate.setText(AppTimeUtils.getCurrentTime(TimeUtils.FORMAT_DATE_CHINESE));
-                            tvSystemTimeWeek.setText(AppTimeUtils.getCurrentWeek());
-                            tvSystemTimeTime.setText(AppTimeUtils.getCurrentTime(TimeUtils.FORMAT_TIME));
-                            String second =
-                                    AppTimeUtils.getSecond(AppTimeUtils.getCurrentTimeAsLong());
-                            if (second.length() < 2) {
-                                second = "0" + second;
-                            }
-                            tvSystemTimeSecond.setText(second);
-                            if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                                ivSystemTimeLight.setVisibility(View.GONE);
-                            } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-                                ivSystemTimeLight.setVisibility(View.VISIBLE);
-                            }
-                        }
-                );
+//        Observable.interval(500, TimeUnit.MILLISECONDS)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .compose(bindToLifecycle())
+//                .subscribe(
+//                        aLong -> {
+//                            tvSystemTimeDate.setText(AppTimeUtils.getCurrentTime(TimeUtils.FORMAT_DATE_CHINESE));
+//                            tvSystemTimeWeek.setText(AppTimeUtils.getCurrentWeek());
+//                            tvSystemTimeTime.setText(AppTimeUtils.getCurrentTime(TimeUtils.FORMAT_TIME));
+//                            String second =
+//                                    AppTimeUtils.getSecond(AppTimeUtils.getCurrentTimeAsLong());
+//                            if (second.length() < 2) {
+//                                second = "0" + second;
+//                            }
+//                            tvSystemTimeSecond.setText(second);
+//                            if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//                                ivSystemTimeLight.setVisibility(View.GONE);
+//                            } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+//                                ivSystemTimeLight.setVisibility(View.VISIBLE);
+//                            }
+//                        }
+//                );
+
+        RxTimeUtils.showScreenTime(bindToLifecycle()).subscribe(
+                aLong -> {
+                    tvSystemTimeDate.setText(AppTimeUtils.getCurrentTime(TimeUtils.FORMAT_DATE_CHINESE));
+                    tvSystemTimeWeek.setText(AppTimeUtils.getCurrentWeek());
+                    tvSystemTimeTime.setText(AppTimeUtils.getCurrentTime(TimeUtils.FORMAT_TIME));
+                    String second =
+                            AppTimeUtils.getSecond(AppTimeUtils.getCurrentTimeAsLong());
+                    if (second.length() < 2) {
+                        second = "0" + second;
+                    }
+                    tvSystemTimeSecond.setText(second);
+                    if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                        ivSystemTimeLight.setVisibility(View.GONE);
+                    } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                        ivSystemTimeLight.setVisibility(View.VISIBLE);
+                    }
+                }
+        );
     }
 
     @SuppressLint("SetTextI18n")

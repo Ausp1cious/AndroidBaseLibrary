@@ -21,10 +21,12 @@ import wang.auspicous.ausp1cious.testui.FGActivity;
 import wang.auspicous.ausp1cious.testui.TestActivity;
 import wang.auspicous.ausp1cious.testui.WebTest;
 import wang.auspicous.ausp1cious.ui.time.SystemTimeActivity;
+import wang.auspicous.ausp1cious.ui.time.TomatoTimeActivity;
 import wang.auspicous.ausp1ciouslib.component.eventbus.EventBusMessageCenter;
 import wang.auspicous.ausp1ciouslib.net.HttpUtils;
 import wang.auspicous.ausp1ciouslib.net.callback.ICallback;
 import wang.auspicous.ausp1ciouslib.net.callback.RequestCallback;
+import wang.auspicous.ausp1ciouslib.utils.ActivityJumpUtils;
 import wang.auspicous.ausp1ciouslib.widgets.recyclerview.IConvert;
 import wang.auspicous.ausp1ciouslib.widgets.recyclerview.TestAdapter;
 
@@ -82,6 +84,7 @@ public class MainActivity extends AppUIActivity {
         btnHide.setOnClickListener(v -> {
 //            startActivity(new Intent(MainActivity.this, WebTest.class));
 //            shutdown();
+            ActivityJumpUtils.jump(MainActivity.this, TomatoTimeActivity.class);
         });
     }
 

@@ -30,6 +30,8 @@
         <activity android:name=".testui.FGActivity" />
         <activity android:name=".testui.TestActivity" />
         <activity android:name=".MainActivity" />
+
+        <service android:name=".service.InitIntentService" />
     </application>
 
 </manifest>
