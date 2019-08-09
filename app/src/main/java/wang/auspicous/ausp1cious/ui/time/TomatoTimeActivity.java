@@ -20,9 +20,6 @@ public class TomatoTimeActivity extends AppMVPActivity<TomatoTimeContract.Tomato
         TomatoTimePresenterImpl> implements TomatoTimeContract.TomatoTimeView {
 
 
-    @BindView(R.id.tv_tomato_time_show)
-    TextView tvTomatoTimeShow;
-
     @Override
     protected int setContainerView() {
         return R.layout.activity_tomato_time;
@@ -45,11 +42,6 @@ public class TomatoTimeActivity extends AppMVPActivity<TomatoTimeContract.Tomato
     @SuppressLint("CheckResult")
     @Override
     protected void initData() {
-        RxTimeUtils.showScreenTime(bindUntilEvent(ActivityEvent.DESTROY)).subscribe(
-                aLong -> {
-                    tvTomatoTimeShow.setText(TomatoTimeUtils.getRestTime(1565083920000L));
-                }
-        );
     }
 
 }
