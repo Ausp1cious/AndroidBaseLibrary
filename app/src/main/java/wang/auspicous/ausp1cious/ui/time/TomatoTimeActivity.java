@@ -2,9 +2,9 @@ package wang.auspicous.ausp1cious.ui.time;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.widget.TextView;
 
-import com.trello.rxlifecycle3.android.ActivityEvent;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -12,13 +12,12 @@ import wang.auspicous.ausp1cious.Presenters.Contracts.TomatoTimeContract;
 import wang.auspicous.ausp1cious.Presenters.TomatoTimePresenterImpl;
 import wang.auspicous.ausp1cious.R;
 import wang.auspicous.ausp1cious.base.AppMVPActivity;
-import wang.auspicous.ausp1cious.utils.AppTimeUtils;
-import wang.auspicous.ausp1cious.utils.RxTimeUtils;
-import wang.auspicous.ausp1cious.utils.TomatoTimeUtils;
+import wang.auspicous.ausp1cious.ui.time.adpter.TomatoAdapter;
 
 public class TomatoTimeActivity extends AppMVPActivity<TomatoTimeContract.TomatoTimeView,
         TomatoTimePresenterImpl> implements TomatoTimeContract.TomatoTimeView {
-
+    @BindView(R.id.rv_tomato)
+    RecyclerView rvTomato;
 
     @Override
     protected int setContainerView() {
@@ -32,6 +31,7 @@ public class TomatoTimeActivity extends AppMVPActivity<TomatoTimeContract.Tomato
 
     @Override
     protected void initWidget() {
+        rvTomato.setLayoutManager(new LinearLayoutManager(this));
 
     }
 
@@ -42,6 +42,7 @@ public class TomatoTimeActivity extends AppMVPActivity<TomatoTimeContract.Tomato
     @SuppressLint("CheckResult")
     @Override
     protected void initData() {
+        rvTomato.setAdapter(new TomatoAdapter(this));
     }
 
 }

@@ -37,6 +37,8 @@ public class TomatoTimeView extends View {
     private float minLength;
     private int[] progressColor;
 
+    private int periods;
+
 
     public TomatoTimeView(Context context) {
         this(context, null);
@@ -61,8 +63,6 @@ public class TomatoTimeView extends View {
         mInnerCircleRadius = (float) (minLength * 0.8) / 2;
 
         mProgressArcWidth = (float) (0.02 * minLength);
-
-
     }
 
 
@@ -72,7 +72,9 @@ public class TomatoTimeView extends View {
         canvas.save();
         canvas.drawColor(Color.WHITE);
         canvas.translate(mWidth / 2, mHeight / 2);
-        drawSchedule(canvas);
+        if (periods != 0) {
+            drawSchedule(canvas);
+        }
 //        drawProgress(canvas);
 //        drawTomatoTime(canvas);
         canvas.restore();
@@ -108,52 +110,28 @@ public class TomatoTimeView extends View {
 
 
     private void drawSchedule(Canvas canvas) {
-//        RectF mScheduleRectF = new RectF(
-//                (float) (-minLength * 0.9 / 2),
-//                (float) (-minLength * 0.9 / 2),
-//                (float) (minLength * 0.9 / 2),
-//                (float) (minLength * 0.9 / 2)
-//        );
-//        mScheduleBoderPaint.setStyle(Paint.Style.STROKE);
-//        mScheduleBoderPaint.setStrokeWidth(4);
-//        mSchedulePaint.setStyle(Paint.Style.STROKE);
-//        mSchedulePaint.setStrokeWidth((float) (minLength*0.1/2));
-
-        float startDegree = 270;
-        int n = 33;
-        float sweepDegree = 360 / (n * 1f);
-        for (int i = 1; i < n+1; i++) {
-            if (startDegree + sweepDegree == 270) {
-                if (n == 5) {
-                    drawRing(canvas, (float) (mInnerCircleRadius * 0.8), mInnerCircleRadius, Color.RED,
+        float startDegree = -90;
+        float sweepDegree = 360 / (periods * 1f);
+        for (int i = 1; i < periods + 1; i++) {
+            if (periods == 3) {
+                if (i == 2) {
+                    drawRing(canvas, (float) (mInnerCircleRadius * 0.8), mInnerCircleRadius, Color
+                                    .RED,
                             startDegree, sweepDegree+0.1f);
-                }else {
-                    drawRing(canvas, (float) (mInnerCircleRadius * 0.8), mInnerCircleRadius, Color.RED,
-                            startDegree, sweepDegree+0.00001f);
+                    startDegree += sweepDegree;
+                    continue;
                 }
-
-            } else {
-                drawRing(canvas, (float) (mInnerCircleRadius * 0.8), mInnerCircleRadius, Color.RED,
-                        startDegree, sweepDegree);
             }
-            startDegree -= sweepDegree;
+            drawRing(canvas, (float) (mInnerCircleRadius * 0.8), mInnerCircleRadius, Color
+                            .RED,
+                    startDegree, sweepDegree);
+            startDegree += sweepDegree;
         }
 
-
-//        for (int i = 1; i < 3; i++) {
-//            completeScheduleDegree = (360 / 3) * i;
-//            canvas.drawArc(mScheduleRectF, 270, completeScheduleDegree, true, mSchedulePaint);
-//        }
-//        canvas.drawCircle(0, 0, (float) (minLength*0.8/2+mProgressArcWidth*1.05),
-//        mScheduleBoderPaint);
-
-
-
+//        float startDegree = -90;
+//        float sweepDegree = 360 / (3 * 1f);
 //        drawRing(canvas, (float) (mInnerCircleRadius * 0.8), mInnerCircleRadius, Color.RED,
-//                0, 72);
-//
-//        drawRing(canvas, (float) (mInnerCircleRadius * 0.8), mInnerCircleRadius, Color.RED,
-//                342, 72);
+//                startDegree+sweepDegree*1, sweepDegree);
     }
 
     private void drawProgress(Canvas canvas) {
@@ -190,6 +168,7 @@ public class TomatoTimeView extends View {
                 innerRadius,
                 innerRadius
         );
+        canvas.save();
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         Paint paintSolid = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setColor(color);
@@ -197,34 +176,32 @@ public class TomatoTimeView extends View {
         paint.setStrokeWidth(4);
         paintSolid.setColor(Color.GREEN);
         Path innerPath = new Path();
-        innerPath.lineTo((float) (innerRadius * Math.cos(startAngle % 360 * Math.PI / 180)),
-                (float) (innerRadius * Math.sin(startAngle % 360 * Math.PI / 180)));
-        innerPath.lineTo((float) (innerRadius * Math.cos((sweepAngle + startAngle) % 360 * Math.PI / 180)),
-                (float) (innerRadius * Math.sin((sweepAngle + startAngle) % 360 * Math.PI / 180)));
+        innerPath.addArc(innerRectF, startAngle, sweepAngle);
+        innerPath.moveTo(0, 0);
+        innerPath.lineTo((float) (innerRadius * Math.cos(startAngle * Math.PI / 180)),
+                (float) (innerRadius * Math.sin(startAngle * Math.PI / 180)));
+        innerPath.lineTo((float) (innerRadius * Math.cos((sweepAngle + startAngle) * Math.PI / 180)),
+                (float) (innerRadius * Math.sin((sweepAngle + startAngle) * Math.PI / 180)));
         innerPath.close();
-        innerPath.addArc(innerRectF, startAngle % 360, sweepAngle % 360);
-        canvas.save();
         canvas.clipPath(innerPath);
-//        canvas.drawPath(innerPath,paint);
-
-
         canvas.restore();
         canvas.save();
         Path outerPath = new Path();
-        outerPath.lineTo((float) (outerRadius * Math.cos(startAngle % 360 * Math.PI / 180)),
-                (float) (outerRadius * Math.sin(startAngle % 360 * Math.PI / 180)));
-        outerPath.lineTo((float) (outerRadius * Math.cos((sweepAngle + startAngle) % 360 * Math.PI / 180)),
-                (float) (outerRadius * Math.sin((sweepAngle + startAngle) % 360 * Math.PI / 180)));
+        outerPath.addArc(outerRectF, startAngle, sweepAngle);
+        outerPath.moveTo(0, 0);
+        outerPath.lineTo((float) (outerRadius * Math.cos(startAngle * Math.PI / 180)),
+                (float) (outerRadius * Math.sin(startAngle * Math.PI / 180)));
+        outerPath.lineTo((float) (outerRadius * Math.cos((sweepAngle + startAngle) * Math.PI / 180)),
+                (float) (outerRadius * Math.sin((sweepAngle + startAngle) * Math.PI / 180)));
         outerPath.close();
-        outerPath.addArc(outerRectF, startAngle % 360, sweepAngle % 360);
-        canvas.clipPath(outerPath);
-//        canvas.drawPath(outerPath, paint);
-
-
         outerPath.op(innerPath, Path.Op.DIFFERENCE);
         canvas.drawPath(outerPath, paintSolid);
         canvas.drawPath(outerPath, paint);
         canvas.restore();
     }
 
+    public void setPeriods(int n) {
+        this.periods = n;
+        invalidate();
+    }
 }
