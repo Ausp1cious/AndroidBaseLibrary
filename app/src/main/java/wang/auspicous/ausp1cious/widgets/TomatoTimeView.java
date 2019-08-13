@@ -19,6 +19,7 @@ import com.orhanobut.logger.Logger;
 import wang.auspicous.ausp1cious.R;
 import wang.auspicous.ausp1cious.bean.TomatoPeriodsBean;
 import wang.auspicous.ausp1cious.bean.TomatoTimeStatus;
+import wang.auspicous.ausp1cious.utils.AppSpUtils;
 
 public class TomatoTimeView extends View {
     private int i = 0;
@@ -32,6 +33,10 @@ public class TomatoTimeView extends View {
     private Float mSchedulerWidth;
     private Float mSchedulerRadius;
 
+    private Float mCircleTimeSize;
+    private Float mCircleTimeUnitSize;
+    private Float mCircleStatusSize;
+
 
     private Paint mScheduleBorderPaint;
     private Paint mSchedulePaint;
@@ -40,11 +45,20 @@ public class TomatoTimeView extends View {
     private Paint mProgressPaint;
     private Paint mInnerCirclePaint;
 
+    private Paint mCircleTimePaint;
+    private Paint mCircleTimeUnitPaint;
+    private Paint mCircleTimeStatus;
+
     private int colorScheduler;
     private int colorSchedulerBorder;
     private int colorSchedulerOverTime;
     private int[] progressColor;
+    private int progressColorBackground;
     private int colorInnerCircle;
+    private int colorCircleTime;
+    private int colorCircleTimeUnit;
+    private int colorCircleTimeStatus;
+
 
 
     private float minLength;
@@ -79,6 +93,13 @@ public class TomatoTimeView extends View {
         mProgressArcRadius = mSchedulerRadius - mSchedulerWidth / 2;
         mProgressArcWidth = mSchedulerWidth / 2;
         mInnerCircleRadius = mProgressArcRadius - mProgressArcWidth / 2;
+
+        mCircleTimeSize = minLength * 0.3f;
+        mCircleTimePaint.setTextSize(mCircleTimeSize);
+
+        mCircleTimeUnitSize = mCircleTimeSize * 0.2f;
+        mCircleTimeUnitPaint.setTextSize(mCircleTimeUnitSize);
+
     }
 
 
@@ -112,10 +133,22 @@ public class TomatoTimeView extends View {
 
         //进度条画笔
         mProgressPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mProgressPaint.setColor(ContextCompat.getColor(context, R.color.white));
-        mInnerCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mProgressPaint.setColor(progressColorBackground);
         //里面圆圈画笔
-        mInnerCirclePaint.setColor(Color.BLUE);
+        mInnerCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mInnerCirclePaint.setColor(colorInnerCircle);
+        //圈里面的时间文字
+        mCircleTimePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mCircleTimePaint.setColor(colorCircleTime);
+        mCircleTimePaint.setTextAlign(Paint.Align.CENTER);
+        //圆里面时间文字单位
+        mCircleTimeUnitPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mCircleTimeUnitPaint.setColor(colorCircleTime);
+        mCircleTimeUnitPaint.setTextAlign(Paint.Align.CENTER);
+        //圆里面时间文字状态
+        mCircleTimeStatus = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mCircleTimeStatus.setColor(colorCircleTime);
+        mCircleTimePaint.setTextAlign(Paint.Align.CENTER);
     }
 
     private void initColor(Context context) {
@@ -132,9 +165,12 @@ public class TomatoTimeView extends View {
                 ContextCompat.getColor(context, R.color.cyan400),
                 ContextCompat.getColor(context, R.color.cyan300),
         };
-
+        progressColorBackground = ContextCompat.getColor(context, R.color.white);
+        colorInnerCircle = ContextCompat.getColor(context, R.color.blue500);
+        colorCircleTime = ContextCompat.getColor(context, R.color.white);
+        colorCircleTimeUnit = ContextCompat.getColor(context, R.color.white);
+        colorCircleTimeStatus = ContextCompat.getColor(context, R.color.white);
     }
-
 
     private void drawSchedule(Canvas canvas) {
         float startDegree = -90;
@@ -195,6 +231,27 @@ public class TomatoTimeView extends View {
 
     private void drawTomatoTime(Canvas canvas) {
         canvas.drawCircle(0, 0, mInnerCircleRadius, mInnerCirclePaint);
+
+        if (tomatoTimeStatus.getRestTime() != AppSpUtils.getTomatoTimeConfiguration().getUnitTime()) {
+            //显示倒计时文字
+            canvas.drawText(tomatoTimeStatus.getRestTime()+"", 0, 0, mCircleTimePaint);
+            //显示当前时间单位
+            Paint.FontMetrics tomatoTimeFontMetrics = mCircleTimePaint.getFontMetrics();
+            Paint.FontMetrics tomatoTimeUnitFontMetrics = mCircleTimeUnitPaint.getFontMetrics();
+            Paint.FontMetrics tomatoTimeStatusFontMetrics = mCircleTimeStatus.getFontMetrics();
+            float distanceTimeBetweenUnit =
+                    tomatoTimeFontMetrics.bottom + tomatoTimeUnitFontMetrics.top;
+            float distanceUnitBetweenStatus =
+                    tomatoTimeUnitFontMetrics.bottom + tomatoTimeStatusFontMetrics.top;
+            Logger.i(tomatoTimeFontMetrics.bottom+"---"+tomatoTimeUnitFontMetrics.top);
+            if (tomatoTimeStatus.getRestTimeUnit()== TomatoTimeStatus.TIME_UNIT_MINUTES) {
+                canvas.drawText("minutes", 0, distanceTimeBetweenUnit, mCircleTimeUnitPaint);
+            } else if (tomatoTimeStatus.getRestTimeUnit() == TomatoTimeStatus.TIME_UNIT_SECONDS) {
+                canvas.drawText("seconds", 0, distanceTimeBetweenUnit, mCircleTimeUnitPaint);
+            }
+            //显示当前状态
+        }
+
     }
 
     private Path drawRing(Canvas canvas, float innerRadius, float outerRadius,

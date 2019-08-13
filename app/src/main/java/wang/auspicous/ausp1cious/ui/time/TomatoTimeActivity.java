@@ -58,7 +58,7 @@ public class TomatoTimeActivity extends AppMVPActivity<TomatoTimeContract.Tomato
 //        rvTomato.setAdapter(new TomatoAdapter(this));
         RxTimeUtils.showScreenTime(bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(o -> {
-                    TomatoTimeUtils.getRestTime(1565685600000L, tomatoTimeStatus);
+                    TomatoTimeUtils.getRestTime(1565688480000L, tomatoTimeStatus);
                     ttvTime.updateTomatoTimeStatus();
                 });
     }
