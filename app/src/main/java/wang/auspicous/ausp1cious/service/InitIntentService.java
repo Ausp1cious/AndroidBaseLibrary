@@ -36,22 +36,8 @@ public class InitIntentService extends IntentService {
         }
     }
     private void init() {
-        initAppConfiguration();
+
     }
 
-    /**
-     * 初始化配置参数
-     */
-    private void initAppConfiguration() {
-        if (AppSpUtils.getTomatoTimeConfiguration() == null) {
-            TomatoSettingBean setting = new TomatoSettingBean();
-            setting.setUnitTime(25 * 60 * 1000);
-            setting.setShortRestTime(5 * 60 * 1000);
-            setting.setLongRestTime(15 * 60 * 1000);
-            setting.setPeriodTime(4);
-            setting.setPlanTime(1 * 60 * 1000);
-            setting.setSummarizeTime(2 * 60 * 1000);
-            AppSpUtils.setTomatoTimeConfiguration(setting);
-        }
-    }
+
 }

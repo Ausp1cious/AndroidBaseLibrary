@@ -100,6 +100,8 @@ public class TomatoTimeView extends View {
         mCircleTimeUnitSize = mCircleTimeSize * 0.2f;
         mCircleTimeUnitPaint.setTextSize(mCircleTimeUnitSize);
 
+        mCircleStatusSize = mCircleTimeSize * 0.22f;
+        mCircleTimeStatus.setTextSize(mCircleStatusSize);
     }
 
 
@@ -148,7 +150,7 @@ public class TomatoTimeView extends View {
         //圆里面时间文字状态
         mCircleTimeStatus = new Paint(Paint.ANTI_ALIAS_FLAG);
         mCircleTimeStatus.setColor(colorCircleTime);
-        mCircleTimePaint.setTextAlign(Paint.Align.CENTER);
+        mCircleTimeStatus.setTextAlign(Paint.Align.CENTER);
     }
 
     private void initColor(Context context) {
@@ -234,22 +236,30 @@ public class TomatoTimeView extends View {
 
         if (tomatoTimeStatus.getRestTime() != AppSpUtils.getTomatoTimeConfiguration().getUnitTime()) {
             //显示倒计时文字
-            canvas.drawText(tomatoTimeStatus.getRestTime()+"", 0, 0, mCircleTimePaint);
-            //显示当前时间单位
             Paint.FontMetrics tomatoTimeFontMetrics = mCircleTimePaint.getFontMetrics();
             Paint.FontMetrics tomatoTimeUnitFontMetrics = mCircleTimeUnitPaint.getFontMetrics();
             Paint.FontMetrics tomatoTimeStatusFontMetrics = mCircleTimeStatus.getFontMetrics();
             float distanceTimeBetweenUnit =
-                    tomatoTimeFontMetrics.bottom + tomatoTimeUnitFontMetrics.top;
+                     - tomatoTimeUnitFontMetrics.top*2;
             float distanceUnitBetweenStatus =
-                    tomatoTimeUnitFontMetrics.bottom + tomatoTimeStatusFontMetrics.top;
-            Logger.i(tomatoTimeFontMetrics.bottom+"---"+tomatoTimeUnitFontMetrics.top);
+                    distanceTimeBetweenUnit+tomatoTimeUnitFontMetrics.bottom - tomatoTimeStatusFontMetrics.top;
+            //显示当前时间单位
+            canvas.drawText(tomatoTimeStatus.getRestTime()+"", 0, tomatoTimeFontMetrics.bottom*0.5f, mCircleTimePaint);
             if (tomatoTimeStatus.getRestTimeUnit()== TomatoTimeStatus.TIME_UNIT_MINUTES) {
                 canvas.drawText("minutes", 0, distanceTimeBetweenUnit, mCircleTimeUnitPaint);
             } else if (tomatoTimeStatus.getRestTimeUnit() == TomatoTimeStatus.TIME_UNIT_SECONDS) {
                 canvas.drawText("seconds", 0, distanceTimeBetweenUnit, mCircleTimeUnitPaint);
             }
             //显示当前状态
+            if (tomatoTimeStatus.getState()== TomatoTimeStatus.STATUS_PREPARE) {
+                canvas.drawText("准备阶段",0,distanceUnitBetweenStatus,mCircleTimeStatus);
+            } else if (tomatoTimeStatus.getState() == TomatoTimeStatus.STATUS_TOMATO_TIME) {
+                canvas.drawText("番茄时间阶段",0,distanceUnitBetweenStatus,mCircleTimeStatus);
+            } else if (tomatoTimeStatus.getState() == TomatoTimeStatus.STATUS_SUMMARIZE) {
+                canvas.drawText("总结阶段",0,distanceUnitBetweenStatus,mCircleTimeStatus);
+            } else if (tomatoTimeStatus.getState() == TomatoTimeStatus.STATUS_OTHERS) {
+                canvas.drawText("其他阶段",0,distanceUnitBetweenStatus,mCircleTimeStatus);
+            }
         }
 
     }

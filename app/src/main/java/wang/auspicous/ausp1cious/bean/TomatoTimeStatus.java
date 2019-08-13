@@ -18,11 +18,11 @@ public class TomatoTimeStatus extends BaseBean {
     //0-准备阶段，1-番茄时间阶段，2-总结阶段，3-其他阶段
     private int status = 0;
     //剩余时间
-    private long restTime = AppSpUtils.getTomatoTimeConfiguration().getUnitTime();
+    private long restTime = AppSpUtils.getTomatoTimeConfiguration() == null ? 0 : AppSpUtils.getTomatoTimeConfiguration().getUnitTime();
     //剩余时间单位：0-Seconds 1-minutes
     private int restTimeUnit = 1;
     //单位时间
-    private long totalTime = AppSpUtils.getTomatoTimeConfiguration().getUnitTime();
+    private long totalTime = AppSpUtils.getTomatoTimeConfiguration() == null ? 0 : AppSpUtils.getTomatoTimeConfiguration().getUnitTime();
     //剩余百分比
     private float restRate = 0;
 
@@ -34,6 +34,9 @@ public class TomatoTimeStatus extends BaseBean {
         return restTimeUnit;
     }
 
+    public int getState() {
+        return status;
+    }
     public void setStatus(int status) {
         this.status = status;
     }

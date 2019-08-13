@@ -2,6 +2,7 @@ package wang.auspicous.ausp1cious.ui.time;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,17 +19,19 @@ import wang.auspicous.ausp1cious.base.AppMVPActivity;
 import wang.auspicous.ausp1cious.bean.TomatoPeriodsBean;
 import wang.auspicous.ausp1cious.bean.TomatoTimeStatus;
 import wang.auspicous.ausp1cious.ui.time.adpter.TomatoAdapter;
+import wang.auspicous.ausp1cious.utils.AppTimeUtils;
 import wang.auspicous.ausp1cious.utils.RxTimeUtils;
 import wang.auspicous.ausp1cious.utils.TomatoTimeUtils;
 import wang.auspicous.ausp1cious.widgets.TomatoTimeView;
 
 public class TomatoTimeActivity extends AppMVPActivity<TomatoTimeContract.TomatoTimeView,
         TomatoTimePresenterImpl> implements TomatoTimeContract.TomatoTimeView {
-    @BindView(R.id.rv_tomato)
-    RecyclerView rvTomato;
     @BindView(R.id.ttv_tomato_time)
     TomatoTimeView ttvTime;
+    @BindView(R.id.btn_tomato_time_start)
+    Button btnTomatoTimeStart;
     private TomatoTimeStatus tomatoTimeStatus;
+    long startTime;
 
     @Override
     protected int setContainerView() {
@@ -42,14 +45,15 @@ public class TomatoTimeActivity extends AppMVPActivity<TomatoTimeContract.Tomato
 
     @Override
     protected void initWidget() {
-//        rvTomato.setLayoutManager(new LinearLayoutManager(this));
-        ttvTime.setPeriods(new TomatoPeriodsBean(11, 10));
+        ttvTime.setPeriods(new TomatoPeriodsBean(1, 0));
         tomatoTimeStatus = new TomatoTimeStatus();
         ttvTime.setTomatoTimeStatus(tomatoTimeStatus);
     }
 
     protected void initListener() {
-
+        btnTomatoTimeStart.setOnClickListener(v -> {
+            startTime = AppTimeUtils.getCurrentTimeAsLong();
+        });
     }
 
     @SuppressLint("CheckResult")
@@ -58,8 +62,10 @@ public class TomatoTimeActivity extends AppMVPActivity<TomatoTimeContract.Tomato
 //        rvTomato.setAdapter(new TomatoAdapter(this));
         RxTimeUtils.showScreenTime(bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(o -> {
-                    TomatoTimeUtils.getRestTime(1565688480000L, tomatoTimeStatus);
-                    ttvTime.updateTomatoTimeStatus();
+                    if (startTime != 0) {
+                        TomatoTimeUtils.getRestTime(startTime, tomatoTimeStatus);
+                        ttvTime.updateTomatoTimeStatus();
+                    }
                 });
     }
 

@@ -13,9 +13,11 @@ import java.io.File;
 
 import okhttp3.logging.HttpLoggingInterceptor;
 import wang.auspicous.ausp1cious.base.AppConstants;
+import wang.auspicous.ausp1cious.bean.TomatoSettingBean;
 import wang.auspicous.ausp1cious.dao.entity.DaoMaster;
 import wang.auspicous.ausp1cious.dao.entity.DaoSession;
 import wang.auspicous.ausp1cious.service.InitIntentService;
+import wang.auspicous.ausp1cious.utils.AppSpUtils;
 import wang.auspicous.ausp1ciouslib.base.BaseApp;
 import wang.auspicous.ausp1ciouslib.net.HttpLogger;
 import wang.auspicous.ausp1ciouslib.net.httpclient.HttpFactory;
@@ -37,6 +39,7 @@ public class AppApplication extends BaseApp {
         super.onCreate();
         mInstance = this;
         InitIntentService.start(this);
+        initAppConfiguration();
         Logger.addLogAdapter(new AndroidLogAdapter());
         XLog.init(LogLevel.ALL);
         initNetwork();
@@ -84,5 +87,21 @@ public class AppApplication extends BaseApp {
             setupDatabase();
         }
         return mDaoSession;
+    }
+
+    /**
+     * 初始化配置参数
+     */
+    private void initAppConfiguration() {
+        if (AppSpUtils.getTomatoTimeConfiguration() == null) {
+            TomatoSettingBean setting = new TomatoSettingBean();
+            setting.setUnitTime(25 * 60 * 1000);
+            setting.setShortRestTime(5 * 60 * 1000);
+            setting.setLongRestTime(15 * 60 * 1000);
+            setting.setPeriodTime(4);
+            setting.setPlanTime(1 * 60 * 1000);
+            setting.setSummarizeTime(2 * 60 * 1000);
+            AppSpUtils.setTomatoTimeConfiguration(setting);
+        }
     }
 }
