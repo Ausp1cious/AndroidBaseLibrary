@@ -8,7 +8,12 @@
     tools:context=".ui.time.TomatoTimeActivity">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_tomato"
+        android:visibility="gone"
         android:background="@color/blue300"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+    <wang.auspicous.ausp1cious.widgets.TomatoTimeView
+        android:id="@+id/ttv_tomato_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </RelativeLayout>

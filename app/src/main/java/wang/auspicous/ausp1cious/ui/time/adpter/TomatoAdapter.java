@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.orhanobut.logger.Logger;
 
 import wang.auspicous.ausp1cious.R;
+import wang.auspicous.ausp1cious.bean.TomatoPeriodsBean;
 import wang.auspicous.ausp1cious.widgets.TomatoTimeView;
 
 public class TomatoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -30,7 +31,7 @@ public class TomatoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof TomatoAdapterHolder) {
             Logger.i("显示Bind");
-            ((TomatoAdapterHolder) holder).ttvTime.setPeriods(position);
+            ((TomatoAdapterHolder) holder).ttvTime.setPeriods(new TomatoPeriodsBean());
         }
     }
 

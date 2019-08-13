@@ -16,9 +16,9 @@ import androidx.core.content.ContextCompat;
 
 import com.orhanobut.logger.Logger;
 
-import java.math.BigDecimal;
-
 import wang.auspicous.ausp1cious.R;
+import wang.auspicous.ausp1cious.bean.TomatoPeriodsBean;
+import wang.auspicous.ausp1cious.bean.TomatoTimeStatus;
 
 public class TomatoTimeView extends View {
     private int i = 0;
@@ -26,18 +26,32 @@ public class TomatoTimeView extends View {
     private Float mHeight;
 
     private Float mInnerCircleRadius;
+    private Float mProgressArcWidth;
+    private Float mProgressArcRadius;
 
-    private Paint mScheduleBoderPaint;
+    private Float mSchedulerWidth;
+    private Float mSchedulerRadius;
+
+
+    private Paint mScheduleBorderPaint;
     private Paint mSchedulePaint;
+    private Paint mScheduleOverTimePaint;
 
     private Paint mProgressPaint;
     private Paint mInnerCirclePaint;
 
-    private Float mProgressArcWidth;
-    private float minLength;
+    private int colorScheduler;
+    private int colorSchedulerBorder;
+    private int colorSchedulerOverTime;
     private int[] progressColor;
+    private int colorInnerCircle;
 
-    private int periods;
+
+    private float minLength;
+
+
+    private TomatoPeriodsBean tomatoPeriodsBean;
+    private TomatoTimeStatus tomatoTimeStatus;
 
 
     public TomatoTimeView(Context context) {
@@ -60,9 +74,11 @@ public class TomatoTimeView extends View {
         mWidth = (float) (getMeasuredWidth() - getPaddingLeft() - getPaddingRight());
         mHeight = (float) (getMeasuredHeight() - getPaddingTop() - getPaddingBottom());
         minLength = Math.min(mWidth, mHeight);
-        mInnerCircleRadius = (float) (minLength * 0.8) / 2;
-
-        mProgressArcWidth = (float) (0.02 * minLength);
+        mSchedulerRadius = (float) (minLength * 0.8) / 2;
+        mSchedulerWidth = (float) (mSchedulerRadius * 0.2);
+        mProgressArcRadius = mSchedulerRadius - mSchedulerWidth / 2;
+        mProgressArcWidth = mSchedulerWidth / 2;
+        mInnerCircleRadius = mProgressArcRadius - mProgressArcWidth / 2;
     }
 
 
@@ -72,16 +88,40 @@ public class TomatoTimeView extends View {
         canvas.save();
         canvas.drawColor(Color.WHITE);
         canvas.translate(mWidth / 2, mHeight / 2);
-        if (periods != 0) {
-            drawSchedule(canvas);
-        }
-//        drawProgress(canvas);
-//        drawTomatoTime(canvas);
+        drawProgress(canvas);
+        drawSchedule(canvas);
+        drawTomatoTime(canvas);
         canvas.restore();
     }
 
     private void init(Context context) {
+        initColor(context);
         initPaint(context);
+    }
+
+    private void initPaint(Context context) {
+        //任务表画笔
+        mScheduleBorderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mScheduleBorderPaint.setStyle(Paint.Style.STROKE);
+        mScheduleBorderPaint.setStrokeWidth(2);
+        mScheduleBorderPaint.setColor(colorSchedulerBorder);
+        mSchedulePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mSchedulePaint.setColor(colorScheduler);
+        mScheduleOverTimePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mScheduleOverTimePaint.setColor(colorSchedulerOverTime);
+
+        //进度条画笔
+        mProgressPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mProgressPaint.setColor(ContextCompat.getColor(context, R.color.white));
+        mInnerCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        //里面圆圈画笔
+        mInnerCirclePaint.setColor(Color.BLUE);
+    }
+
+    private void initColor(Context context) {
+        colorScheduler = ContextCompat.getColor(context, R.color.green600);
+        colorSchedulerOverTime = ContextCompat.getColor(context, R.color.orange500);
+        colorSchedulerBorder = ContextCompat.getColor(context, R.color.green200);
         progressColor = new int[]{
                 ContextCompat.getColor(context, R.color.cyan300),
                 ContextCompat.getColor(context, R.color.cyan400),
@@ -91,70 +131,73 @@ public class TomatoTimeView extends View {
                 ContextCompat.getColor(context, R.color.cyan500),
                 ContextCompat.getColor(context, R.color.cyan400),
                 ContextCompat.getColor(context, R.color.cyan300),
-
         };
-    }
 
-    private void initPaint(Context context) {
-        mScheduleBoderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mScheduleBoderPaint.setColor(Color.GREEN);
-
-        mSchedulePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mSchedulePaint.setColor(Color.RED);
-
-        mProgressPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mProgressPaint.setColor(ContextCompat.getColor(context, R.color.white));
-        mInnerCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mInnerCirclePaint.setColor(Color.BLUE);
     }
 
 
     private void drawSchedule(Canvas canvas) {
         float startDegree = -90;
+        int periods;
+        if (tomatoPeriodsBean.isOverTime()) {
+            periods = tomatoPeriodsBean.getConductedTime();
+        } else {
+            periods = tomatoPeriodsBean.getPlanTime();
+        }
         float sweepDegree = 360 / (periods * 1f);
+        float innerRadius = mSchedulerRadius - mSchedulerWidth / 2;
         for (int i = 1; i < periods + 1; i++) {
-            if (periods == 3) {
+            if (periods == 3) { //图像会变形的地方特殊处理
                 if (i == 2) {
-                    drawRing(canvas, (float) (mInnerCircleRadius * 0.8), mInnerCircleRadius, Color
-                                    .RED,
-                            startDegree, sweepDegree+0.1f);
+                    Path path = drawRing(canvas, innerRadius, mSchedulerRadius, startDegree,
+                            sweepDegree + 0.1f);
+                    canvas.drawPath(path, mScheduleBorderPaint);
+                    if (i < tomatoPeriodsBean.getConductedTime()) {
+                        if (i > tomatoPeriodsBean.getPlanTime()) {//超时
+                            canvas.drawPath(path, mScheduleOverTimePaint);
+                        } else {//正常进度时间
+                            canvas.drawPath(path, mSchedulePaint);
+                        }
+                    }
                     startDegree += sweepDegree;
                     continue;
                 }
             }
-            drawRing(canvas, (float) (mInnerCircleRadius * 0.8), mInnerCircleRadius, Color
-                            .RED,
-                    startDegree, sweepDegree);
+            Path path = drawRing(canvas, innerRadius, mSchedulerRadius, startDegree, sweepDegree);
+            canvas.drawPath(path, mScheduleBorderPaint);
+            if (i <= tomatoPeriodsBean.getConductedTime()) {
+                if (i > tomatoPeriodsBean.getPlanTime()) {//超时
+                    canvas.drawPath(path, mScheduleOverTimePaint);
+                } else {//正常进度时间
+                    canvas.drawPath(path, mSchedulePaint);
+                }
+            }
             startDegree += sweepDegree;
         }
-
-//        float startDegree = -90;
-//        float sweepDegree = 360 / (3 * 1f);
-//        drawRing(canvas, (float) (mInnerCircleRadius * 0.8), mInnerCircleRadius, Color.RED,
-//                startDegree+sweepDegree*1, sweepDegree);
     }
 
     private void drawProgress(Canvas canvas) {
         //绘制背景色
         RectF mProgressRectF = new RectF(
-                (-mInnerCircleRadius - mProgressArcWidth / 2),
-                -mInnerCircleRadius - mProgressArcWidth / 2,
-                mInnerCircleRadius + mProgressArcWidth / 2,
-                mInnerCircleRadius + mProgressArcWidth / 2
+                (-mProgressArcRadius + mProgressArcWidth / 2),
+                -mProgressArcRadius + mProgressArcWidth / 2,
+                mProgressArcRadius - mProgressArcWidth / 2,
+                mProgressArcRadius - mProgressArcWidth / 2
         );
         mProgressPaint.setStrokeWidth(mProgressArcWidth);
         mProgressPaint.setStyle(Paint.Style.STROKE);
-        canvas.drawArc(mProgressRectF, 0, 360, false, mProgressPaint);
+        mProgressPaint.setShader(null);
+        canvas.drawArc(mProgressRectF, 270, 360, false, mProgressPaint);
         //绘制前景色
-        mProgressPaint.setShader(new SweepGradient(0, 270, progressColor, null));
-        canvas.drawArc(mProgressRectF, 270, 270, false, mProgressPaint);
+        mProgressPaint.setShader(new SweepGradient(0, 0, progressColor, null));
+        canvas.drawArc(mProgressRectF, 270, tomatoTimeStatus.getRestRate()*360, false, mProgressPaint);
     }
 
     private void drawTomatoTime(Canvas canvas) {
         canvas.drawCircle(0, 0, mInnerCircleRadius, mInnerCirclePaint);
     }
 
-    private void drawRing(Canvas canvas, float innerRadius, float outerRadius, int color,
+    private Path drawRing(Canvas canvas, float innerRadius, float outerRadius,
                           float startAngle, float sweepAngle) {
         RectF outerRectF = new RectF(
                 -outerRadius,
@@ -169,12 +212,6 @@ public class TomatoTimeView extends View {
                 innerRadius
         );
         canvas.save();
-        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        Paint paintSolid = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setColor(color);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(4);
-        paintSolid.setColor(Color.GREEN);
         Path innerPath = new Path();
         innerPath.addArc(innerRectF, startAngle, sweepAngle);
         innerPath.moveTo(0, 0);
@@ -195,13 +232,30 @@ public class TomatoTimeView extends View {
                 (float) (outerRadius * Math.sin((sweepAngle + startAngle) * Math.PI / 180)));
         outerPath.close();
         outerPath.op(innerPath, Path.Op.DIFFERENCE);
-        canvas.drawPath(outerPath, paintSolid);
-        canvas.drawPath(outerPath, paint);
         canvas.restore();
+        return outerPath;
     }
 
-    public void setPeriods(int n) {
-        this.periods = n;
+    /**
+     * 设置全部的进度
+     */
+    public void setPeriods(TomatoPeriodsBean periods) {
+        this.tomatoPeriodsBean = periods;
         invalidate();
     }
+
+    /**
+     * 设置番茄时间的状态
+     */
+    public void setTomatoTimeStatus(TomatoTimeStatus tomatoTimeStatus) {
+        this.tomatoTimeStatus = tomatoTimeStatus;
+    }
+
+    public void updateTomatoTimeStatus() {
+        if (tomatoTimeStatus != null) {
+            invalidate();
+        }
+    }
+
+
 }

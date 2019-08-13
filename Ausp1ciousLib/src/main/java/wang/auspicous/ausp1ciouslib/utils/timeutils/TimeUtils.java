@@ -516,7 +516,6 @@ public class TimeUtils {
         int minuteOne = Integer.valueOf(getMinute(locale, timestampOne));
         int minuteTwo = Integer.valueOf(getMinute(locale, timestampTwo));
         long hoursBetweenTwoTime = getHoursBetweenTwoTime(locale, timestampOne, timestampTwo);
-        Logger.i("One:"+minuteOne+";Two:"+minuteTwo);
         return hoursBetweenTwoTime * 60 - (minuteOne - minuteTwo);
     }
 
