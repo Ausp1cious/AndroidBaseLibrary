@@ -34,11 +34,12 @@ public class TomatoTimeUtils {
         long summarizeTime =
                 startTime + tomatoTimeConfiguration.getPlanTime() + tomatoTimeConfiguration.getUnitTime() + tomatoTimeConfiguration.getSummarizeTime();
         if (AppTimeUtils.getCurrentTimeAsLong() < preTime) {//准备状态
-            tomatoTimeStatus.setRestRate(1-new BigDecimal(preTime-AppTimeUtils.getCurrentTimeAsLong()).divide(new BigDecimal(tomatoTimeConfiguration.getPlanTime()), 6, BigDecimal.ROUND_DOWN).floatValue());
+            tomatoTimeStatus.setRestRate(1 - new BigDecimal(preTime - AppTimeUtils.getCurrentTimeAsLong()).divide(new BigDecimal(tomatoTimeConfiguration.getPlanTime()), 6, BigDecimal.ROUND_DOWN).floatValue());
             long minutesBetweenTwoTime =
                     AppTimeUtils.getMinutesBetweenTwoTime(AppTimeUtils.getCurrentTimeAsLong(),
                             preTime);
-            if (minutesBetweenTwoTime != 1) {
+            Logger.i("minutes:"+minutesBetweenTwoTime);
+            if (minutesBetweenTwoTime > 1) {
                 tomatoTimeStatus.setRestTime(minutesBetweenTwoTime);
                 tomatoTimeStatus.setRestTimeUnit(TomatoTimeStatus.TIME_UNIT_MINUTES);
                 tomatoTimeStatus.setStatus(TomatoTimeStatus.STATUS_PREPARE);
@@ -51,11 +52,11 @@ public class TomatoTimeUtils {
                 tomatoTimeStatus.setStatus(TomatoTimeStatus.STATUS_PREPARE);
             }
         } else if (AppTimeUtils.getCurrentTimeAsLong() < tomatoTime) {//番茄工作法状态
-            tomatoTimeStatus.setRestRate(1-new BigDecimal(tomatoTime-AppTimeUtils.getCurrentTimeAsLong()).divide(new BigDecimal(tomatoTimeConfiguration.getUnitTime()), 6, BigDecimal.ROUND_DOWN).floatValue());
+            tomatoTimeStatus.setRestRate(1 - new BigDecimal(tomatoTime - AppTimeUtils.getCurrentTimeAsLong()).divide(new BigDecimal(tomatoTimeConfiguration.getUnitTime()), 6, BigDecimal.ROUND_DOWN).floatValue());
             long minutesBetweenTwoTime =
                     AppTimeUtils.getMinutesBetweenTwoTime(AppTimeUtils.getCurrentTimeAsLong(),
                             tomatoTime);
-            if (minutesBetweenTwoTime != 1) {
+            if (minutesBetweenTwoTime > 1) {
                 tomatoTimeStatus.setRestTime(minutesBetweenTwoTime);
                 tomatoTimeStatus.setRestTimeUnit(TomatoTimeStatus.TIME_UNIT_MINUTES);
                 tomatoTimeStatus.setStatus(TomatoTimeStatus.STATUS_TOMATO_TIME);
@@ -68,11 +69,11 @@ public class TomatoTimeUtils {
                 tomatoTimeStatus.setStatus(TomatoTimeStatus.STATUS_TOMATO_TIME);
             }
         } else if (AppTimeUtils.getCurrentTimeAsLong() < summarizeTime) {    //总结状态
-            tomatoTimeStatus.setRestRate(1-new BigDecimal(summarizeTime-AppTimeUtils.getCurrentTimeAsLong()).divide(new BigDecimal(tomatoTimeConfiguration.getSummarizeTime()), 6, BigDecimal.ROUND_DOWN).floatValue());
+            tomatoTimeStatus.setRestRate(1 - new BigDecimal(summarizeTime - AppTimeUtils.getCurrentTimeAsLong()).divide(new BigDecimal(tomatoTimeConfiguration.getSummarizeTime()), 6, BigDecimal.ROUND_DOWN).floatValue());
             long minutesBetweenTwoTime =
                     AppTimeUtils.getMinutesBetweenTwoTime(AppTimeUtils.getCurrentTimeAsLong(),
                             summarizeTime);
-            if (minutesBetweenTwoTime != 1) {
+            if (minutesBetweenTwoTime > 1) {
                 tomatoTimeStatus.setRestTime(minutesBetweenTwoTime);
                 tomatoTimeStatus.setRestTimeUnit(TomatoTimeStatus.TIME_UNIT_MINUTES);
                 tomatoTimeStatus.setStatus(TomatoTimeStatus.STATUS_SUMMARIZE);
