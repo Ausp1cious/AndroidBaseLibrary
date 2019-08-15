@@ -16,9 +16,6 @@ public class TomatoTimeActivity extends AppMVPActivity<TomatoTimeContract.Tomato
         TomatoTimePresenterImpl> implements TomatoTimeContract.TomatoTimeView {
     @BindView(R.id.ttv_tomato_time)
     TomatoTimeView ttvTime;
-    @BindView(R.id.btn_tomato_time_start)
-    Button btnTomatoTimeStart;
-    long startTime;
 
     @Override
     protected int setContainerView() {
@@ -36,22 +33,12 @@ public class TomatoTimeActivity extends AppMVPActivity<TomatoTimeContract.Tomato
     }
 
     protected void initListener() {
-        btnTomatoTimeStart.setOnClickListener(v -> {
-            startTime = AppTimeUtils.getCurrentTimeAsLong();
-        });
+
     }
 
     @SuppressLint("CheckResult")
     @Override
     protected void initData() {
-//        rvTomato.setAdapter(new TomatoAdapter(this));
-//        RxTimeUtils.showScreenTime(bindUntilEvent(ActivityEvent.DESTROY))
-//                .subscribe(o -> {
-//                    if (startTime != 0) {
-//                        TomatoTimeUtils.getRestTime(startTime, tomatoTimeStatusBean);
-//                        ttvTime.updateTomatoTimeStatus();
-//                    }
-//                });
         getPresenter().getTomatoTimeData();
     }
 
@@ -65,5 +52,4 @@ public class TomatoTimeActivity extends AppMVPActivity<TomatoTimeContract.Tomato
         ttvTime.updateTomatoTime();
     }
 
-    // TODO: 8/15/19 是否需要开始开关
 }

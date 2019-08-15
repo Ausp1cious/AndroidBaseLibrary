@@ -83,7 +83,7 @@ public class TomatoTimeView extends View {
         mWidth = (float) (getMeasuredWidth() - getPaddingLeft() - getPaddingRight());
         mHeight = (float) (getMeasuredHeight() - getPaddingTop() - getPaddingBottom());
         minLength = Math.min(mWidth, mHeight);
-        mSchedulerRadius = (float) (minLength * 0.8) / 2;
+        mSchedulerRadius = (float) (minLength * 0.9) / 2;
         mSchedulerWidth = (float) (mSchedulerRadius * 0.2);
         mProgressArcRadius = mSchedulerRadius - mSchedulerWidth / 2;
         mProgressArcWidth = mSchedulerWidth / 2;
