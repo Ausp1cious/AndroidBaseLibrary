@@ -25,6 +25,6 @@ public interface BaseContract {
      * 协议基类Presenter
      */
     interface Presenter {
-
+        void onActivityDestroy();
     }
 }

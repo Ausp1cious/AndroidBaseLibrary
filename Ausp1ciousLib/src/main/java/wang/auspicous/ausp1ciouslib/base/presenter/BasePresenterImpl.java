@@ -48,4 +48,9 @@ public class BasePresenterImpl<View extends BaseContract.View> implements BaseCo
             mReference = null;
         }
     }
+
+    @Override
+    public void onActivityDestroy() {
+
+    }
 }

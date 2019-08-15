@@ -14,12 +14,10 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import com.orhanobut.logger.Logger;
-
 import wang.auspicous.ausp1cious.R;
+import wang.auspicous.ausp1cious.bean.ShowSingleTimeBean;
 import wang.auspicous.ausp1cious.bean.TomatoPeriodsBean;
-import wang.auspicous.ausp1cious.bean.TomatoTimeStatus;
-import wang.auspicous.ausp1cious.utils.AppSpUtils;
+import wang.auspicous.ausp1cious.bean.TomatoTimeShowBean;
 
 public class TomatoTimeView extends View {
     private int i = 0;
@@ -60,12 +58,9 @@ public class TomatoTimeView extends View {
     private int colorCircleTimeStatus;
 
 
-
     private float minLength;
 
-
-    private TomatoPeriodsBean tomatoPeriodsBean;
-    private TomatoTimeStatus tomatoTimeStatus;
+    private TomatoTimeShowBean tomatoTimeShowBean;
 
 
     public TomatoTimeView(Context context) {
@@ -177,6 +172,10 @@ public class TomatoTimeView extends View {
     private void drawSchedule(Canvas canvas) {
         float startDegree = -90;
         int periods;
+        if (tomatoTimeShowBean == null || tomatoTimeShowBean.getTomatoPeriodsBean() == null) {
+            return;
+        }
+        TomatoPeriodsBean tomatoPeriodsBean = tomatoTimeShowBean.getTomatoPeriodsBean();
         if (tomatoPeriodsBean.isOverTime()) {
             periods = tomatoPeriodsBean.getConductedTime();
         } else {
@@ -215,6 +214,9 @@ public class TomatoTimeView extends View {
     }
 
     private void drawProgress(Canvas canvas) {
+        if (tomatoTimeShowBean == null) {
+            return;
+        }
         //绘制背景色
         RectF mProgressRectF = new RectF(
                 (-mProgressArcRadius + mProgressArcWidth / 2),
@@ -228,40 +230,32 @@ public class TomatoTimeView extends View {
         canvas.drawArc(mProgressRectF, 270, 360, false, mProgressPaint);
         //绘制前景色
         mProgressPaint.setShader(new SweepGradient(0, 0, progressColor, null));
-        canvas.drawArc(mProgressRectF, 270, tomatoTimeStatus.getRestRate()*360, false, mProgressPaint);
+        canvas.drawArc(mProgressRectF, 270, tomatoTimeShowBean.getRestRate() * 360, false,
+                mProgressPaint);
     }
 
     private void drawTomatoTime(Canvas canvas) {
         canvas.drawCircle(0, 0, mInnerCircleRadius, mInnerCirclePaint);
-
-        if (tomatoTimeStatus.getRestTime() != AppSpUtils.getTomatoTimeConfiguration().getUnitTime()) {
-            //显示倒计时文字
-            Paint.FontMetrics tomatoTimeFontMetrics = mCircleTimePaint.getFontMetrics();
-            Paint.FontMetrics tomatoTimeUnitFontMetrics = mCircleTimeUnitPaint.getFontMetrics();
-            Paint.FontMetrics tomatoTimeStatusFontMetrics = mCircleTimeStatus.getFontMetrics();
-            float distanceTimeBetweenUnit =
-                     - tomatoTimeUnitFontMetrics.top*2;
-            float distanceUnitBetweenStatus =
-                    distanceTimeBetweenUnit+tomatoTimeUnitFontMetrics.bottom - tomatoTimeStatusFontMetrics.top;
-            //显示当前时间单位
-            canvas.drawText(tomatoTimeStatus.getRestTime()+"", 0, tomatoTimeFontMetrics.bottom*0.5f, mCircleTimePaint);
-            if (tomatoTimeStatus.getRestTimeUnit()== TomatoTimeStatus.TIME_UNIT_MINUTES) {
-                canvas.drawText("minutes", 0, distanceTimeBetweenUnit, mCircleTimeUnitPaint);
-            } else if (tomatoTimeStatus.getRestTimeUnit() == TomatoTimeStatus.TIME_UNIT_SECONDS) {
-                canvas.drawText("seconds", 0, distanceTimeBetweenUnit, mCircleTimeUnitPaint);
-            }
-            //显示当前状态
-            if (tomatoTimeStatus.getState()== TomatoTimeStatus.STATUS_PREPARE) {
-                canvas.drawText("准备阶段",0,distanceUnitBetweenStatus,mCircleTimeStatus);
-            } else if (tomatoTimeStatus.getState() == TomatoTimeStatus.STATUS_TOMATO_TIME) {
-                canvas.drawText("番茄时间阶段",0,distanceUnitBetweenStatus,mCircleTimeStatus);
-            } else if (tomatoTimeStatus.getState() == TomatoTimeStatus.STATUS_SUMMARIZE) {
-                canvas.drawText("总结阶段",0,distanceUnitBetweenStatus,mCircleTimeStatus);
-            } else if (tomatoTimeStatus.getState() == TomatoTimeStatus.STATUS_OTHERS) {
-                canvas.drawText("其他阶段",0,distanceUnitBetweenStatus,mCircleTimeStatus);
-            }
+        if (tomatoTimeShowBean == null || tomatoTimeShowBean.getShowSingleTimeBean() == null) {
+            return;
         }
-
+        ShowSingleTimeBean showSingleTimeBean = tomatoTimeShowBean.getShowSingleTimeBean();
+        //显示倒计时文字
+        Paint.FontMetrics tomatoTimeFontMetrics = mCircleTimePaint.getFontMetrics();
+        Paint.FontMetrics tomatoTimeUnitFontMetrics = mCircleTimeUnitPaint.getFontMetrics();
+        Paint.FontMetrics tomatoTimeStatusFontMetrics = mCircleTimeStatus.getFontMetrics();
+        float distanceTimeBetweenUnit =
+                -tomatoTimeUnitFontMetrics.top * 2;
+        float distanceUnitBetweenStatus =
+                distanceTimeBetweenUnit + tomatoTimeUnitFontMetrics.bottom - tomatoTimeStatusFontMetrics.top;
+        //显示当前时间单位
+        canvas.drawText(showSingleTimeBean.getTime(), 0, tomatoTimeFontMetrics.bottom * 0.5f,
+                mCircleTimePaint);
+        canvas.drawText(showSingleTimeBean.getTimeUnit(), 0, distanceTimeBetweenUnit,
+                mCircleTimeUnitPaint);
+        //显示当前状态
+        canvas.drawText(tomatoTimeShowBean.getTomatoTimeStatus(), 0, distanceUnitBetweenStatus,
+                mCircleTimeStatus);
     }
 
     private Path drawRing(Canvas canvas, float innerRadius, float outerRadius,
@@ -303,23 +297,12 @@ public class TomatoTimeView extends View {
         return outerPath;
     }
 
-    /**
-     * 设置全部的进度
-     */
-    public void setPeriods(TomatoPeriodsBean periods) {
-        this.tomatoPeriodsBean = periods;
-        invalidate();
+    public void setTomatoTimeShowBean(TomatoTimeShowBean tomatoTimeShowBean) {
+        this.tomatoTimeShowBean = tomatoTimeShowBean;
     }
 
-    /**
-     * 设置番茄时间的状态
-     */
-    public void setTomatoTimeStatus(TomatoTimeStatus tomatoTimeStatus) {
-        this.tomatoTimeStatus = tomatoTimeStatus;
-    }
-
-    public void updateTomatoTimeStatus() {
-        if (tomatoTimeStatus != null) {
+    public void updateTomatoTime() {
+        if (tomatoTimeShowBean != null) {
             invalidate();
         }
     }

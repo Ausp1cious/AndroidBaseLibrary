@@ -1,27 +1,15 @@
 package wang.auspicous.ausp1cious.ui.time;
 
 import android.annotation.SuppressLint;
-import android.os.Bundle;
 import android.widget.Button;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.trello.rxlifecycle3.android.ActivityEvent;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import io.reactivex.functions.Consumer;
 import wang.auspicous.ausp1cious.Presenters.Contracts.TomatoTimeContract;
 import wang.auspicous.ausp1cious.Presenters.TomatoTimePresenterImpl;
 import wang.auspicous.ausp1cious.R;
 import wang.auspicous.ausp1cious.base.AppMVPActivity;
-import wang.auspicous.ausp1cious.bean.TomatoPeriodsBean;
-import wang.auspicous.ausp1cious.bean.TomatoTimeStatus;
-import wang.auspicous.ausp1cious.ui.time.adpter.TomatoAdapter;
+import wang.auspicous.ausp1cious.bean.TomatoTimeShowBean;
 import wang.auspicous.ausp1cious.utils.AppTimeUtils;
-import wang.auspicous.ausp1cious.utils.RxTimeUtils;
-import wang.auspicous.ausp1cious.utils.TomatoTimeUtils;
 import wang.auspicous.ausp1cious.widgets.TomatoTimeView;
 
 public class TomatoTimeActivity extends AppMVPActivity<TomatoTimeContract.TomatoTimeView,
@@ -30,7 +18,6 @@ public class TomatoTimeActivity extends AppMVPActivity<TomatoTimeContract.Tomato
     TomatoTimeView ttvTime;
     @BindView(R.id.btn_tomato_time_start)
     Button btnTomatoTimeStart;
-    private TomatoTimeStatus tomatoTimeStatus;
     long startTime;
 
     @Override
@@ -45,9 +32,7 @@ public class TomatoTimeActivity extends AppMVPActivity<TomatoTimeContract.Tomato
 
     @Override
     protected void initWidget() {
-        ttvTime.setPeriods(new TomatoPeriodsBean(1, 0));
-        tomatoTimeStatus = new TomatoTimeStatus();
-        ttvTime.setTomatoTimeStatus(tomatoTimeStatus);
+
     }
 
     protected void initListener() {
@@ -60,13 +45,25 @@ public class TomatoTimeActivity extends AppMVPActivity<TomatoTimeContract.Tomato
     @Override
     protected void initData() {
 //        rvTomato.setAdapter(new TomatoAdapter(this));
-        RxTimeUtils.showScreenTime(bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(o -> {
-                    if (startTime != 0) {
-                        TomatoTimeUtils.getRestTime(startTime, tomatoTimeStatus);
-                        ttvTime.updateTomatoTimeStatus();
-                    }
-                });
+//        RxTimeUtils.showScreenTime(bindUntilEvent(ActivityEvent.DESTROY))
+//                .subscribe(o -> {
+//                    if (startTime != 0) {
+//                        TomatoTimeUtils.getRestTime(startTime, tomatoTimeStatusBean);
+//                        ttvTime.updateTomatoTimeStatus();
+//                    }
+//                });
+        getPresenter().getTomatoTimeData();
     }
 
+    @Override
+    public void setTomatoTimeViewDate(TomatoTimeShowBean tomatoTimeShowBean) {
+        ttvTime.setTomatoTimeShowBean(tomatoTimeShowBean);
+    }
+
+    @Override
+    public void updateTomatoTime() {
+        ttvTime.updateTomatoTime();
+    }
+
+    // TODO: 8/15/19 是否需要开始开关
 }

@@ -41,6 +41,7 @@ public abstract class BaseMVPActivity<V extends BaseContract.View,
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        getPresenter().onActivityDestroy();
         detachPresenter();
     }
 

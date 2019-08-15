@@ -1,14 +1,9 @@
 package wang.auspicous.ausp1cious.bean;
 
-import com.orhanobut.logger.Logger;
-
-import java.math.BigDecimal;
-
 import wang.auspicous.ausp1cious.utils.AppSpUtils;
-import wang.auspicous.ausp1cious.utils.AppTimeUtils;
 import wang.auspicous.ausp1ciouslib.component.bean.BaseBean;
 
-public class TomatoTimeStatus extends BaseBean {
+public class TomatoTimeStatusBean extends BaseBean {
     public static final int STATUS_PREPARE = 0;
     public static final int STATUS_TOMATO_TIME = 1;
     public static final int STATUS_SUMMARIZE = 2;
