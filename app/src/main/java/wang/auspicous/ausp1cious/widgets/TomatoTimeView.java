@@ -9,6 +9,7 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.SweepGradient;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -35,6 +36,8 @@ public class TomatoTimeView extends View {
     private Float mCircleTimeUnitSize;
     private Float mCircleStatusSize;
 
+    private Float mShadowRadius = 32f;
+
 
     private Paint mScheduleBorderPaint;
     private Paint mSchedulePaint;
@@ -47,6 +50,8 @@ public class TomatoTimeView extends View {
     private Paint mCircleTimeUnitPaint;
     private Paint mCircleTimeStatus;
 
+    private Paint mShadowPaint;
+
     private int colorScheduler;
     private int colorSchedulerBorder;
     private int colorSchedulerOverTime;
@@ -57,10 +62,14 @@ public class TomatoTimeView extends View {
     private int colorCircleTimeUnit;
     private int colorCircleTimeStatus;
 
+    private int colorShadow;
+    private int colorShadowPress;
+
 
     private float minLength;
 
     private TomatoTimeShowBean tomatoTimeShowBean;
+
 
 
     public TomatoTimeView(Context context) {
@@ -104,13 +113,31 @@ public class TomatoTimeView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.save();
-        canvas.drawColor(Color.WHITE);
         canvas.translate(mWidth / 2, mHeight / 2);
+        canvas.drawColor(Color.WHITE);
+        drawShadow(canvas);
         drawProgress(canvas);
         drawSchedule(canvas);
         drawTomatoTime(canvas);
         canvas.restore();
     }
+
+    @SuppressLint("ClickableViewAccessibility")
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        int action = event.getAction();
+        if (action == MotionEvent.ACTION_DOWN) {
+            mShadowRadius = 24f;
+            mShadowPaint.setShadowLayer(mShadowRadius, 0, mShadowRadius/2, colorShadowPress);
+            invalidate();
+        } else if (event.getAction() == MotionEvent.ACTION_UP) {
+            mShadowRadius = 32f;
+            mShadowPaint.setShadowLayer(mShadowRadius, 0, mShadowRadius/2, colorShadow);
+            invalidate();
+        }
+        return true;
+    }
+
 
     private void init(Context context) {
         initColor(context);
@@ -146,6 +173,10 @@ public class TomatoTimeView extends View {
         mCircleTimeStatus = new Paint(Paint.ANTI_ALIAS_FLAG);
         mCircleTimeStatus.setColor(colorCircleTime);
         mCircleTimeStatus.setTextAlign(Paint.Align.CENTER);
+        //画阴影
+        mShadowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mShadowPaint.setColor(Color.WHITE);
+        mShadowPaint.setShadowLayer(mShadowRadius, 0, mShadowRadius/2, colorShadow);
     }
 
     private void initColor(Context context) {
@@ -167,6 +198,9 @@ public class TomatoTimeView extends View {
         colorCircleTime = ContextCompat.getColor(context, R.color.white);
         colorCircleTimeUnit = ContextCompat.getColor(context, R.color.white);
         colorCircleTimeStatus = ContextCompat.getColor(context, R.color.white);
+
+        colorShadow = ContextCompat.getColor(context, R.color.grey500);
+        colorShadowPress = ContextCompat.getColor(context, R.color.grey700);
     }
 
     private void drawSchedule(Canvas canvas) {
@@ -297,6 +331,10 @@ public class TomatoTimeView extends View {
         return outerPath;
     }
 
+    private void drawShadow(Canvas canvas) {
+        canvas.drawCircle(0,0,mSchedulerRadius, mShadowPaint);
+    }
+
     public void setTomatoTimeShowBean(TomatoTimeShowBean tomatoTimeShowBean) {
         this.tomatoTimeShowBean = tomatoTimeShowBean;
     }
@@ -306,6 +344,5 @@ public class TomatoTimeView extends View {
             invalidate();
         }
     }
-
 
 }
