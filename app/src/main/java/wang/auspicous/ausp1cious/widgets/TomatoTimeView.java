@@ -15,6 +15,8 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import com.orhanobut.logger.Logger;
+
 import wang.auspicous.ausp1cious.R;
 import wang.auspicous.ausp1cious.bean.ShowSingleTimeBean;
 import wang.auspicous.ausp1cious.bean.TomatoPeriodsBean;
@@ -69,7 +71,6 @@ public class TomatoTimeView extends View {
     private float minLength;
 
     private TomatoTimeShowBean tomatoTimeShowBean;
-
 
 
     public TomatoTimeView(Context context) {
@@ -127,12 +128,14 @@ public class TomatoTimeView extends View {
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
         if (action == MotionEvent.ACTION_DOWN) {
-            mShadowRadius = 24f;
-            mShadowPaint.setShadowLayer(mShadowRadius, 0, mShadowRadius/2, colorShadowPress);
-            invalidate();
+            if (isInCircle(event.getX(), event.getY())) {
+                mShadowRadius = 24f;
+                mShadowPaint.setShadowLayer(mShadowRadius, 0, mShadowRadius / 2, colorShadowPress);
+                invalidate();
+            }
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
             mShadowRadius = 32f;
-            mShadowPaint.setShadowLayer(mShadowRadius, 0, mShadowRadius/2, colorShadow);
+            mShadowPaint.setShadowLayer(mShadowRadius, 0, mShadowRadius / 2, colorShadow);
             invalidate();
         }
         return true;
@@ -176,7 +179,7 @@ public class TomatoTimeView extends View {
         //画阴影
         mShadowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mShadowPaint.setColor(Color.WHITE);
-        mShadowPaint.setShadowLayer(mShadowRadius, 0, mShadowRadius/2, colorShadow);
+        mShadowPaint.setShadowLayer(mShadowRadius, 0, mShadowRadius / 2, colorShadow);
     }
 
     private void initColor(Context context) {
@@ -332,7 +335,11 @@ public class TomatoTimeView extends View {
     }
 
     private void drawShadow(Canvas canvas) {
-        canvas.drawCircle(0,0,mSchedulerRadius, mShadowPaint);
+        canvas.drawCircle(0, 0, mSchedulerRadius, mShadowPaint);
+    }
+
+    private boolean isInCircle(float x, float y) {
+        return Math.pow(x - (mWidth / 2),2) + Math.pow(y - (mHeight / 2),2) < Math.pow(mSchedulerRadius,2);
     }
 
     public void setTomatoTimeShowBean(TomatoTimeShowBean tomatoTimeShowBean) {
