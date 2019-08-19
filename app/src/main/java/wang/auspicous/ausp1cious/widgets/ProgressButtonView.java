@@ -12,8 +12,6 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import com.orhanobut.logger.Logger;
-
 import wang.auspicous.ausp1ciouslib.utils.deviceutils.DensityUtils;
 
 public class ProgressButtonView extends View {
@@ -57,11 +55,10 @@ public class ProgressButtonView extends View {
             widthSize = DensityUtils.dp2px(96);
         }
         if (heightMode == MeasureSpec.AT_MOST) {
-            heightSize = DensityUtils.dp2px(56);
+            heightSize = DensityUtils.dp2px(64);
         }
         setMeasuredDimension(widthSize + getPaddingLeft() + getPaddingRight(),
                 heightSize + getPaddingTop() + getPaddingBottom());
-        Logger.i("onMeasure 实际宽度："+widthSize);
     }
 
     @Override
@@ -79,8 +76,8 @@ public class ProgressButtonView extends View {
         canvas.save();
         canvas.drawColor(Color.BLACK);
         canvas.translate(getWidth() / 2f, getHeight() / 2f);
-//        drawRoundRectButton(canvas);
         drawProgress(canvas);
+        drawRoundRectButton(canvas);
         canvas.restore();
     }
 
@@ -108,19 +105,19 @@ public class ProgressButtonView extends View {
     private void drawRoundRectButton(Canvas canvas) {
         float width = mRoundRectButtonWidth / 2;
         float height = mRoundRectButtonHeight / 2;
-        canvas.drawRoundRect(-width, -height, width, height,
+        canvas.drawRoundRect(-width+roundRectRadius/2+mProgressWidth/2, -height+roundRectRadius/2+mProgressWidth/2, width-roundRectRadius/2-mProgressWidth/2, height-roundRectRadius/2-mProgressWidth/2,
                 DensityUtils.dp2px(roundRectRadius), DensityUtils.dp2px(roundRectRadius),
                 roundRectButtonPaint);
     }
 
     private void drawProgress(Canvas canvas) {
-        float sweepAngle = 180f;
-        float width = mWidth / 2;
+        float sweepAngle = 10f;
+        float width = (mWidth) / 2;
         float height = mHeight / 2;
         float radius = (float) Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
+        float roundRectRadius = DensityUtils.dp2px(this.roundRectRadius);
         RectF rectF = new RectF(-radius, -radius, radius, radius);
-        RectF rectFRoundRect = new RectF(-width, -height, width, height);
-
+        RectF rectFRoundRect = new RectF(-width+roundRectRadius/2, -height+roundRectRadius/2, width-roundRectRadius/2, height-roundRectRadius/2);
         Path innerPath = new Path();
         innerPath.moveTo(0, 0);
         innerPath.addArc(rectF, 270, sweepAngle);
@@ -131,22 +128,11 @@ public class ProgressButtonView extends View {
                 (float) (radius * Math.sin((270 + sweepAngle) * Math.PI / 180)));
         innerPath.close();
         progressPaint.setStyle(Paint.Style.STROKE);
-        progressPaint.setStrokeWidth(1);
-//        progressPaint.setStyle(Paint.Style.FILL);
-        canvas.drawPath(innerPath, progressPaint);
+        progressPaint.setStrokeWidth(16);
         Path outerPath = new Path();
-        outerPath.addRoundRect(rectFRoundRect, DensityUtils.dp2px(8), DensityUtils.dp2px(8),
+        outerPath.addRoundRect(rectFRoundRect, roundRectRadius, roundRectRadius,
                 Path.Direction.CW);
-        roundRectButtonPaint.setStyle(Paint.Style.STROKE);
-//        progressPaint.setStrokeWidth(4);
-//        canvas.drawPath(outerPath, progressPaint);
-//        progressPaint.setStyle(Paint.Style.FILL);
-//        canvas.drawPath(innerPath,progressPaint);
-//        canvas.drawPath(innerPath, roundRectButtonPaint);
-        canvas.drawPath(outerPath, roundRectButtonPaint);
-//        outerPath.op(innerPath, Path.Op.REVERSE_DIFFERENCE);
-//        canvas.drawPath(outerPath,progressPaint);
-
-
+        outerPath.op(innerPath, Path.Op.INTERSECT);
+        canvas.drawPath(outerPath,progressPaint);
     }
 }
