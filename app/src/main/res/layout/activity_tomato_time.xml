@@ -17,7 +17,20 @@
             android:layout_width="wrap_content"
             android:layout_height="360dp" />
 
-        <include layout="@layout/border_1dp_grey100"/>
+        <include layout="@layout/border_1dp_grey100" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <wang.auspicous.ausp1cious.widgets.ProgressButtonView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_centerHorizontal="true"
+                android:padding="32dp"
+                />
+        </RelativeLayout>
     </LinearLayout>
 
 </RelativeLayout>
