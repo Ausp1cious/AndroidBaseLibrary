@@ -15,8 +15,6 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import com.orhanobut.logger.Logger;
-
 import wang.auspicous.ausp1cious.R;
 import wang.auspicous.ausp1cious.bean.ShowSingleTimeBean;
 import wang.auspicous.ausp1cious.bean.TomatoPeriodsBean;

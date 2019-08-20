@@ -117,7 +117,7 @@ public class TomatoTimeUtils {
                         AppTimeUtils.getSecondsBetweenTwoTime(AppTimeUtils.getCurrentTimeAsLong(),
                                 endTime);
                 time = secondsBetweenTwoTime + "";
-                timeUnit = "minutes";
+                timeUnit = "seconds";
             }
         }else {
             long minutesBetweenTwoTime = AppTimeUtils.getMinutesBetweenTwoTime(startTime,

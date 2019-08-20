@@ -9,6 +9,12 @@ public interface TomatoTimeContract {
         void setTomatoTimeViewDate(TomatoTimeShowBean tomatoTimeShowBean);
         //更新控件
         void updateTomatoTime();
+
+        void setPreparePeriod();
+
+        void setTomatoTimePeriod();
+
+        void setSummarizePeriod();
     }
 
     interface TomatoTimePresenter extends BaseContract.Presenter {

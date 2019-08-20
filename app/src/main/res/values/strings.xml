@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Achieve</string>
+    <string name="tomato_time_prepare_add_time">+20s</string>
+    <string name="tomato_time_prepare_complete">准备完成</string>
+    <string name="tomato_time_time_todo">TODO</string>
+    <string name="tomato_time_time_complete">完成</string>
+    <string name="tomato_time_summarize_summarize">总结</string>
+    <string name="tomato_time_summarize_complete">完成</string>
+
 </resources>

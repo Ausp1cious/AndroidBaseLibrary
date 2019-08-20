@@ -23,6 +23,7 @@ public class TomatoTimePresenterImpl extends BasePresenterImpl<TomatoTimeContrac
 
     private TomatoTimeShowBean tomatoTimeShowBean;
     TomatoTimeEntity mTomatoTimeEntity;
+    private int currentPeriod = -1;
 
     @Override
     public void getTomatoTimeData() {
@@ -53,6 +54,10 @@ public class TomatoTimePresenterImpl extends BasePresenterImpl<TomatoTimeContrac
             RxTimeUtils.showScreenTime(getView().bindApiLifecycle(ActivityEvent.DESTROY)).subscribe(o -> {
                 switch (mTomatoTimeEntity.getTomatoTimeStatus()) {
                     case TomatoTimeStatus.TOMATO_STATUS_PREPARE:
+                        if (currentPeriod != TomatoTimeStatus.TOMATO_STATUS_PREPARE) {
+                            getView().setPreparePeriod();
+                            currentPeriod = TomatoTimeStatus.TOMATO_STATUS_PREPARE;
+                        }
                         ShowSingleTimeBean planRestTime =
                                 TomatoTimeUtils.getRestTime(mTomatoTimeEntity.getTomatoTimePrepareStarted(),
                                         mTomatoTimeEntity.getPlanTime());
@@ -66,6 +71,10 @@ public class TomatoTimePresenterImpl extends BasePresenterImpl<TomatoTimeContrac
                         }
                         break;
                     case TomatoTimeStatus.TOMATO_STATUS_TOMATO_TIME:
+                        if (currentPeriod != TomatoTimeStatus.TOMATO_STATUS_TOMATO_TIME) {
+                            getView().setTomatoTimePeriod();
+                            currentPeriod = TomatoTimeStatus.TOMATO_STATUS_TOMATO_TIME;
+                        }
                         ShowSingleTimeBean tomatoTimeRestTime =
                                 TomatoTimeUtils.getRestTime(mTomatoTimeEntity.getTomatoTimeStarted(),
                                         mTomatoTimeEntity.getTomatoTime());
@@ -75,6 +84,10 @@ public class TomatoTimePresenterImpl extends BasePresenterImpl<TomatoTimeContrac
                                 mTomatoTimeEntity.getTomatoTime()));
                         break;
                     case TomatoTimeStatus.TOMATO_STATUS_SUMMARIZE:
+                        if (currentPeriod != TomatoTimeStatus.TOMATO_STATUS_SUMMARIZE) {
+                            getView().setSummarizePeriod();
+                            currentPeriod = TomatoTimeStatus.TOMATO_STATUS_SUMMARIZE;
+                        }
                         break;
                 }
                 getView().updateTomatoTime();
