@@ -61,6 +61,28 @@ public class TomatoTimeActivity extends AppMVPActivity<TomatoTimeContract.Tomato
         pbvTomatoTimeRight.setText(getResources().getString(R.string.tomato_time_prepare_complete));
         pbvTomatoTimeLeft.setProgressMode(false);
         pbvTomatoTimeRight.setProgressMode(false);
+        pbvTomatoTimeLeft.setOnProgressButtonClickListener(new ProgressButtonView.OnProgressButtonClickListener() {
+            @Override
+            public void onProgressEnd() {
+
+            }
+
+            @Override
+            public void onClick() {
+                getPresenter().onPrepareAddTime();
+            }
+        });
+        pbvTomatoTimeRight.setOnProgressButtonClickListener(new ProgressButtonView.OnProgressButtonClickListener() {
+            @Override
+            public void onProgressEnd() {
+
+            }
+
+            @Override
+            public void onClick() {
+                getPresenter().onPrepareComplete();
+            }
+        });
     }
 
     @Override
@@ -69,6 +91,28 @@ public class TomatoTimeActivity extends AppMVPActivity<TomatoTimeContract.Tomato
         pbvTomatoTimeRight.setText(getResources().getString(R.string.tomato_time_time_complete));
         pbvTomatoTimeLeft.setProgressMode(false);
         pbvTomatoTimeRight.setProgressMode(true);
+        pbvTomatoTimeLeft.setOnProgressButtonClickListener(new ProgressButtonView.OnProgressButtonClickListener() {
+            @Override
+            public void onProgressEnd() {
+
+            }
+
+            @Override
+            public void onClick() {
+
+            }
+        });
+        pbvTomatoTimeRight.setOnProgressButtonClickListener(new ProgressButtonView.OnProgressButtonClickListener() {
+            @Override
+            public void onProgressEnd() {
+
+            }
+
+            @Override
+            public void onClick() {
+
+            }
+        });
     }
 
     @Override
@@ -77,6 +121,28 @@ public class TomatoTimeActivity extends AppMVPActivity<TomatoTimeContract.Tomato
         pbvTomatoTimeRight.setText(getResources().getString(R.string.tomato_time_summarize_complete));
         pbvTomatoTimeLeft.setProgressMode(false);
         pbvTomatoTimeRight.setProgressMode(true);
+        pbvTomatoTimeLeft.setOnProgressButtonClickListener(new ProgressButtonView.OnProgressButtonClickListener() {
+            @Override
+            public void onProgressEnd() {
+
+            }
+
+            @Override
+            public void onClick() {
+
+            }
+        });
+        pbvTomatoTimeRight.setOnProgressButtonClickListener(new ProgressButtonView.OnProgressButtonClickListener() {
+            @Override
+            public void onProgressEnd() {
+
+            }
+
+            @Override
+            public void onClick() {
+
+            }
+        });
     }
 
 }

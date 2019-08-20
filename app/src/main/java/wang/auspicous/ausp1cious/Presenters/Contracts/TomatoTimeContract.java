@@ -20,5 +20,15 @@ public interface TomatoTimeContract {
     interface TomatoTimePresenter extends BaseContract.Presenter {
         void getTomatoTimeData();
 
+        /**
+         * 添加时间
+         */
+        void onPrepareAddTime();
+
+        /**
+         * 准备阶段结束
+         */
+        void onPrepareComplete();
+
     }
 }

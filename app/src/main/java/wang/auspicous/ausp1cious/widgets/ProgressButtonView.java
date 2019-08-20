@@ -130,7 +130,9 @@ public class ProgressButtonView extends View {
                 }
             }
             if (listener != null) {
-                listener.onClick();
+                if (isInButton(event.getX(), event.getY())) {
+                    listener.onClick();
+                }
             }
             invalidate();
         }
@@ -277,5 +279,9 @@ public class ProgressButtonView extends View {
 
     public void setOnProgressButtonClickListener(OnProgressButtonClickListener listener) {
         this.listener = listener;
+    }
+
+    private boolean isInButton(float x, float y) {
+        return (x >= 0 && x <= mWidth && y >= 0 && y <= mHeight);
     }
 }

@@ -36,6 +36,18 @@ public class TomatoTimePresenterImpl extends BasePresenterImpl<TomatoTimeContrac
         initTomatoTimeViewShow();
     }
 
+    @Override
+    public void onPrepareAddTime() {
+        mTomatoTimeEntity.setPlanTime(mTomatoTimeEntity.getPlanTime() + 20 * 1000);
+    }
+
+    @Override
+    public void onPrepareComplete() {
+        mTomatoTimeEntity.setTomatoTimePrepareEnded(AppTimeUtils.getCurrentTimeAsLong());
+        mTomatoTimeEntity.setTomatoTimeStatus(TomatoTimeStatus.TOMATO_STATUS_TOMATO_TIME);
+        mTomatoTimeEntity.setTomatoTimeStarted(AppTimeUtils.getCurrentTimeAsLong());
+    }
+
     private TomatoTimeEntity mockData() {
         TomatoTimeEntity tomatoTimeEntity = new TomatoTimeEntity();
         tomatoTimeEntity.setTomatoTimeStart(AppTimeUtils.getCurrentTimeAsLong());
