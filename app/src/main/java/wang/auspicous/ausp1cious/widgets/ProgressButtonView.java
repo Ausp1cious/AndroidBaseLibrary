@@ -284,4 +284,8 @@ public class ProgressButtonView extends View {
     private boolean isInButton(float x, float y) {
         return (x >= 0 && x <= mWidth && y >= 0 && y <= mHeight);
     }
+    public void resetProgress() {
+        sweepAngle = 0;
+        invalidate();
+    }
 }

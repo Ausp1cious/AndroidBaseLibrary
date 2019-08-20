@@ -30,5 +30,15 @@ public interface TomatoTimeContract {
          */
         void onPrepareComplete();
 
+        /**
+         * 番茄时间完成
+         */
+        void onTomatoTimeComplete();
+
+
+        /**
+         * 当前番茄时间总结结束
+         */
+        void onTomatoTimeSummarizeComplete();
     }
 }

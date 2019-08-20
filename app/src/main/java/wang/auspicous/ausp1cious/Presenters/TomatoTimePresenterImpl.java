@@ -48,6 +48,18 @@ public class TomatoTimePresenterImpl extends BasePresenterImpl<TomatoTimeContrac
         mTomatoTimeEntity.setTomatoTimeStarted(AppTimeUtils.getCurrentTimeAsLong());
     }
 
+    @Override
+    public void onTomatoTimeComplete() {
+        mTomatoTimeEntity.setTomatoTimeEnded(AppTimeUtils.getCurrentTimeAsLong());
+        mTomatoTimeEntity.setTomatoTimeStatus(TomatoTimeStatus.TOMATO_STATUS_SUMMARIZE);
+        mTomatoTimeEntity.setTomatoTimeSummarizeStarted(AppTimeUtils.getCurrentTimeAsLong());
+    }
+
+    @Override
+    public void onTomatoTimeSummarizeComplete() {
+
+    }
+
     private TomatoTimeEntity mockData() {
         TomatoTimeEntity tomatoTimeEntity = new TomatoTimeEntity();
         tomatoTimeEntity.setTomatoTimeStart(AppTimeUtils.getCurrentTimeAsLong());
@@ -100,6 +112,13 @@ public class TomatoTimePresenterImpl extends BasePresenterImpl<TomatoTimeContrac
                             getView().setSummarizePeriod();
                             currentPeriod = TomatoTimeStatus.TOMATO_STATUS_SUMMARIZE;
                         }
+                        ShowSingleTimeBean tomatoTimeSummarize =
+                                TomatoTimeUtils.getRestTime(mTomatoTimeEntity.getTomatoTimeSummarizeStarted(),
+                                        mTomatoTimeEntity.getSummarizeTime());
+                        tomatoTimeShowBean.setShowSingleTimeBean(tomatoTimeSummarize);
+                        tomatoTimeShowBean.setTomatoTimeStatus("总结阶段");
+                        tomatoTimeShowBean.setRestRate(TomatoTimeUtils.getRestRate(mTomatoTimeEntity.getTomatoTimeSummarizeStarted(),
+                                mTomatoTimeEntity.getSummarizeTime()));
                         break;
                 }
                 getView().updateTomatoTime();

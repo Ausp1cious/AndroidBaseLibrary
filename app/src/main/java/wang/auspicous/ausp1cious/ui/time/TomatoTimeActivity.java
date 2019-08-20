@@ -105,7 +105,7 @@ public class TomatoTimeActivity extends AppMVPActivity<TomatoTimeContract.Tomato
         pbvTomatoTimeRight.setOnProgressButtonClickListener(new ProgressButtonView.OnProgressButtonClickListener() {
             @Override
             public void onProgressEnd() {
-
+                getPresenter().onTomatoTimeComplete();
             }
 
             @Override
@@ -117,6 +117,7 @@ public class TomatoTimeActivity extends AppMVPActivity<TomatoTimeContract.Tomato
 
     @Override
     public void setSummarizePeriod() {
+        pbvTomatoTimeRight.resetProgress();
         pbvTomatoTimeLeft.setText(getResources().getString(R.string.tomato_time_summarize_summarize));
         pbvTomatoTimeRight.setText(getResources().getString(R.string.tomato_time_summarize_complete));
         pbvTomatoTimeLeft.setProgressMode(false);
