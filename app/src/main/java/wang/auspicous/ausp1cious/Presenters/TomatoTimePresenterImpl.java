@@ -57,7 +57,12 @@ public class TomatoTimePresenterImpl extends BasePresenterImpl<TomatoTimeContrac
 
     @Override
     public void onTomatoTimeSummarizeComplete() {
-
+        mTomatoTimeEntity = mockData();
+        tomatoTimeShowBean = new TomatoTimeShowBean();
+        tomatoTimeShowBean.setTomatoPeriodsBean(new TomatoPeriodsBean(3, 2));
+        if (getView() != null) {
+            getView().setTomatoTimeViewDate(tomatoTimeShowBean);
+        }
     }
 
     private TomatoTimeEntity mockData() {
