@@ -45,6 +45,8 @@ public class ProgressButtonView extends View {
 
     private boolean useProgress = true;
 
+    private boolean actionUp = true;
+
     private int during = 2000;
     private float sweepAngle = 0f;
     private ValueAnimator valueAnimator;
@@ -112,6 +114,7 @@ public class ProgressButtonView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            actionUp = false;
             mShadowRadius = 8f;
             shadowPaint.setShadowLayer(mShadowRadius, 0, mShadowRadius / 2, colorShadow);
             if (useProgress) {
@@ -120,6 +123,7 @@ public class ProgressButtonView extends View {
             }
             invalidate();
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
+            actionUp = true;
             mShadowRadius = 16f;
             shadowPaint.setShadowLayer(mShadowRadius, 0, mShadowRadius / 2, colorShadow);
             if (useProgress) {
@@ -173,7 +177,9 @@ public class ProgressButtonView extends View {
             if (f > 0.98) {
                 press = true;
                 if (listener != null) {
-                    listener.onProgressEnd();
+                    if (actionUp) {
+                        listener.onProgressEnd();
+                    }
                 }
             }
             invalidate();
