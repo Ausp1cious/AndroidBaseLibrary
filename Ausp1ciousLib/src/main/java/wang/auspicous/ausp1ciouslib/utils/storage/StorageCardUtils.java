@@ -59,6 +59,9 @@ public class StorageCardUtils {
         String f = filePath + "/" + fileName + fileFormat;
         File file = new File(f);
         if (!file.exists()) {
+            if (!file.getParentFile().exists()) {
+                file.getParentFile().mkdirs();
+            }
             try {
                 file.createNewFile();
             } catch (IOException e) {
