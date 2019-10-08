@@ -25,11 +25,12 @@ public abstract class BaseEventActivity extends BaseNetEvnActivity {
   @Override
   protected void onStop() {
     super.onStop();
-    unregisterEvenBus();
+
   }
 
   @Override
   protected void onDestroy() {
+    unregisterEvenBus();
     super.onDestroy();
   }
 
@@ -53,6 +54,7 @@ public abstract class BaseEventActivity extends BaseNetEvnActivity {
   public void onGetMessageEvent(EventBusMessageCenter event) {
 
   }
+
 
   /**
    * EventBus stickMessage 执行的地方
@@ -80,5 +82,4 @@ public abstract class BaseEventActivity extends BaseNetEvnActivity {
       EventBus.getDefault().unregister(this);
     }
   }
-
 }

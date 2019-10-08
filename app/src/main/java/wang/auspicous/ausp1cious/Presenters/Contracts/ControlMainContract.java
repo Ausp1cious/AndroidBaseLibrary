@@ -29,6 +29,8 @@ public interface ControlMainContract {
         void setUpdate(String bitratios,String rmpt);
 
         void reboot();
+
+        void getPiInfo();
     }
 
 }

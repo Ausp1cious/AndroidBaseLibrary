@@ -61,7 +61,7 @@ public class ControlMainActivity extends AppMVPActivity<ControlMainContract.Cont
         btnGetBitratios.setOnClickListener(v -> getPresenter().getBitratiosInfo());
         btnGetSetting.setOnClickListener(v -> getPresenter().getSettingInfo());
         btnSetUpdate.setOnClickListener(v -> getPresenter().setUpdate(etBitratios.getText().toString(), etRtmp.getText().toString()));
-        btnReboot.setOnClickListener(v -> getPresenter().reboot());
+        btnReboot.setOnClickListener(v -> getPresenter().getPiInfo());
     }
 
     @Override

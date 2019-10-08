@@ -3,6 +3,8 @@ package wang.auspicous.ausp1cious.Presenters;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.orhanobut.logger.Logger;
+
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +12,7 @@ import java.util.Map;
 import wang.auspicous.ausp1cious.AppApplication;
 import wang.auspicous.ausp1cious.Presenters.Contracts.ControlMainContract;
 import wang.auspicous.ausp1cious.base.SimpleCallBack;
+import wang.auspicous.ausp1cious.utils.AppTimeUtils;
 import wang.auspicous.ausp1ciouslib.base.presenter.BasePresenterImpl;
 import wang.auspicous.ausp1ciouslib.net.HttpUtils;
 import wang.auspicous.ausp1ciouslib.net.httpclient.HttpFactory;
@@ -113,6 +116,26 @@ public class ControlMainPresenterImpl extends BasePresenterImpl<ControlMainContr
                 }
             }
         });
+    }
+
+    @Override
+    public void getPiInfo() {
+        Logger.t("LinkPi").i("点击");
+        Map<String, Object> params = new HashMap<>();
+        params.put("_", AppTimeUtils.getCurrentTimeAsLong()+"");
+        HttpUtils.get().setSuffixUrl("/config/config.json").setParams(params).execute(new SimpleCallBack<Object>(getView()) {
+            @Override
+            public void onNext(String requestUrl, Map<String, Object> requestParams,
+                               Object responseResult) {
+                Logger.t("LinkPi").i("onNext:"+requestUrl);
+            }
+
+            @Override
+            public void onError(String requestUrl, Map<String, Object> requestParams,
+                                Throwable throwable) {
+                Logger.t("LinkPi").i("onError:"+requestUrl+"--"+throwable.getMessage());
+            }
+        }, getView().bindApiLifecycle());
     }
 
     private void fetchService(int type, String url,SimpleCallBack<String> callBack) {
