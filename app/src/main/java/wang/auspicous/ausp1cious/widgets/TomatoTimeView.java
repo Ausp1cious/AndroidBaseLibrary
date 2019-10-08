@@ -69,6 +69,7 @@ public class TomatoTimeView extends View {
     private float minLength;
 
     private TomatoTimeShowBean tomatoTimeShowBean;
+    private OnTomatoTimeClickListener onTomatoTimeClickListener;
 
 
     public TomatoTimeView(Context context) {
@@ -134,6 +135,7 @@ public class TomatoTimeView extends View {
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
             mShadowRadius = 32f;
             mShadowPaint.setShadowLayer(mShadowRadius, 0, mShadowRadius / 2, colorShadow);
+            setOnTomatoTimeClick(event.getX(), event.getY());
             invalidate();
         }
         return true;
@@ -340,6 +342,17 @@ public class TomatoTimeView extends View {
         return Math.pow(x - (mWidth / 2),2) + Math.pow(y - (mHeight / 2),2) < Math.pow(mSchedulerRadius,2);
     }
 
+    /**
+     * 设置番茄时间的点击回调
+     */
+    private void setOnTomatoTimeClick(float x, float y) {
+        if (isInCircle(x, y)) {
+            if (onTomatoTimeClickListener != null) {
+                onTomatoTimeClickListener.onClick();
+            }
+        }
+    }
+
     public void setTomatoTimeShowBean(TomatoTimeShowBean tomatoTimeShowBean) {
         this.tomatoTimeShowBean = tomatoTimeShowBean;
     }
@@ -349,5 +362,18 @@ public class TomatoTimeView extends View {
             invalidate();
         }
     }
+
+    /**
+     * 设置番茄时间点击事件
+     * @param listener
+     */
+    public void setOnTomatoTimeClickListener(OnTomatoTimeClickListener listener) {
+        this.onTomatoTimeClickListener = listener;
+    }
+
+    public interface OnTomatoTimeClickListener{
+        void onClick();
+    }
+
 
 }

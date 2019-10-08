@@ -3,13 +3,16 @@ package wang.auspicous.ausp1cious.ui.time;
 import android.annotation.SuppressLint;
 
 import butterknife.BindView;
+import wang.auspicous.ausp1cious.Presenters.Contracts.SingleTaskAddContract;
 import wang.auspicous.ausp1cious.Presenters.Contracts.TomatoTimeContract;
 import wang.auspicous.ausp1cious.Presenters.TomatoTimePresenterImpl;
 import wang.auspicous.ausp1cious.R;
 import wang.auspicous.ausp1cious.base.AppMVPActivity;
 import wang.auspicous.ausp1cious.bean.TomatoTimeShowBean;
+import wang.auspicous.ausp1cious.ui.task.SingleTaskAddActivity;
 import wang.auspicous.ausp1cious.widgets.ProgressButtonView;
 import wang.auspicous.ausp1cious.widgets.TomatoTimeView;
+import wang.auspicous.ausp1ciouslib.utils.ActivityJumpUtils;
 
 public class TomatoTimeActivity extends AppMVPActivity<TomatoTimeContract.TomatoTimeView,
         TomatoTimePresenterImpl> implements TomatoTimeContract.TomatoTimeView {
@@ -36,7 +39,8 @@ public class TomatoTimeActivity extends AppMVPActivity<TomatoTimeContract.Tomato
     }
 
     protected void initListener() {
-
+        ttvTime.setOnTomatoTimeClickListener(() -> ActivityJumpUtils.jump(TomatoTimeActivity.this,
+                SingleTaskAddActivity.class));
     }
 
     @SuppressLint("CheckResult")

@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/BaseAppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.task.SingleTaskAddActivity"></activity>
+        <activity android:name=".ui.task.SingleTaskAddActivity"/>
         <activity android:name=".ui.time.TomatoTimeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
