@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="base_dpi">800dp</string>
+    <dimen name="dp_0">0dp</dimen>
+    <dimen name="dp_2">1.478dp</dimen>
+    <dimen name="dp_4">2.956dp</dimen>
+    <dimen name="dp_8">5.912dp</dimen>
+    <dimen name="dp_12">8.868dp</dimen>
+    <dimen name="dp_16">11.824dp</dimen>
+    <dimen name="dp_24">17.736dp</dimen>
+</resources>
