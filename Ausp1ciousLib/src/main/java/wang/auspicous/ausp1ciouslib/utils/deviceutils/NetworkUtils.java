@@ -8,25 +8,22 @@ import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
-import android.telecom.TelecomManager;
 import android.telephony.TelephonyManager;
 import android.text.format.Formatter;
-import android.util.Log;
 
 import java.net.InetAddress;
 import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
 
 import androidx.annotation.RequiresApi;
 import androidx.annotation.RequiresPermission;
-import me.imid.swipebacklayout.lib.Utils;
-import wang.auspicous.ausp1ciouslib.base.BaseApp;
+
+import wang.auspicous.ausp1ciouslib.base.BaseApplication;
 
 /**
  * Created by Ausp1cious on 2019/2/15.
@@ -54,7 +51,7 @@ public final class NetworkUtils {
 
   @RequiresApi(api = Build.VERSION_CODES.M)
   public static NetworkAvailable isNetworkAvailable() {
-    ConnectivityManager connMgr = (ConnectivityManager) BaseApp.getInstance().getContext().getSystemService(
+    ConnectivityManager connMgr = (ConnectivityManager) BaseApplication.getInstance().getContext().getSystemService(
             Context.CONNECTIVITY_SERVICE);
     if (connMgr != null) {
       NetworkCapabilities networkCapabilities = connMgr.getNetworkCapabilities(
@@ -104,7 +101,7 @@ public final class NetworkUtils {
   @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
   private static NetworkInfo getActiveNetworkInfo() {
     ConnectivityManager cm =
-            (ConnectivityManager) BaseApp.getInstance().getContext().getSystemService(
+            (ConnectivityManager) BaseApplication.getInstance().getContext().getSystemService(
                     Context.CONNECTIVITY_SERVICE);
     if (cm == null) return null;
     return cm.getActiveNetworkInfo();
@@ -243,7 +240,7 @@ public final class NetworkUtils {
   @RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
   public static String getIpAddressByWifi() {
     @SuppressLint("WifiManagerLeak")
-    WifiManager wm = (WifiManager) BaseApp.getInstance().getContext().getSystemService(Context.WIFI_SERVICE);
+    WifiManager wm = (WifiManager) BaseApplication.getInstance().getContext().getSystemService(Context.WIFI_SERVICE);
     if (wm == null) return "";
     return Formatter.formatIpAddress(wm.getDhcpInfo().ipAddress);
   }
@@ -254,7 +251,7 @@ public final class NetworkUtils {
   @RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
   public static String getGatewayByWifi() {
     @SuppressLint("WifiManagerLeak")
-    WifiManager wm = (WifiManager) BaseApp.getInstance().getContext().getSystemService(Context.WIFI_SERVICE);
+    WifiManager wm = (WifiManager) BaseApplication.getInstance().getContext().getSystemService(Context.WIFI_SERVICE);
     if (wm == null) return "";
     return Formatter.formatIpAddress(wm.getDhcpInfo().gateway);
   }
@@ -265,7 +262,7 @@ public final class NetworkUtils {
   @RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
   public static String getNetMaskByWifi() {
     @SuppressLint("WifiManagerLeak")
-    WifiManager wm = (WifiManager) BaseApp.getInstance().getContext().getSystemService(Context.WIFI_SERVICE);
+    WifiManager wm = (WifiManager) BaseApplication.getInstance().getContext().getSystemService(Context.WIFI_SERVICE);
     if (wm == null) return "";
     return Formatter.formatIpAddress(wm.getDhcpInfo().netmask);
   }
@@ -276,7 +273,7 @@ public final class NetworkUtils {
   @RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
   public static String getServerAddressByWifi() {
     @SuppressLint("WifiManagerLeak")
-    WifiManager wm = (WifiManager) BaseApp.getInstance().getContext().getSystemService(Context.WIFI_SERVICE);
+    WifiManager wm = (WifiManager) BaseApplication.getInstance().getContext().getSystemService(Context.WIFI_SERVICE);
     if (wm == null) return "";
     return Formatter.formatIpAddress(wm.getDhcpInfo().serverAddress);
   }

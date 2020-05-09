@@ -8,11 +8,12 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.gyf.barlibrary.ImmersionBar;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+
+import com.gyf.immersionbar.ImmersionBar;
+
 import wang.auspicous.ausp1ciouslib.R;
 import wang.auspicous.ausp1ciouslib.utils.SoftKeyBoardUtils;
 import wang.auspicous.ausp1ciouslib.utils.sharedpreferences.SpUtils;

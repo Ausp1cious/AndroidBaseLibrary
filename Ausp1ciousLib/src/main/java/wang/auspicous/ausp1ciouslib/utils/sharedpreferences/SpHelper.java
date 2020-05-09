@@ -11,7 +11,7 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import wang.auspicous.ausp1ciouslib.Constants;
-import wang.auspicous.ausp1ciouslib.base.BaseApp;
+import wang.auspicous.ausp1ciouslib.base.BaseApplication;
 import wang.auspicous.ausp1ciouslib.utils.jsonutils.JsonUtils;
 
 /**
@@ -20,7 +20,7 @@ import wang.auspicous.ausp1ciouslib.utils.jsonutils.JsonUtils;
 public class SpHelper {
 
   public static SharedPreferences getSharedPreferences() {
-    return BaseApp.getInstance().getContext().getSharedPreferences(
+    return BaseApplication.getInstance().getContext().getSharedPreferences(
             Constants.SharedPreference.NAME_OF_SHARED_PREFERENCE,
             Context.MODE_PRIVATE
     );

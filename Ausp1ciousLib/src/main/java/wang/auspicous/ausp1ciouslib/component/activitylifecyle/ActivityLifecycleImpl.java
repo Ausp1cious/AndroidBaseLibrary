@@ -7,11 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-import com.orhanobut.logger.Logger;
-
 import java.lang.reflect.Field;
 import java.util.LinkedList;
-import wang.auspicous.ausp1ciouslib.base.BaseApp;
+import wang.auspicous.ausp1ciouslib.base.BaseApplication;
 
 /**
  * Created by Ausp1cious on 2019/2/16.
@@ -116,7 +114,7 @@ public class ActivityLifecycleImpl implements Application.ActivityLifecycleCallb
   private static void fixSoftInputLeaks(final Activity activity) {
     if (activity == null) return;
     InputMethodManager imm =
-            (InputMethodManager) BaseApp.getInstance().getContext().getSystemService(
+            (InputMethodManager) BaseApplication.getInstance().getContext().getSystemService(
                     Context.INPUT_METHOD_SERVICE);
     if (imm == null) return;
     String[] leakViews =

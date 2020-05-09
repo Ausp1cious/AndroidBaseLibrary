@@ -13,25 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/BaseAppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.task.SingleTaskAddActivity"/>
-        <activity android:name=".ui.time.TomatoTimeActivity">
+        <activity
+            android:name=".ui.activities.SplashActivity"
+            android:theme="@style/AppTheme.SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".pancam.ShowActivity" />
-        <activity android:name=".pancam.ControlMainActivity"></activity>
-        <activity android:name=".testui.WebTest" />
-        <activity android:name=".ui.time.SystemTimeActivity" />
-        <activity
-            android:name=".ui.SplashActivity"
-            android:theme="@style/AppTheme.SplashTheme"></activity>
-        <activity android:name=".testui.FGActivity" />
-        <activity android:name=".testui.TestActivity" />
+        <activity android:name=".ui.activities.FGActivity" />
+        <activity android:name=".ui.activities.TestActivity" />
         <activity android:name=".MainActivity" />
-
         <service android:name=".service.InitIntentService" />
     </application>
 

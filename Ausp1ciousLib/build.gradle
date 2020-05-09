@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
@@ -34,6 +35,9 @@ android {
             path "src/main/cpp/CMakeLists.txt"
         }
     }
+    greendao {
+        schemaVersion globalConfiguration.libGreenDaoVersion
+    }
 }
 dependencies {
     def LibraryDependencies = rootProject.ext.AppLibary
@@ -42,13 +46,13 @@ dependencies {
     testImplementation LibraryTestDependencies.junit
     androidTestImplementation LibraryTestDependencies.testRunner
     androidTestImplementation LibraryTestDependencies.espresso
-    api LibraryDependencies.appCompatV7
+    api LibraryDependencies.appcompat
     api LibraryDependencies.multiDex
     api LibraryDependencies.design
     api LibraryDependencies.constraintLayout
     api LibraryDependencies.recyclerview
     api LibraryDependencies.cardView
-    api LibraryDependencies.rxjava2
+    api LibraryDependencies.rxjava
     api LibraryDependencies.rxAndroid
     api LibraryDependencies.retrofit
     api LibraryDependencies.gsonConverter
@@ -56,11 +60,10 @@ dependencies {
     api LibraryDependencies.retrofitConvertScalars
     api LibraryDependencies.disklrucache
     api LibraryDependencies.okHttpLogger
-    api LibraryDependencies.xlog
-    api LibraryDependencies.rxbinding3
-    api LibraryDependencies.rxlifecycle3
-    api LibraryDependencies.rxbindingAndroid3
-    api LibraryDependencies.rxbindingComponents3
+    api LibraryDependencies.rxbinding
+    api LibraryDependencies.rxlifecycle
+    api LibraryDependencies.rxbindingAndroid
+    api LibraryDependencies.rxbindingComponents
     api LibraryDependencies.jacksonCore
     api LibraryDependencies.jacksonAnnotations
     api LibraryDependencies.jacksonDatabind
@@ -69,4 +72,7 @@ dependencies {
     api LibraryDependencies.swipeback
     api LibraryDependencies.easyPermission
     api LibraryDependencies.evenBus
+    api LibraryDependencies.greenDao
+    api LibraryDependencies.bufferKnife
+    annotationProcessor LibraryDependencies.bufferKnifeCompiler
 }

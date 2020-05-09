@@ -5,10 +5,12 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 
-import com.gyf.barlibrary.ImmersionBar;
-import com.gyf.barlibrary.OSUtils;
 
 import androidx.annotation.Nullable;
+
+import com.gyf.immersionbar.ImmersionBar;
+import com.gyf.immersionbar.OSUtils;
+
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.imid.swipebacklayout.lib.Utils;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityBase;
@@ -55,7 +57,7 @@ public abstract class BaseSwipeBackActivity extends BaseEventActivity implements
   @Override
   protected void onDestroy() {
     super.onDestroy();
-    ImmersionBar.with(this).destroy();
+//    ImmersionBar.with(this).destroy();  不需要销毁了？
   }
 
   @Override
@@ -140,6 +142,4 @@ public abstract class BaseSwipeBackActivity extends BaseEventActivity implements
               Constants.Permission.PERMISSION_VIBRATE, perms);
     }
   }
-
-
 }

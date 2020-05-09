@@ -7,9 +7,6 @@ import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
-import wang.auspicous.ausp1cious.bean.TomatoSettingBean;
-import wang.auspicous.ausp1cious.utils.AppSpUtils;
-
 public class InitIntentService extends IntentService {
     private static final String ACTION_APP_INIT = "wang.auspicous.ausp1cious.service.init";
     public InitIntentService(){

@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/amber300"
-    tools:context=".testui.TestActivity">
+    android:orientation="vertical"
+    tools:context=".ui.activities.TestActivity">
+
     <View
         android:id="@+id/id_status_bar"
-        android:background="@color/orange500"
         android:layout_width="match_parent"
-        android:visibility="gone"
-        android:layout_height="0dp"/>
+        android:layout_height="0dp"
+        android:background="@color/orange500"
+        android:visibility="gone" />
+
     <Button
         android:id="@+id/btn_show"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="显示"
-        />
+        android:text="显示" />
+
     <Button
         android:id="@+id/btn_hide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="隐藏"
-        />
+        android:text="隐藏" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_test"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 </LinearLayout>

@@ -8,7 +8,8 @@ ext {
     //版本控制
     versionCode = 1
     versionName = "0.0.0"
-    greenDaoVersion = 1
+    libGreenDaoVersion = 1
+    appGreenDaoVersion = 1
 
     //Android
     androidBuildToolVersion = "28.0.0"
@@ -18,11 +19,8 @@ ext {
     minSdkVersion = 21
     targetSdkVersion = 28
 
-    //官方支持
-    supportLibraryVersion = '27.1.1'
-//    constraintLayout = '1.0.2'
-    //Androidx
-    appcompat = "1.0.0"
+    //Android
+    appcompat = "1.1.0"
     material = '1.0.0'
     constraintLayout = '1.1.3'
     recyclerview = '1.0.0'
@@ -34,20 +32,15 @@ ext {
     mockito = '2.8.9'
     robolectric = '3.8'
     //BufferKnife
-    bufferKnife = '10.1.0'
-    //RxJava2
-    rxjava2 = '2.2.3'
-    rxAndroid = '2.1.0'
-    rxBinding3 = '3.0.0-alpha1'
-    rxlifecycle3 = '3.0.0'
+    bufferKnife = '10.0.0'
+    //RxJava
+    rxjava = '3.0.0'
+    rxAndroid = '3.0.0'
+    rxBinding = '3.1.0'
     //retrofit
-    retrofit = '2.5.0'
-    retrofitAdapter = '2.3.0'
-    retrofitGsonConvert = '2.3.0'
-    retrofitConvertScalars = '2.3.0'
+    retrofit = '2.8.1'
     disklrucache = '2.0.2'
-    okhttpLogger = '3.8.1'
-    xlog = '1.6.1'
+    okhttpLogger = '4.6.0'
     //64k
     multiDex = '2.0.0'
     //Jackson
@@ -55,67 +48,68 @@ ext {
     //Logger
     logger = '2.2.0'
     //ImmersionBar
-    immersionBar = '2.3.3-beta15'
+    immersionBar = '3.0.0'
     //SwipeBack
     swipeBack = '1.1.0'
     //EasyPermission
     easyPermission = '3.0.0'
     //EvenBus
-    evenBus = '3.1.1'
+    evenBus = '3.2.0'
     //GreenDao
-    greendao = '3.2.2'
+    greendao = '3.3.0'
 
-
-    AppTestLibary = [
-            junit     : "junit:junit:$junit",
-            testRunner: "androidx.test:runner:$testRunner",
-            espresso  : "androidx.test.espresso:espresso-core:$espresso",
-    ]
     App = [
             bufferKnife        : "com.jakewharton:butterknife:$bufferKnife",
             bufferKnifeCompiler: "com.jakewharton:butterknife-compiler:$bufferKnife",
-            greenDao           : "org.greenrobot:greendao:$greendao",
+//            greenDao           : "org.greenrobot:greendao:$greendao",
     ]
+
     AppLibary = [
             multiDex              : "androidx.multidex:multidex:${multiDex}",
 //support -> androidx//////////////////////////////////////////////////////////////////////////////////////////////////start
-//            appCompatV7       : "com.android.support:appcompat-v7:${supportLibraryVersion}",
-//            design            : "com.android.support:design:${supportLibraryVersion}",
-//            constraintLayout  : "com.android.support.constraint:constraint-layout:${constraintLayout}",
-//            recyclerview      : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
-//            cardView          : "com.android.support:cardview-v7:${supportLibraryVersion}",
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            appCompatV7           : "androidx.appcompat:appcompat:${appcompat}",
+            appcompat           : "androidx.appcompat:appcompat:${appcompat}",
             design                : "com.google.android.material:material:${material}",
             constraintLayout      : "androidx.constraintlayout:constraintlayout:${constraintLayout}",
             recyclerview          : "androidx.recyclerview:recyclerview:${recyclerview}",
             cardView              : "androidx.cardview:cardview:${cardview}",
 //support -> androidx//////////////////////////////////////////////////////////////////////////////////////////////////end
-            rxjava2               : "io.reactivex.rxjava2:rxjava:${rxjava2}",
-            rxAndroid             : "io.reactivex.rxjava2:rxandroid:${rxAndroid}",
+            rxjava               : "io.reactivex.rxjava3:rxjava:${rxjava}",
+            rxAndroid             : "io.reactivex.rxjava3:rxandroid:${rxAndroid}",
             //Retrofit
             retrofit              : "com.squareup.retrofit2:retrofit:${retrofit}",
-            gsonConverter         : "com.squareup.retrofit2:converter-gson:${retrofitGsonConvert}",
-            retrofitAdapter       : "com.squareup.retrofit2:adapter-rxjava2:${retrofitAdapter}",
-            retrofitConvertScalars: "com.squareup.retrofit2:converter-scalars:$retrofitConvertScalars",
+            gsonConverter         : "com.squareup.retrofit2:converter-gson:${retrofit}",
+            retrofitAdapter       : "com.squareup.retrofit2:adapter-rxjava2:${retrofit}",
+            retrofitConvertScalars: "com.squareup.retrofit2:converter-scalars:$retrofit",
+            //关于缓存的一个包
             disklrucache          : "com.jakewharton:disklrucache:$disklrucache",
             okHttpLogger          : "com.squareup.okhttp3:logging-interceptor:$okhttpLogger",
-            xlog                  : "com.elvishew:xlog:$xlog",
-
-
-            rxbinding3            : "com.jakewharton.rxbinding3:rxbinding:$rxBinding3",
-            rxlifecycle3          : "com.trello.rxlifecycle3:rxlifecycle:$rxlifecycle3",
-            rxbindingAndroid3     : "com.trello.rxlifecycle3:rxlifecycle-android:$rxlifecycle3",
-            rxbindingComponents3  : "com.trello.rxlifecycle3:rxlifecycle-components:$rxlifecycle3",
+            //
+            rxbinding            : "com.jakewharton.rxbinding3:rxbinding:$rxBinding",
+            rxlifecycle          : "com.trello.rxlifecycle3:rxlifecycle:$rxBinding",
+            rxbindingAndroid     : "com.trello.rxlifecycle3:rxlifecycle-android:$rxBinding",
+            rxbindingComponents  : "com.trello.rxlifecycle3:rxlifecycle-components:$rxBinding",
+            //Json解析库
             jacksonCore           : "com.fasterxml.jackson.core:jackson-core:$jackson",
             jacksonAnnotations    : "com.fasterxml.jackson.core:jackson-annotations:$jackson",
             jacksonDatabind       : "com.fasterxml.jackson.core:jackson-databind:$jackson",
+            //日志库
             logger                : "com.orhanobut:logger:$logger",
+            //数据库
+            greenDao           : "org.greenrobot:greendao:$greendao",
+            //沉浸式状态栏
             immersionBar          : "com.gyf.immersionbar:immersionbar:$immersionBar",
+            //左滑退出
             swipeback             : "me.imid.swipebacklayout.lib:library:$swipeBack",
+            //权限管理
             easyPermission        : "pub.devrel:easypermissions:$easyPermission",
+            //事件
             evenBus               : "org.greenrobot:eventbus:$evenBus",
-
-
+            bufferKnife        : "com.jakewharton:butterknife:$bufferKnife",
+            bufferKnifeCompiler: "com.jakewharton:butterknife-compiler:$bufferKnife",
+    ]
+    AppTestLibary = [
+            junit     : "junit:junit:$junit",
+            testRunner: "androidx.test:runner:$testRunner",
+            espresso  : "androidx.test.espresso:espresso-core:$espresso",
     ]
 }

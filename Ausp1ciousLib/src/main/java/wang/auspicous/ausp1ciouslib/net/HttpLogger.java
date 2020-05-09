@@ -1,7 +1,6 @@
 package wang.auspicous.ausp1ciouslib.net;
 
 import androidx.annotation.NonNull;
-import com.elvishew.xlog.XLog;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 
@@ -23,7 +22,6 @@ public class HttpLogger implements HttpLoggingInterceptor.Logger {
         mMessage.append(message.concat("\n"));
         // 响应结束，打印整条日志
         if (message.startsWith("<-- END HTTP")) {
-            XLog.d(mMessage.toString());
         }
     }
 

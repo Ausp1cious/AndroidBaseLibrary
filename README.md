@@ -5,6 +5,21 @@ Android 基础库
 
 目的：提供对业务逻辑的快速支持
 
+# 如何导入到薪项目中
+1. 新建项目
+2. 用项目目录下的build.gradle文件替换新建项目项目目录下的build.gradle文件
+3. 复制项目目录下的dependencies.gradle文件到新建项目目录下
+4. 用项目目录下的.gitignore文件替换新建项目项目目录下的.gitignore文件
+5. 复制Ausp1ciousLib包到新建项目下
+6. 在新建项目项目目录下的settings.gradle添加Ausp1cious包的依赖：`include ':app', ':Ausp1ciousLib'`
+7. 修改Library中XML的provider标签下的authorities
+8. 用App下的build.gradle中的内容替换新建项目App下的build.gradle中除了defaultConfig标签中的applicationId,signingConfigs中的签名信息之外的所有内容
+9. 在新项目中的App目录下创建签名文件，并且在signingConfigs指定签名信息
+10. 复制Library中proguard-rules.pro到App中proguard-rules.pro
+11. 创建`AppApplication`文件，继承至`BaseApplication`,对薪项目初始化配置，参考项目中的配置
+12. 指定`AppApplication`到XML中，并且修改`application`标签下的主题：`@style/AppTheme`
+
+
 # 基本功能
 
 ## 左滑退出

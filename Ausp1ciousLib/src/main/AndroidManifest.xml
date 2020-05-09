@@ -28,7 +28,7 @@
         <!--FileProvider添加/////////////////////////////////////////////////////////////////Start-->
         <provider
             android:name=".base.provider.FileProvider"
-            android:authorities="wang.auspicous.ausp1ciouslib.base.provider.FileProvider"
+            android:authorities="wang.auspicous.ausp1ciouslib.base.provider.FileProvider.Library"
             android:exported="false"
             android:grantUriPermissions="true">
             <!--元数据-->

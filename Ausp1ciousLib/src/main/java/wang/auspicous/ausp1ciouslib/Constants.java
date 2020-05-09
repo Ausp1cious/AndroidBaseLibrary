@@ -151,4 +151,7 @@ public interface Constants {
         //锁死当前用户屏幕，方向传感器不生效
         int SCREEN_ORIENTATION_LOCKED = 14;
     }
+    interface DB{
+        String DB_NAME = "AWLibraryDB";
+    }
 }
